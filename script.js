@@ -92,8 +92,8 @@ const DEFAULT_DATA = {
             id: 'ex5', 
             title: 'Phần mềm Kiểm phiếu', 
             desc: 'Kiểm phiếu nhanh,tự động, chính xác', 
-            preview: 'https://vothanhdamkg1982-lang.github.io/Phan-Mem-Kiem-Phieu/', 
-            download: 'https://vothanhdamkg1982-lang.github.io/Phan-Mem-Kiem-Phieu/',
+            preview: 'https://vothanhdamkg1982-lang.github.io/Phan-mem-kiem-phieu-nhanh/', 
+            download: 'https://vothanhdamkg1982-lang.github.io/Phan-mem-kiem-phieu-nhanh/',
             category: 'ungdung', 
             type: 'App web' 
         }
