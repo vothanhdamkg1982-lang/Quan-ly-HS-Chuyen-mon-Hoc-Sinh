@@ -96,6 +96,15 @@ const DEFAULT_DATA = {
             download: 'https://vothanhdamkg1982-lang.github.io/Phan-mem-kiem-phieu-nhanh/',
             category: 'ungdung', 
             type: 'App web' 
+        },
+        { 
+            id: 'ex6', 
+            title: 'Phần mềm Tính tiền điện sinh hoạt', 
+            desc: 'Tính tiền điện sinh hoạt nhanh,tự động, chính xác', 
+            preview: 'https://vothanhdamkg1982-lang.github.io/T-nh-Nhanh-Tien-DIen-SH/', 
+            download: 'https://vothanhdamkg1982-lang.github.io/T-nh-Nhanh-Tien-DIen-SH/',
+            category: 'ungdung', 
+            type: 'App web' 
         }
     ],
     links: [
