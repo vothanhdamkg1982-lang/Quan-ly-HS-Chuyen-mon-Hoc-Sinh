@@ -105,6 +105,15 @@ const DEFAULT_DATA = {
             download: 'https://vothanhdamkg1982-lang.github.io/T-nh-Nhanh-Tien-DIen-SH/',
             category: 'ungdung', 
             type: 'App web' 
+        },
+        { 
+            id: 'ex7', 
+            title: 'Phần mềm Cập nhật ngày giáo án', 
+            desc: 'Tự động dịch chuyển toàn bộ ngày tháng trong file Word, giữ nguyên 100% định dạng', 
+            preview: 'https://vothanhdamkg1982-lang.github.io/Cap-Nhat-Ngay-Giao-An/', 
+            download: 'https://vothanhdamkg1982-lang.github.io/Cap-Nhat-Ngay-Giao-An/',
+            category: 'ungdung', 
+            type: 'App web' 
         }
     ],
     links: [
@@ -205,6 +214,7 @@ function renderSection(key) {
         case 'documents': barId = 'docFilterBar'; break;
         case 'chuyenmon': barId = 'chuyenmonFilterBar'; break;
         case 'ungdung': barId = 'ungdungFilterBar'; break;
+        case 'links': barId = 'linksFilterBar'; break;
         default: barId = null;
     }
     const filter = barId ? getActiveFilter(barId) : 'all';
