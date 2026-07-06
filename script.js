@@ -108,6 +108,7 @@ const DEFAULT_DATA = {
         { id: 'l7', title: 'VNEDU Trần Quốc Toản', url: 'https://ucnnzccazsgdkiengiang.vnedu.vn', desc: 'Quản lý học sinh' },
         { id: 'l8', title: 'Đại học Trà Vinh', url: 'https://lms2tvu.onschool.edu.vn/', desc: 'Khóa học trực tuyến' },
         { id: 'l9', title: 'Bình dân học vụ số', url: 'https://binhdanhocvuso.gov.vn/dashboard', desc: 'Nền tảng Bình dân học vụ số' },
+        { id: 'l10', title: 'Câu hỏi sau tập huấn, bồi dưỡng', url: 'https://th.nxbgd.vn/cauhoidanhgia', desc: 'Đánh giá sau tập huấn, bồi dưỡng' },
     ]
 };
 
