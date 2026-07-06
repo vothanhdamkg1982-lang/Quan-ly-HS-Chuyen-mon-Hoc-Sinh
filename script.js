@@ -5,13 +5,13 @@
 // ---------- DỮ LIỆU MẶC ĐỊNH ----------
 const DEFAULT_DATA = {
     photos: [
-        { id: 'p1', url: 'https://i.ibb.co/tPXW5C8V/7cecf5215ca5f65fafebfe3fabc3ff0d.jpg', title: 'Lớp học Tin học', desc: 'Giờ thực hành tại phòng máy', category: 'giangday' },
-        { id: 'p2', url: 'https://picsum.photos/seed/teacher/600/400', title: 'Giáo viên Võ Thanh Đậm', desc: 'Trong giờ lên lớp', category: 'giangday' },
-        { id: 'p3', url: 'https://picsum.photos/seed/school/600/400', title: 'Khuôn viên trường', desc: 'Góc sân trường', category: 'sukien' },
-        { id: 'p4', url: 'https://picsum.photos/seed/students/600/400', title: 'Học sinh thực hành', desc: 'Các em đang làm bài tập', category: 'hoatdong' },
+        { id: 'p1', url: 'https://i.ibb.co/PZZfhZ7N/T-p-hu-n-SGK-Tin-h-c.jpg', title: 'Tập huấn Tin học', desc: 'Tập huấn tại Hội trường', category: 'hoatdong' },
+        { id: 'p2', url: '#', title: 'Giáo viên Võ Thanh Đậm', desc: 'Trong giờ lên lớp', category: 'giangday' },
+        { id: 'p3', url: 'https://i.ibb.co/rrvq3cz/IMG-0256.jpg', title: 'Họp mặt 20/11', desc: 'Ngày Nhà giáo Việt Nam', category: 'sukien' },
+        { id: 'p4', url: '#', title: 'Học sinh thực hành', desc: 'Các em đang làm bài tập', category: 'hoatdong' },
     ],
     videos: [
-        { id: 'v1', url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', title: 'Video giới thiệu', desc: 'Video mẫu về giảng dạy', category: 'giangday' },
+        { id: 'v1', url: 'https://youtu.be/Z_ZohjfYVyc?si=zS_F2-a0uNtN6aeq&t=2976', title: 'Tập huấn SGK Tin học 3', desc: 'SGK thống nhất', category: 'sukien' },
         { id: 'v2', url: 'https://www.youtube.com/watch?v=3JZ_D3ELwOQ', title: 'Học Tin học vui', desc: 'Bài giảng thú vị', category: 'hoatdong' },
     ],
     documents: [
