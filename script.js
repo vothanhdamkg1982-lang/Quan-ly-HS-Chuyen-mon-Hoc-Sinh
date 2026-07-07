@@ -6,13 +6,13 @@
 const DEFAULT_DATA = {
     photos: [
         { id: 'p1', url: 'https://i.ibb.co/PZZfhZ7N/T-p-hu-n-SGK-Tin-h-c.jpg', title: 'Tập huấn Tin học', desc: 'Tập huấn tại Hội trường', category: 'hoatdong' },
-        { id: 'p2', url: '#', title: 'Giáo viên Võ Thanh Đậm', desc: 'Trong giờ lên lớp', category: 'giangday' },
+        { id: 'p2', url: 'https://i.ibb.co/1cqx5g9/T-p-hu-n-m-n-C-ng-ngh.jpg', title: 'Tập huấn môn Công nghệ', desc: 'Tập huấn tại Hội trường', category: 'hoatdong' },
         { id: 'p3', url: 'https://i.ibb.co/rrvq3cz/IMG-0256.jpg', title: 'Họp mặt 20/11', desc: 'Ngày Nhà giáo Việt Nam', category: 'sukien' },
-        { id: 'p4', url: '#', title: 'Học sinh thực hành', desc: 'Các em đang làm bài tập', category: 'hoatdong' },
+        { id: 'p4', url: 'https://i.ibb.co/M5yQtMMG/T-p-hu-n-SGK-TNXH.jpg', title: 'Tâp huấn SGK', desc: 'Tập hấn bộ sách thống nhất toàn quốc', category: 'hoatdong' },
     ],
     videos: [
-        { id: 'v1', url: 'https://youtu.be/Z_ZohjfYVyc?si=zS_F2-a0uNtN6aeq&t=2976', title: 'Tập huấn SGK Tin học 3', desc: 'SGK thống nhất', category: 'sukien' },
-        { id: 'v2', url: 'https://www.youtube.com/watch?v=3JZ_D3ELwOQ', title: 'Học Tin học vui', desc: 'Bài giảng thú vị', category: 'hoatdong' },
+        { id: 'v1', url: 'https://th.nxbgd.vn/tinhoc-3', title: 'Tập huấn SGK Tin học 3', desc: 'Tập huấn trực tuyến', category: 'hoatdong' },
+        { id: 'v2', url: 'https://th.nxbgd.vn/congnghe-3', title: 'Tập huấn SGK môn Công nghệ', desc: 'Tập huấn trực tuyến', category: 'hoatdong' },
     ],
     documents: [
         { id: 'd1', url: 'https://drive.google.com/file/d/1Wp_pWeOQuE5WUtKADi0VLK05qKqUhFfm/view?usp=sharing', title: 'Danh hiệu', desc: 'Chiến sĩ thi đua cơ sở 2013', category: 'khenthuong' },
