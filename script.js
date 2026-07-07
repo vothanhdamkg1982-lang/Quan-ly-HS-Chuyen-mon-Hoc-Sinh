@@ -114,6 +114,15 @@ const DEFAULT_DATA = {
             download: 'https://vothanhdamkg1982-lang.github.io/Cap-Nhat-Ngay-Giao-An/',
             category: 'ungdung', 
             type: 'App web' 
+        },
+        { 
+            id: 'ex8', 
+            title: 'Phần mềm Theo Dõi Tính Lãi Suất Ngân Hàng', 
+            desc: 'Tự động theo dõi lãi suất ngân hàng, tính toán lãi suất tiết kiệm, vay vốn',
+            preview: 'https://vothanhdamkg1982-lang.github.io/Phan-Mem-THeo-Doi-Tinh-Lai-Suat-Ngan-Hang/', 
+            download: 'https://vothanhdamkg1982-lang.github.io/Phan-Mem-THeo-Doi-Tinh-Lai-Suat-Ngan-Hang/',
+            category: 'ungdung', 
+            type: 'App web' 
         }
     ],
     links: [
