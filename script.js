@@ -1,5 +1,6 @@
 /* ============================================================
    QUẢN LÝ DỮ LIỆU & GIAO DIỆN (CÓ UPLOAD / XÓA / JSON)
+   TÍCH HỢP FAVICON CHO LIÊN KẾT
    ============================================================ */
 
 // ---------- DỮ LIỆU MẶC ĐỊNH ----------
@@ -43,9 +44,39 @@ const DEFAULT_DATA = {
         { id: 'd24', url: 'https://drive.google.com/file/d/16KJ-mPNmYkVaWShFMxf6ujqwMh038CZZ/view?usp=sharing', title: 'Văn bằng, chứng chỉ', desc: 'Chứng chỉ Tin học Ứng dụng Trình độ A', category: 'Văn bằng, chứng chỉ' },
     ],
     chuyenmon: [
-        { id: 'cm1', title: 'Giáo án Tin học lớp 3 - Bài 1', desc: 'Làm quen với máy tính', url: '#', category: 'giaoan', type: 'pdf' },
-        { id: 'cm2', title: 'Giáo án Tin học lớp 4 - Bài 5', desc: 'Sử dụng công cụ vẽ', url: '#', category: 'giaoan', type: 'pdf' },
-        { id: 'cm3', title: 'Giáo án Tin học lớp 5 - Bài 8', desc: 'Lập trình Scratch cơ bản', url: '#', category: 'giaoan', type: 'pdf' },
+        { id: 'cm1', title: 'Giáo án Tin học - Công nghệ K3-5', desc: 'Tuần 1-35(Năm học 2026 - 2027)', url: 'https://drive.google.com/file/d/1s3Fg-lo7fYhQgazJw2L_s4YOWYuLzmzG/view?usp=sharing', category: 'giaoan', type: 'pdf' },
+        { id: 'cm2', title: 'Giáo án Tin học - Công nghệ K3-5', desc: 'Tuần 1-2', url: 'https://drive.google.com/file/d/1s9noCA7NJsQecKH0M0VCzo2KcIg9GMdk/view?usp=sharing', category: 'giaoan', type: 'pdf' },
+        { id: 'cm3', title: 'Giáo án Tin học - Công nghệ K3-5', desc: 'Tuần 3-4', url: 'https://drive.google.com/file/d/1H2GpJKNxnrIWsGDOPtlB69g1UTt1NmTJ/view?usp=sharing', category: 'giaoan', type: 'pdf' },
+        { id: 'cm4', title: 'Giáo án Tin học - Công nghệ K3-5', desc: 'Tuần 5-6', url: 'https://drive.google.com/file/d/1XtxwAxmpZ-WrT5i3OcpOb51Kxq8MCnit/view?usp=sharing', category: 'giaoan', type: 'pdf' },
+        { id: 'cm5', title: 'Giáo án Tin học - Công nghệ K3-5', desc: 'Tuần 7-8', url: 'https://drive.google.com/file/d/1jmvC7A_mAxfaKHUoNY7zKXZJQe8hmQN5/view?usp=sharing', category: 'giaoan', type: 'pdf' },
+        { id: 'cm6', title: 'Giáo án Tin học - Công nghệ K3-5', desc: 'Tuần 9-10', url: 'https://drive.google.com/file/d/1YV88Lxdh00uEq57GlR1bP9zfRckV3VMK/view?usp=sharing', category: 'giaoan', type: 'pdf' },
+        { id: 'cm7', title: 'Giáo án Tin học - Công nghệ K3-5', desc: 'Tuần 11-12', url: 'https://drive.google.com/file/d/1TE8QGMupYaJnh9f7VuDbPlBkChlHi9PU/view?usp=sharing', category: 'giaoan', type: 'pdf' },
+        { id: 'cm8', title: 'Giáo án Tin học - Công nghệ K3-5', desc: 'Tuần 13-14', url: 'https://drive.google.com/file/d/1LtK9v4J17B5Bd8X-hPU_qitMgiWRBmqM/view?usp=sharing', category: 'giaoan', type: 'pdf' },
+        { id: 'cm9', title: 'Giáo án Tin học - Công nghệ K3-5', desc: 'Tuần 15-16', url: 'https://drive.google.com/file/d/12UZI0dzasT3MLfMdB28CcIjroE28GfUl/view?usp=sharing', category: 'giaoan', type: 'pdf' },
+        { id: 'cm10', title: 'Giáo án Tin học - Công nghệ K3-5', desc: 'Tuần 17-18', url: 'https://drive.google.com/file/d/1WpkSv_tVsu4Y1NuBfsGjLSiH_4LJXJve/view?usp=sharing', category: 'giaoan', type: 'pdf' },
+        { id: 'cm11', title: 'Giáo án Tin học - Công nghệ K3-5', desc: 'Tuần 19-20', url: 'https://drive.google.com/file/d/1rVIda7a6qqsQ2IHeNrwT3qKpjn7730nK/view?usp=sharing', category: 'giaoan', type: 'pdf' },
+        { id: 'cm12', title: 'Giáo án Tin học - Công nghệ K3-5', desc: 'Tuần 21-22', url: 'https://drive.google.com/file/d/1caHmB6OPgc5w5HsNhGYipkw472XCCT3E/view?usp=sharing', category: 'giaoan', type: 'pdf' },
+        { id: 'cm13', title: 'Giáo án Tin học - Công nghệ K3-5', desc: 'Tuần 23-24', url: 'https://drive.google.com/file/d/1U2a02Vabxv2mcsknmtzALTz1VVbZeNaV/view?usp=sharing', category: 'giaoan', type: 'pdf' },
+        { id: 'cm14', title: 'Giáo án Tin học - Công nghệ K3-5', desc: 'Tuần 25-26', url: 'https://drive.google.com/file/d/1QmSw1Io6Mvd3NH-tjg5lvSrVSlX4grpd/view?usp=sharing', category: 'giaoan', type: 'pdf' },
+        { id: 'cm15', title: 'Giáo án Tin học - Công nghệ K3-5', desc: 'Tuần 27-28', url: 'https://drive.google.com/file/d/1noHBpIU0uU640os8niSJNXte4RYEa9LP/view?usp=sharing', category: 'giaoan', type: 'pdf' },
+        { id: 'cm16', title: 'Giáo án Tin học - Công nghệ K3-5', desc: 'Tuần 29-30', url: 'https://drive.google.com/file/d/1JAZseO5X09WzUmTrKTAaqmb1_qvy16hW/view?usp=sharing', category: 'giaoan', type: 'pdf' },
+        { id: 'cm17', title: 'Giáo án Tin học - Công nghệ K3-5', desc: 'Tuần 31-32', url: 'https://drive.google.com/file/d/1yxqoniKB45cFpA__BJcpL1EIfUu8DcM-/view?usp=sharing', category: 'giaoan', type: 'pdf' },
+        { id: 'cm18', title: 'Giáo án Tin học - Công nghệ K3-5', desc: 'Tuần 33-34', url: 'https://drive.google.com/file/d/1Xvs7oaXT5eD4dhHLSp23ti8trVfohsNy/view?usp=sharing', category: 'giaoan', type: 'pdf' },
+        { id: 'cm19', title: 'Giáo án Tin học - Công nghệ K3-5', desc: 'Tuần 35', url: 'https://drive.google.com/file/d/1gc1Vjxrm20vN4CmoFquJOdRfF_VzhUAu/view?usp=sharing', category: 'giaoan', type: 'pdf' },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         { id: 'cm4', title: 'Đề thi học kỳ 1 - Tin học 3', desc: 'Năm học 2024-2025', url: '#', category: 'dethi', type: 'pdf' },
         { id: 'cm5', title: 'Đề thi học kỳ 2 - Tin học 4', desc: 'Năm học 2024-2025', url: '#', category: 'dethi', type: 'pdf' },
         { id: 'cm6', title: 'Sáng kiến kinh nghiệm: Ứng dụng CNTT trong dạy học', desc: 'Giải A cấp huyện', url: '#', category: 'sangkien', type: 'pdf' },
@@ -58,8 +89,8 @@ const DEFAULT_DATA = {
             id: 'ex1', 
             title: 'Phần mềm Kế hoạch giáo dục - Lịch báo giảng tự động', 
             desc: 'App web tự động tính lịch theo tuần', 
-            preview: 'https://vothanhdamkg1982-lang.github.io/Ke-Hoach-Giao-Duc-1.4-CTGDPT-2018-Tieu-hoc-/', 
-            download: 'https://vothanhdamkg1982-lang.github.io/Ke-Hoach-Giao-Duc-1.4-CTGDPT-2018-Tieu-hoc-/',
+            preview: 'https://vothanhdamkg1982-lang.github.io/Ke-Hoach-Giao-Duc-1.4-CTGDPT-2018-Tieu-hoc/', 
+            download: 'https://vothanhdamkg1982-lang.github.io/Ke-Hoach-Giao-Duc-1.4-CTGDPT-2018-Tieu-hoc/',
             category: 'ungdung', 
             type: 'App web' 
         },
@@ -193,7 +224,11 @@ function addItem(arrayKey, newItem) {
         default: return;
     }
     saveData();
-    renderSection(arrayKey);
+    if (arrayKey === 'ungdung' || arrayKey === 'links') {
+        renderUngDungAndLinks();
+    } else {
+        renderSection(arrayKey);
+    }
 }
 
 function removeItem(arrayKey, id) {
@@ -211,21 +246,25 @@ function removeItem(arrayKey, id) {
     if (index !== -1) {
         arr.splice(index, 1);
         saveData();
-        renderSection(arrayKey);
+        if (arrayKey === 'ungdung' || arrayKey === 'links') {
+            renderUngDungAndLinks();
+        } else {
+            renderSection(arrayKey);
+        }
     }
 }
 
 // ---------- RENDER THEO SECTION ----------
 function renderSection(key) {
-    // Ánh xạ key -> id của filter bar (lưu ý bỏ 's' ở cuối)
     let barId;
     switch(key) {
         case 'photos': barId = 'photoFilterBar'; break;
         case 'videos': barId = 'videoFilterBar'; break;
         case 'documents': barId = 'docFilterBar'; break;
         case 'chuyenmon': barId = 'chuyenmonFilterBar'; break;
-        case 'ungdung': barId = 'ungdungFilterBar'; break;
-        case 'links': barId = 'linksFilterBar'; break;
+        case 'ungdung': 
+            renderUngDungAndLinks();
+            return;
         default: barId = null;
     }
     const filter = barId ? getActiveFilter(barId) : 'all';
@@ -234,8 +273,6 @@ function renderSection(key) {
         case 'videos': renderVideos(filter); break;
         case 'documents': renderDocuments(filter); break;
         case 'chuyenmon': renderChuyenMon(filter); break;
-        case 'ungdung': renderUngDung(filter); break;
-        case 'links': renderLinks(); break;
     }
 }
 
@@ -256,27 +293,27 @@ function renderBanner() {
             avatar: 'https://i.ibb.co/GQywpxZS/IMG-0030.jpg'
         },
         {
-            title: 'Máy tính & Lập trình',
-            desc: 'Khơi nguồn sáng tạo với công nghệ thông tin',
-            btnText: 'Khám phá',
-            btnLink: '#section-chuyenmon',
-            bg: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1600&q=80',
-            avatar: null
-        },
-        {
-            title: 'Học sinh & Công nghệ',
-            desc: 'Ứng dụng CNTT trong giảng dạy và học tập',
+            title: 'Công nghệ trong giáo dục',
+            desc: 'Ứng dụng CNTT để nâng cao chất lượng dạy và học',
             btnText: 'Xem kho ảnh',
             btnLink: '#section-photos',
             bg: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?w=1600&q=80',
             avatar: null
         },
         {
-            title: '24 năm cống hiến',
-            desc: 'Tận tâm với sự nghiệp trồng người',
-            btnText: 'Xem thành tích',
-            btnLink: '#section-documents',
-            bg: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=1600&q=80',
+            title: 'Phần mềm hỗ trợ giảng dạy',
+            desc: 'Các công cụ giúp giáo viên quản lý và soạn bài hiệu quả',
+            btnText: 'Khám phá',
+            btnLink: '#section-ungdung',
+            bg: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1600&q=80',
+            avatar: null
+        },
+        {
+            title: 'Liên kết hữu ích',
+            desc: 'Kết nối với các nền tảng giáo dục và tài nguyên trực tuyến',
+            btnText: 'Xem ngay',
+            btnLink: '#section-ungdung',
+            bg: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1600&q=80',
             avatar: null
         }
     ];
@@ -365,6 +402,19 @@ function updateBadges() {
     document.getElementById('homePhotoCount').textContent = PHOTOS.length;
     document.getElementById('homeVideoCount').textContent = VIDEOS.length;
     document.getElementById('homeDocCount').textContent = DOCUMENTS.length;
+}
+
+// ---------- LẤY FAVICON CHO LIÊN KẾT ----------
+function getFaviconUrl(link) {
+    const url = link.url || '';
+    try {
+        const domain = new URL(url).hostname;
+        // Sử dụng Google Favicon service
+        return `https://www.google.com/s2/favicons?domain=${domain}&sz=32`;
+        // Có thể dùng DuckDuckGo: return `https://icons.duckduckgo.com/ip3/${domain}`;
+    } catch {
+        return ''; // fallback
+    }
 }
 
 // ---------- RENDER ẢNH ----------
@@ -529,8 +579,8 @@ function renderChuyenMon(filter = 'all') {
     });
 }
 
-// ---------- RENDER ỨNG DỤNG (EXCEL) ----------
-function renderUngDung(filter = 'all') {
+// ---------- RENDER ỨNG DỤNG (PHẦN MỀM) ----------
+function renderUngDungApp(filter = 'all') {
     const list = document.getElementById('ungdungList');
     let items = UNGDUNG;
     if (filter !== 'all') items = items.filter(u => u.category === filter);
@@ -538,22 +588,36 @@ function renderUngDung(filter = 'all') {
         list.innerHTML = `<div class="empty-state"><i class="fas fa-file-excel"></i><p>Không có ứng dụng nào.</p></div>`;
         return;
     }
-    list.innerHTML = items.map(u => `
-        <div class="doc-item" data-id="${u.id}">
-            <div class="doc-info">
-                <i class="fas fa-file-excel" style="color: #217346;"></i>
-                <div>
-                    <div class="doc-title">${u.title || 'Ứng dụng Excel'}</div>
-                    <div class="doc-desc">${u.desc || ''}</div>
+    list.innerHTML = items.map(u => {
+        // Áp dụng icon Font Awesome riêng cho từng ứng dụng
+        let iconClass = 'fa-file-excel';
+        const title = u.title || '';
+        if (title.includes('Kế hoạch giáo dục') || title.includes('Lịch báo giảng')) iconClass = 'fa-calendar-alt';
+        else if (title.includes('lương HCSN')) iconClass = 'fa-money-bill-wave';
+        else if (title.includes('quản lý HS')) iconClass = 'fa-users-cog';
+        else if (title.includes('Tính lương')) iconClass = 'fa-calculator';
+        else if (title.includes('Tín dụng')) iconClass = 'fa-hand-holding-usd';
+        else if (title.includes('Kiểm phiếu')) iconClass = 'fa-vote-yea';
+        else if (title.includes('tiền điện')) iconClass = 'fa-bolt';
+        else if (title.includes('Cập nhật ngày giáo án')) iconClass = 'fa-calendar-check';
+        else if (title.includes('Lãi Suất Ngân Hàng')) iconClass = 'fa-chart-line';
+        return `
+            <div class="doc-item" data-id="${u.id}">
+                <div class="doc-info">
+                    <i class="fas ${iconClass}" style="color: #217346;"></i>
+                    <div>
+                        <div class="doc-title">${u.title || 'Ứng dụng Excel'}</div>
+                        <div class="doc-desc">${u.desc || ''}</div>
+                    </div>
+                </div>
+                <div class="doc-actions">
+                    <a href="${u.preview}" target="_blank" rel="noopener"><i class="fas fa-eye"></i> Xem trước</a>
+                    <a href="${u.download}" download="${u.title || 'ungdung'}.xlsx"><i class="fas fa-download"></i> Tải xuống</a>
+                    <button class="btn-delete" data-key="ungdung" data-id="${u.id}"><i class="fas fa-trash"></i> Xóa</button>
                 </div>
             </div>
-            <div class="doc-actions">
-                <a href="${u.preview}" target="_blank" rel="noopener"><i class="fas fa-eye"></i> Xem trước</a>
-                <a href="${u.download}" download="${u.title || 'ungdung'}.xlsx"><i class="fas fa-download"></i> Tải xuống</a>
-                <button class="btn-delete" data-key="ungdung" data-id="${u.id}"><i class="fas fa-trash"></i> Xóa</button>
-            </div>
-        </div>
-    `).join('');
+        `;
+    }).join('');
     document.querySelectorAll('#ungdungList .btn-delete').forEach(btn => {
         btn.addEventListener('click', function(e) {
             e.stopPropagation();
@@ -566,27 +630,37 @@ function renderUngDung(filter = 'all') {
     });
 }
 
-// ---------- RENDER LIÊN KẾT ----------
-function renderLinks() {
-    const grid = document.getElementById('linksGrid');
+// ---------- RENDER LIÊN KẾT (TRONG CỘT TRÁI CỦA UNGDUNG) VỚI FAVICON ----------
+function renderLinksInUngdung() {
+    const grid = document.getElementById('linksGridInUngdung');
+    if (!grid) return;
     if (!LINKS || !LINKS.length) {
         grid.innerHTML = `<div class="empty-state"><i class="fas fa-link"></i><p>Chưa có liên kết nào.</p></div>`;
         return;
     }
-    grid.innerHTML = LINKS.map(link => `
-        <div class="link-card" data-id="${link.id}">
-            <div class="link-title">
-                <i class="fas fa-external-link-alt"></i>
-                ${link.title || 'Liên kết'}
+    grid.innerHTML = LINKS.map(link => {
+        const favicon = getFaviconUrl(link);
+        // Nếu có favicon thì dùng ảnh, ngược lại dùng icon Font Awesome
+        const iconHtml = favicon 
+            ? `<img src="${favicon}" alt="favicon" class="favicon-icon" onerror="this.style.display='none'" />`
+            : `<i class="fas fa-link" style="color: var(--accent);"></i>`;
+        return `
+            <div class="doc-item" data-id="${link.id}">
+                <div class="doc-info">
+                    ${iconHtml}
+                    <div>
+                        <div class="doc-title">${link.title || 'Liên kết'}</div>
+                        <div class="doc-desc">${link.desc || ''} <span style="font-size:0.8rem; color:var(--primary-light); display:block; word-break:break-all;">${link.url}</span></div>
+                    </div>
+                </div>
+                <div class="doc-actions">
+                    <a href="${link.url}" target="_blank" rel="noopener"><i class="fas fa-external-link-alt"></i> Mở</a>
+                    <button class="btn-delete" data-key="links" data-id="${link.id}"><i class="fas fa-trash"></i> Xóa</button>
+                </div>
             </div>
-            <div class="link-desc">${link.desc || ''}</div>
-            <div class="link-url">
-                <a href="${link.url}" target="_blank" rel="noopener">${link.url}</a>
-            </div>
-            <button class="btn-delete" data-key="links" data-id="${link.id}"><i class="fas fa-trash"></i> Xóa</button>
-        </div>
-    `).join('');
-    document.querySelectorAll('#linksGrid .btn-delete').forEach(btn => {
+        `;
+    }).join('');
+    document.querySelectorAll('#linksGridInUngdung .btn-delete').forEach(btn => {
         btn.addEventListener('click', function(e) {
             e.stopPropagation();
             const key = this.dataset.key;
@@ -596,6 +670,13 @@ function renderLinks() {
             }
         });
     });
+}
+
+// ---------- RENDER GỘP PHẦN MỀM & LIÊN KẾT ----------
+function renderUngDungAndLinks() {
+    const filter = getActiveFilter('ungdungFilterBar') || 'all';
+    renderUngDungApp(filter);
+    renderLinksInUngdung();
 }
 
 // ---------- HELPER: embed URL ----------
@@ -640,11 +721,14 @@ document.querySelectorAll('.filter-bar').forEach(bar => {
         if (!btn) return;
         this.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-        // Lấy section id từ phần tử cha chứa filter bar
         const section = this.closest('.section');
         if (!section) return;
         const sectionId = section.id.replace('section-', '');
-        renderSection(sectionId);
+        if (sectionId === 'ungdung') {
+            renderUngDungAndLinks();
+        } else {
+            renderSection(sectionId);
+        }
     });
 });
 
@@ -749,11 +833,15 @@ uploadForm.addEventListener('submit', function(e) {
         } else if (type === 'link') {
             newItem = { title, desc, url: urlOrBase64 };
         }
-        let key = type + 's'; // photos, videos, documents, chuyenmon, ungdung, links
+        let key = type + 's';
         if (type === 'ungdung') key = 'ungdung';
         addItem(key, newItem);
         closeModal();
-        renderSection(key);
+        if (key === 'ungdung' || key === 'links') {
+            renderUngDungAndLinks();
+        } else {
+            renderSection(key);
+        }
     };
 
     if (file) {
@@ -841,8 +929,7 @@ function importJSON() {
                 renderSection('videos');
                 renderSection('documents');
                 renderSection('chuyenmon');
-                renderSection('ungdung');
-                renderSection('links');
+                renderUngDungAndLinks();
                 updateBadges();
                 alert('Nhập dữ liệu thành công!');
             } catch(err) {
@@ -854,7 +941,6 @@ function importJSON() {
     input.click();
 }
 
-// Thêm nút xuất nhập vào trang chủ
 document.addEventListener('DOMContentLoaded', function() {
     const container = document.getElementById('jsonToolsContainer');
     if (container) {
@@ -868,7 +954,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // ============================================================
-// TÍNH LƯƠNG – NHÚNG TRONG SECTION UNGDUNG (ĐÃ CẬP NHẬT TÙY CHỈNH TỶ LỆ)
+// TÍNH LƯƠNG
 // ============================================================
 function calculateSalary() {
     const hsLuong = document.getElementById('hsLuong');
@@ -937,10 +1023,9 @@ document.addEventListener('DOMContentLoaded', function() {
     renderVideos('all');
     renderDocuments('all');
     renderChuyenMon('all');
-    renderUngDung('all');
-    renderLinks();
+    renderUngDungAndLinks();
     updateBadges();
     switchSection('home');
     initSalaryCalculator();
-    console.log('✅ Website đã sẵn sàng với quản lý file, upload, xóa, JSON!');
+    console.log('✅ Website đã sẵn sàng với favicon cho liên kết!');
 });

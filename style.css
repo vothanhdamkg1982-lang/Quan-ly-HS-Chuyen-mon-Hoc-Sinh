@@ -148,7 +148,7 @@ a:hover {
 }
 
 /* ============================================================
-   BANNER ĐỘNG (SLIDER) – NÂNG CẤP
+   BANNER ĐỘNG
    ============================================================ */
 .banner {
     position: relative;
@@ -807,75 +807,59 @@ a:hover {
 }
 
 /* ============================================================
-   LIÊN KẾT
+   LIÊN KẾT (trong cột trái)
    ============================================================ */
-.links-grid {
+#linksGridInUngdung .doc-item {
+    border-left-color: var(--accent);
+}
+#linksGridInUngdung .doc-item .doc-info i {
+    color: var(--accent);
+}
+
+/* ===== FAVICON ===== */
+.favicon-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    object-fit: contain;
+    background: #fff;
+    padding: 2px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    flex-shrink: 0;
+}
+
+/* ============================================================
+   BỐ CỤC HAI CỘT CHO PHẦN MỀM & LIÊN KẾT
+   ============================================================ */
+.two-column-layout {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: 24px;
-    margin-top: 4px;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-top: 10px;
 }
-.link-card {
-    background: var(--bg);
+.two-column-layout .left-col,
+.two-column-layout .right-col {
+    background: #fafcff;
     border-radius: var(--radius);
-    padding: 20px 24px;
-    transition: var(--transition);
-    border: 1px solid rgba(0, 0, 0, 0.05);
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
+    padding: 20px 22px;
+    border: 1px solid #eef2f7;
 }
-.link-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
-    border-color: var(--accent);
-}
-.link-card .link-title {
-    font-size: 1.1rem;
-    font-weight: 600;
+.two-column-layout .left-col h3,
+.two-column-layout .right-col h3 {
+    font-size: 1.2rem;
     color: var(--primary);
+    margin-bottom: 16px;
     display: flex;
     align-items: center;
     gap: 10px;
 }
-.link-card .link-title i {
-    color: var(--accent);
-    font-size: 1.2rem;
-}
-.link-card .link-desc {
-    color: var(--text-light);
-    font-size: 0.9rem;
-    flex: 1;
-}
-.link-card .link-url {
-    font-size: 0.85rem;
-    color: var(--primary-light);
-    word-break: break-all;
-}
-.link-card .link-url a {
-    color: var(--primary-light);
-    transition: var(--transition);
-}
-.link-card .link-url a:hover {
+.two-column-layout .left-col h3 i,
+.two-column-layout .right-col h3 i {
     color: var(--accent);
 }
-.link-card .btn-delete {
-    align-self: flex-start;
-    background: #e74c3c;
-    color: #fff;
-    border: none;
-    padding: 4px 14px;
-    border-radius: 30px;
-    font-size: 0.75rem;
-    cursor: pointer;
-    transition: 0.3s;
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    margin-top: 4px;
-}
-.link-card .btn-delete:hover {
-    background: #c0392b;
+.two-column-layout .left-col .empty-state,
+.two-column-layout .right-col .empty-state {
+    padding: 20px 0;
 }
 
 /* ============================================================
@@ -958,7 +942,7 @@ a:hover {
 }
 
 /* ============================================================
-   FORM TÍNH LƯƠNG (NHÚNG TRONG SECTION UNGDUNG)
+   FORM TÍNH LƯƠNG
    ============================================================ */
 .salary-calculator-card {
     background: #ffffff;
@@ -968,39 +952,33 @@ a:hover {
     margin-top: 28px;
     border: 1px solid rgba(0, 0, 0, 0.03);
 }
-
 .salary-calculator-container {
     font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
     color: #0b1e33;
 }
-
 .salary-form-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 28px 40px;
 }
-
 @media (max-width: 820px) {
     .salary-form-grid {
         grid-template-columns: 1fr;
         gap: 24px;
     }
 }
-
 .salary-inputs-section {
     background: #f8fafc;
     border-radius: 18px;
     padding: 22px 24px 26px;
     border: 1px solid #e9edf2;
 }
-
 .salary-results-section {
     background: #ffffff;
     border-radius: 18px;
     padding: 22px 24px 26px;
     border: 1px solid #e9edf2;
 }
-
 .salary-section-title {
     font-size: 16px;
     font-weight: 600;
@@ -1023,7 +1001,6 @@ a:hover {
     background: #1a4c8c;
     color: #fff;
 }
-
 .salary-input-row {
     display: flex;
     align-items: center;
@@ -1070,7 +1047,6 @@ a:hover {
     margin-top: 8px;
     padding-left: 2px;
 }
-
 .salary-result-item {
     display: flex;
     justify-content: space-between;
@@ -1106,7 +1082,6 @@ a:hover {
     font-size: 20px;
     font-weight: 700;
 }
-
 .salary-divider {
     height: 1px;
     background: #e2e8f0;
@@ -1117,7 +1092,6 @@ a:hover {
     background: #d0d9e6;
     margin: 14px 0 16px;
 }
-
 .salary-summary-grid {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -1131,7 +1105,6 @@ a:hover {
         grid-template-columns: 1fr;
     }
 }
-
 .salary-summary-card {
     background: #f8fafc;
     border-radius: 14px;
@@ -1161,7 +1134,6 @@ a:hover {
 .salary-summary-card .amount.blue {
     color: #1a4c8c;
 }
-
 .salary-note {
     font-size: 13px;
     color: #6b7f96;
@@ -1175,7 +1147,6 @@ a:hover {
 .salary-note strong {
     color: #1a2b3f;
 }
-
 @media (max-width: 600px) {
     .salary-input-row {
         flex-wrap: wrap;
@@ -1278,8 +1249,6 @@ a:hover {
     background: var(--primary-light);
     transform: scale(1.02);
 }
-
-/* ===== NÚT THÊM MỚI ===== */
 .btn-add {
     background: var(--accent);
     color: #fff;
@@ -1298,8 +1267,6 @@ a:hover {
     background: var(--accent-light);
     transform: scale(1.03);
 }
-
-/* ===== NÚT XÓA ===== */
 .btn-delete {
     background: #e74c3c;
     color: #fff;
@@ -1317,8 +1284,6 @@ a:hover {
     background: #c0392b;
     transform: scale(1.05);
 }
-
-/* ===== NÚT XUẤT / NHẬP JSON ===== */
 .json-tools {
     display: flex;
     flex-wrap: wrap;
@@ -1377,6 +1342,10 @@ a:hover {
         text-align: left;
         padding: 12px 18px;
         border-radius: 10px;
+    }
+    .two-column-layout {
+        grid-template-columns: 1fr;
+        gap: 20px;
     }
     .banner, .banner-slider, .banner-slides-wrapper, .banner-slide {
         min-height: 40vh;
@@ -1502,5 +1471,9 @@ a:hover {
         top: 16px;
         right: 20px;
         font-size: 2.8rem;
+    }
+    .two-column-layout .left-col,
+    .two-column-layout .right-col {
+        padding: 16px;
     }
 }

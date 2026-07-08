@@ -26,13 +26,12 @@
                 <li><button data-section="videos"><i class="fas fa-video"></i> Kho video <span class="badge" id="videoCount">0</span></button></li>
                 <li><button data-section="documents"><i class="fas fa-folder-open"></i> Tài liệu <span class="badge" id="docCount">0</span></button></li>
                 <li><button data-section="chuyenmon"><i class="fas fa-folder"></i> Chuyên môn <span class="badge" id="chuyenmonCount">0</span></button></li>
-                <li><button data-section="ungdung"><i class="fas fa-laptop"></i> Phần mềm ứng dụng <span class="badge" id="ungdungCount">0</span></button></li>
-                <li><button data-section="links"><i class="fas fa-link"></i> Liên kết</button></li>
+                <li><button data-section="ungdung"><i class="fas fa-laptop"></i> Công cụ &amp; Liên kết <span class="badge" id="ungdungCount">0</span></button></li>
             </ul>
         </nav>
     </header>
 
-    <!-- ===== BANNER ĐỘNG (SLIDER) ===== -->
+    <!-- BANNER ĐỘNG -->
     <section class="banner">
         <div class="banner-slider" id="bannerSlider">
             <div class="banner-slides-wrapper" id="bannerSlidesWrapper"></div>
@@ -46,7 +45,7 @@
         </div>
     </section>
 
-    <!-- ===== MAIN CONTENT ===== -->
+    <!-- MAIN CONTENT -->
     <main class="container">
 
         <!-- TRANG CHỦ -->
@@ -84,8 +83,6 @@
                 <div class="card stat-item"><i class="fas fa-video"></i><div class="stat-number" id="homeVideoCount">0</div><div class="stat-label">Video</div></div>
                 <div class="card stat-item"><i class="fas fa-file-alt"></i><div class="stat-number" id="homeDocCount">0</div><div class="stat-label">Tài liệu</div></div>
             </div>
-
-            <!-- Nút xuất/nhập JSON sẽ được chèn tự động bởi script -->
             <div id="jsonToolsContainer"></div>
         </section>
 
@@ -195,21 +192,37 @@
             </div>
         </section>
 
-        <!-- KHO ỨNG DỤNG (EXCEL) + FORM TÍNH LƯƠNG -->
+        <!-- GỘP PHẦN MỀM & LIÊN KẾT -->
         <section class="section" id="section-ungdung">
             <div class="card">
-                <div class="section-title"><i class="fas fa-folder"></i> Kho lưu trữ phần mềm ứng dụng</div>
-                <div class="section-sub">Kế hoạch giảng dạy, phần mềm kiểm phiếu, phần mềm quản lý tiền lương</div>
-                <div class="filter-bar" id="ungdungFilterBar">
-                    <button class="filter-btn active" data-filter="all">Tất cả</button>
+                <div class="section-title"><i class="fas fa-laptop"></i> Công cụ &amp; Liên kết</div>
+                <div class="section-sub">Các phần mềm ứng dụng và liên kết hữu ích cho giáo viên</div>
+
+                <div class="two-column-layout">
+                    <!-- Cột trái: Liên kết -->
+                    <div class="left-col">
+                        <h3><i class="fas fa-link"></i> Liên kết hữu ích</h3>
+                        <div style="display:flex; flex-wrap:wrap; gap:10px; margin-bottom:16px;">
+                            <button class="btn-add" data-type="link"><i class="fas fa-plus-circle"></i> Thêm liên kết</button>
+                        </div>
+                        <div class="links-grid" id="linksGridInUngdung"></div>
+                    </div>
+
+                    <!-- Cột phải: Phần mềm ứng dụng -->
+                    <div class="right-col">
+                        <h3><i class="fas fa-file-excel"></i> Phần mềm ứng dụng</h3>
+                        <div class="filter-bar" id="ungdungFilterBar">
+                            <button class="filter-btn active" data-filter="all">Tất cả</button>
+                        </div>
+                        <div style="display:flex; flex-wrap:wrap; gap:10px; margin-bottom:16px;">
+                            <button class="btn-add" data-type="ungdung"><i class="fas fa-plus-circle"></i> Thêm ứng dụng</button>
+                        </div>
+                        <div class="doc-list" id="ungdungList"></div>
+                    </div>
                 </div>
-                <div style="display:flex; flex-wrap:wrap; gap:10px; margin-bottom:16px; align-items:center;">
-                    <button class="btn-add" data-type="ungdung"><i class="fas fa-plus-circle"></i> Thêm ứng dụng</button>
-                </div>
-                <div class="doc-list" id="ungdungList"></div>
             </div>
 
-            <!-- ========== FORM TÍNH LƯƠNG (ĐÃ CẬP NHẬT TÙY CHỈNH TỶ LỆ) ========== -->
+            <!-- FORM TÍNH LƯƠNG -->
             <div class="card salary-calculator-card">
                 <div class="section-title"><i class="fas fa-calculator"></i> Bảng tính lương trực tuyến</div>
                 <div class="section-sub">Điều chỉnh hệ số, phụ cấp – tỷ lệ ưu đãi & đặc biệt có thể tùy chỉnh</div>
@@ -217,13 +230,8 @@
                 <div class="salary-calculator-container" id="salaryApp">
                     <!-- Grid chính -->
                     <div class="salary-form-grid">
-                        <!-- Cột input -->
                         <div class="salary-inputs-section">
-                            <div class="salary-section-title">
-                                ⚙️ Thông số đầu vào
-                                <span>điều chỉnh</span>
-                            </div>
-
+                            <div class="salary-section-title">⚙️ Thông số đầu vào <span>điều chỉnh</span></div>
                             <div class="salary-input-row">
                                 <label>Hệ số lương <span class="sub">(D)</span></label>
                                 <div class="salary-input-group">
@@ -260,7 +268,6 @@
                                     <input type="number" id="hsYTe" step="0.01" value="0" />
                                 </div>
                             </div>
-                            <!-- HAI INPUT MỚI: TỶ LỆ % CHO ƯU ĐÃI VÀ ĐẶC BIỆT -->
                             <div class="salary-input-row">
                                 <label>Phụ cấp ưu đãi <span class="sub">(%)</span></label>
                                 <div class="salary-input-group">
@@ -273,8 +280,7 @@
                                     <input type="number" id="hsDacBietPct" step="0.5" value="30" />
                                 </div>
                             </div>
-                            <!-- Lương cơ sở -->
-                            <div class="salary-input-row" style="margin-top: 6px; padding-top: 12px; border-top: 1px dashed #dce3ec;">
+                            <div class="salary-input-row" style="margin-top:6px; padding-top:12px; border-top:1px dashed #dce3ec;">
                                 <label style="font-weight:600;">Lương cơ sở <span class="sub">(đồng)</span></label>
                                 <div class="salary-input-group">
                                     <input type="number" id="luongCoSo" step="10000" value="2530000" />
@@ -283,13 +289,8 @@
                             <div class="salary-helper">💡 Thay đổi giá trị bên trên, kết quả cập nhật ngay.</div>
                         </div>
 
-                        <!-- Cột kết quả -->
                         <div class="salary-results-section">
-                            <div class="salary-section-title">
-                                📊 Kết quả tính toán
-                                <span>chi tiết</span>
-                            </div>
-
+                            <div class="salary-section-title">📊 Kết quả tính toán <span>chi tiết</span></div>
                             <div class="salary-result-item">
                                 <span class="label">Hệ số phụ cấp ưu đãi</span>
                                 <span class="value" id="kqUuDai">0</span>
@@ -303,7 +304,6 @@
                                 <span class="value" id="kqDacBiet">0</span>
                             </div>
                             <div class="salary-divider"></div>
-
                             <div class="salary-result-item">
                                 <span class="label" style="font-weight:600;">Tổng hệ số</span>
                                 <span class="value highlight" id="kqTongHeSo">0</span>
@@ -313,7 +313,6 @@
                                 <span class="value bold-lg" id="kqLuongThang">0</span>
                             </div>
                             <div class="salary-divider thick"></div>
-
                             <div class="salary-result-item">
                                 <span class="label">BHXH (8%)</span>
                                 <span class="value negative" id="kqBHXH">0</span>
@@ -327,21 +326,18 @@
                                 <span class="value negative" id="kqBHTN">0</span>
                             </div>
                             <div class="salary-divider"></div>
-
                             <div class="salary-result-item">
                                 <span class="label" style="font-weight:600;">Tổng trừ vào lương</span>
                                 <span class="value negative bold-lg" id="kqTongTru">0</span>
                             </div>
                             <div class="salary-divider thick"></div>
-
-                            <div class="salary-result-item" style="padding: 12px 0 8px;">
+                            <div class="salary-result-item" style="padding:12px 0 8px;">
                                 <span class="label" style="font-size:18px; font-weight:700; color:#0b1e33;">💵 Thực lãnh</span>
                                 <span class="value positive bold-lg" id="kqThucLanh" style="font-size:26px;">0</span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Tóm tắt -->
                     <div class="salary-summary-grid">
                         <div class="salary-summary-card">
                             <div class="label">Tổng hệ số</div>
@@ -366,19 +362,6 @@
                     </div>
                 </div>
             </div>
-            <!-- ========== KẾT THÚC FORM TÍNH LƯƠNG ========== -->
-        </section>
-
-        <!-- LIÊN KẾT -->
-        <section class="section" id="section-links">
-            <div class="card">
-                <div class="section-title"><i class="fas fa-link"></i> Liên kết website giáo dục</div>
-                <div class="section-sub">Các trang web hữu ích cho học tập và giảng dạy</div>
-                <div style="display:flex; flex-wrap:wrap; gap:10px; margin-bottom:16px; align-items:center;">
-                    <button class="btn-add" data-type="link"><i class="fas fa-plus-circle"></i> Thêm liên kết</button>
-                </div>
-                <div class="links-grid" id="linksGrid"></div>
-            </div>
         </section>
 
     </main>
@@ -390,7 +373,7 @@
         <div class="lightbox-caption" id="lightboxCaption"></div>
     </div>
 
-    <!-- ===== MODAL UPLOAD ===== -->
+    <!-- MODAL UPLOAD -->
     <div class="modal" id="uploadModal">
         <div class="modal-content">
             <span class="modal-close" id="modalClose">&times;</span>
@@ -423,7 +406,6 @@
         </div>
     </div>
 
-    <!-- FOOTER -->
     <footer class="footer">
         <p>&copy; 2026 Võ Thanh Đậm - Website cá nhân</p>
     </footer>
