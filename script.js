@@ -238,8 +238,8 @@ function renderBanner() {
     const dotsContainer = document.getElementById('bannerDots');
     const SLIDES = [
         {
-            title: 'Võ Thanh Đậm',
-            desc: 'Giáo viên Tin học • Trường Tiểu học Trần Quốc Toản',
+            title: 'Cổng thông tin giáo viên',
+            desc: 'Cập nhật hồ sơ cá nhân - Thông tin học sinh - Chia sẻ tài nguyên giáo dục',
             btnText: 'Tìm hiểu thêm',
             btnLink: '#section-teacher',
             bg: 'https://i.pinimg.com/736x/2e/e7/6e/2ee76e06f2852ed4f66b2b5576687066.jpg',
