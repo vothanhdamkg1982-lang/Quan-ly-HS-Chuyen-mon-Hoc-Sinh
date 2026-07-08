@@ -8,363 +8,338 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 </head>
 <body>
-
     <!-- HEADER -->
     <header class="header">
-        <nav class="navbar">
+        <div class="header-container">
             <div class="logo">
                 <i class="fas fa-chalkboard-teacher"></i>
                 <span>Võ Thanh Đậm</span>
             </div>
-            <button class="menu-toggle" id="menuToggle" aria-label="Mở menu">
-                <i class="fas fa-bars"></i>
-            </button>
-            <ul class="nav-links" id="navLinks">
-                <li><button class="active" data-section="home"><i class="fas fa-home"></i> Trang chủ</button></li>
-                <li><button data-section="teacher"><i class="fas fa-user-graduate"></i> Giáo viên</button></li>
-                <li><button data-section="photos"><i class="fas fa-images"></i> Kho ảnh <span class="badge" id="photoCount">0</span></button></li>
-                <li><button data-section="videos"><i class="fas fa-video"></i> Kho video <span class="badge" id="videoCount">0</span></button></li>
-                <li><button data-section="documents"><i class="fas fa-folder-open"></i> Tài liệu <span class="badge" id="docCount">0</span></button></li>
-                <li><button data-section="chuyenmon"><i class="fas fa-folder"></i> Chuyên môn <span class="badge" id="chuyenmonCount">0</span></button></li>
-                <li><button data-section="ungdung"><i class="fas fa-laptop"></i> Công cụ &amp; Liên kết <span class="badge" id="ungdungCount">0</span></button></li>
-            </ul>
-        </nav>
+            <div class="header-search">
+                <input type="text" id="searchInput" placeholder="Tìm kiếm khóa học, tài liệu..." />
+                <button id="searchBtn"><i class="fas fa-search"></i></button>
+            </div>
+            <div class="header-actions">
+                <button class="btn-login" id="loginBtn"><i class="fas fa-user"></i> Đăng nhập</button>
+                <button class="btn-register" id="registerBtn">Đăng ký</button>
+            </div>
+        </div>
     </header>
 
-    <!-- BANNER ĐỘNG -->
-    <section class="banner">
-        <div class="banner-slider" id="bannerSlider">
-            <div class="banner-slides-wrapper" id="bannerSlidesWrapper"></div>
-            <button class="banner-btn banner-btn-prev" id="bannerPrev" aria-label="Slide trước">
-                <i class="fas fa-chevron-left"></i>
-            </button>
-            <button class="banner-btn banner-btn-next" id="bannerNext" aria-label="Slide sau">
-                <i class="fas fa-chevron-right"></i>
-            </button>
-            <div class="banner-dots" id="bannerDots"></div>
-        </div>
-    </section>
+    <!-- APP WRAPPER -->
+    <div class="app-wrapper">
+        <!-- SIDEBAR -->
+        <aside class="sidebar" id="sidebar">
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><button class="active" data-section="home"><i class="fas fa-home"></i> Trang chủ</button></li>
+                    <li><button data-section="teacher"><i class="fas fa-user-graduate"></i> Giáo viên</button></li>
+                    <li><button data-section="photos"><i class="fas fa-images"></i> Kho ảnh <span class="badge" id="photoCount">0</span></button></li>
+                    <li><button data-section="videos"><i class="fas fa-video"></i> Kho video <span class="badge" id="videoCount">0</span></button></li>
+                    <li><button data-section="documents"><i class="fas fa-folder-open"></i> Tài liệu <span class="badge" id="docCount">0</span></button></li>
+                    <li><button data-section="chuyenmon"><i class="fas fa-folder"></i> Chuyên môn <span class="badge" id="chuyenmonCount">0</span></button></li>
+                    <li><button data-section="ungdung"><i class="fas fa-laptop"></i> Công cụ <span class="badge" id="ungdungCount">0</span></button></li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <button class="btn-json" onclick="exportJSON()"><i class="fas fa-file-export"></i> Xuất JSON</button>
+                <button class="btn-json import" onclick="importJSON()"><i class="fas fa-file-import"></i> Nhập JSON</button>
+            </div>
+        </aside>
 
-    <!-- MAIN CONTENT -->
-    <main class="container">
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+            <!-- BANNER -->
+            <section class="banner">
+                <div class="banner-slider" id="bannerSlider">
+                    <div class="banner-slides-wrapper" id="bannerSlidesWrapper"></div>
+                    <button class="banner-btn banner-btn-prev" id="bannerPrev"><i class="fas fa-chevron-left"></i></button>
+                    <button class="banner-btn banner-btn-next" id="bannerNext"><i class="fas fa-chevron-right"></i></button>
+                    <div class="banner-dots" id="bannerDots"></div>
+                </div>
+            </section>
 
-        <!-- TRANG CHỦ -->
-        <section class="section active" id="section-home">
-            <div class="card hero-card">
-                <div class="hero">
-                    <div class="hero-avatar">
-                        <img src="https://i.ibb.co/GQywpxZS/IMG-0030.jpg" alt="Võ Thanh Đậm" />
-                    </div>
-                    <div class="hero-info">
-                        <h1>Võ Thanh Đậm</h1>
-                        <div class="title-role"><i class="fas fa-chalkboard"></i> Giáo viên Tin học</div>
-                        <p>Chào mừng đến với website cá nhân. Tại đây bạn có thể tìm hiểu thông tin về tôi, tham khảo kho ảnh, video và tài liệu giảng dạy. Mọi tài liệu đều có thể xem và tải xuống.</p>
-                        <div class="hero-stats">
-                            <span class="stat"><i class="fas fa-calendar-alt"></i> <strong>24</strong> năm kinh nghiệm</span>
-                            <span class="stat"><i class="fas fa-graduation-cap"></i> <strong>2</strong> bằng Cử nhân</span>
-                            <span class="stat"><i class="fas fa-book-open"></i> <strong>Tin học</strong> bộ môn</span>
+            <!-- CÁC SECTION -->
+            <div class="content-sections">
+                <!-- TRANG CHỦ -->
+                <section class="section active" id="section-home">
+                    <div class="card hero-card">
+                        <div class="hero">
+                            <div class="hero-avatar">
+                                <img src="https://i.ibb.co/GQywpxZS/IMG-0030.jpg" alt="Võ Thanh Đậm" />
+                            </div>
+                            <div class="hero-info">
+                                <h1>Võ Thanh Đậm</h1>
+                                <div class="title-role"><i class="fas fa-chalkboard"></i> Giáo viên Tin học</div>
+                                <p>Chào mừng đến với website cá nhân. Tại đây bạn có thể tìm hiểu thông tin về tôi, tham khảo kho ảnh, video và tài liệu giảng dạy. Mọi tài liệu đều có thể xem và tải xuống.</p>
+                                <div class="hero-stats">
+                                    <span class="stat"><i class="fas fa-calendar-alt"></i> <strong>24</strong> năm kinh nghiệm</span>
+                                    <span class="stat"><i class="fas fa-graduation-cap"></i> <strong>2</strong> bằng Cử nhân</span>
+                                    <span class="stat"><i class="fas fa-book-open"></i> <strong>Tin học</strong> bộ môn</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
 
-            <div class="card info-highlight">
-                <div class="highlight-content">
-                    <div>
-                        <h3><i class="fas fa-arrow-right"></i> Hệ số lương 4,32 · Bậc 7</h3>
-                        <p>Nâng lương ngày 01/06/2027 · 24 năm cống hiến</p>
-                    </div>
-                    <a href="#section-teacher" class="btn-highlight" onclick="switchSection('teacher')">Xem chi tiết <i class="fas fa-chevron-right"></i></a>
-                </div>
-            </div>
-
-            <div class="stats-grid">
-                <div class="card stat-item"><i class="fas fa-images"></i><div class="stat-number" id="homePhotoCount">0</div><div class="stat-label">Ảnh</div></div>
-                <div class="card stat-item"><i class="fas fa-video"></i><div class="stat-number" id="homeVideoCount">0</div><div class="stat-label">Video</div></div>
-                <div class="card stat-item"><i class="fas fa-file-alt"></i><div class="stat-number" id="homeDocCount">0</div><div class="stat-label">Tài liệu</div></div>
-            </div>
-            <div id="jsonToolsContainer"></div>
-        </section>
-
-        <!-- THÔNG TIN GIÁO VIÊN -->
-        <section class="section" id="section-teacher">
-            <div class="card">
-                <div class="section-title"><i class="fas fa-user-graduate"></i> Thông tin giáo viên</div>
-                <div class="section-sub">Hồ sơ chuyên môn và quá trình công tác</div>
-                <div class="teacher-profile">
-                    <div class="teacher-avatar">
-                        <img src="https://i.ibb.co/GQywpxZS/IMG-0030.jpg" alt="Võ Thanh Đậm" />
-                    </div>
-                    <div class="teacher-info">
-                        <div class="info-grid">
-                            <div class="info-item"><span class="label">Ngày sinh</span><span class="value">05/09/1983</span></div>
-                            <div class="info-item"><span class="label">Bậc / Hệ số</span><span class="value">Bậc 7 · 4,32</span></div>
-                            <div class="info-item"><span class="label">Thâm niên</span><span class="value">23%</span></div>
-                            <div class="info-item"><span class="label">Nâng lương</span><span class="value">01/06/2027</span></div>
-                            <div class="info-item"><span class="label">Kinh nghiệm</span><span class="value">24 năm <small>(từ 2002)</small></span></div>
-                            <div class="info-item"><span class="label">Bộ môn</span><span class="value">Tin học</span></div>
-                            <div class="info-item"><span class="label">Văn bằng</span><span class="value">Cử nhân GD Tiểu học <br /> Cử nhân Công nghệ thông tin</span></div>
+                    <div class="card info-highlight">
+                        <div class="highlight-content">
+                            <div>
+                                <h3><i class="fas fa-arrow-right"></i> Hệ số lương 4,32 · Bậc 7</h3>
+                                <p>Nâng lương ngày 01/06/2027 · 24 năm cống hiến</p>
+                            </div>
+                            <a href="#section-teacher" class="btn-highlight" onclick="switchSection('teacher')">Xem chi tiết <i class="fas fa-chevron-right"></i></a>
                         </div>
                     </div>
-                </div>
-                <div class="teacher-tags">
-                    <span><i class="fas fa-calendar-check"></i> 24 năm giảng dạy</span>
-                    <span><i class="fas fa-laptop-code"></i> Chuyên môn Tin học</span>
-                    <span><i class="fas fa-university"></i> 2 bằng Cử nhân</span>
-                </div>
-            </div>
-        </section>
 
-        <!-- KHO ẢNH -->
-        <section class="section" id="section-photos">
-            <div class="card">
-                <div class="section-title"><i class="fas fa-images"></i> Kho ảnh</div>
-                <div class="section-sub">Click vào ảnh để xem toàn màn hình</div>
-                <div class="filter-bar" id="photoFilterBar">
-                    <button class="filter-btn active" data-filter="all">Tất cả</button>
-                    <button class="filter-btn" data-filter="giangday">Giảng dạy</button>
-                    <button class="filter-btn" data-filter="hoatdong">Hoạt động</button>
-                    <button class="filter-btn" data-filter="sukien">Sự kiện</button>
-                    <button class="filter-btn" data-filter="ca">Cá nhân</button>
-                </div>
-                <div style="display:flex; flex-wrap:wrap; gap:10px; margin-bottom:16px; align-items:center;">
-                    <button class="btn-add" data-type="photo"><i class="fas fa-plus-circle"></i> Thêm ảnh</button>
-                </div>
-                <div class="gallery-grid" id="photoGrid"></div>
-            </div>
-        </section>
-
-        <!-- KHO VIDEO -->
-        <section class="section" id="section-videos">
-            <div class="card">
-                <div class="section-title"><i class="fas fa-video"></i> Kho video</div>
-                <div class="section-sub">Video từ YouTube, Vimeo</div>
-                <div class="filter-bar" id="videoFilterBar">
-                    <button class="filter-btn active" data-filter="all">Tất cả</button>
-                    <button class="filter-btn" data-filter="giangday">Giảng dạy</button>
-                    <button class="filter-btn" data-filter="hoatdong">Hoạt động</button>
-                    <button class="filter-btn" data-filter="sukien">Sự kiện</button>
-                    <button class="filter-btn" data-filter="cá nhân">Cá nhân</button>
-                </div>
-                <div style="display:flex; flex-wrap:wrap; gap:10px; margin-bottom:16px; align-items:center;">
-                    <button class="btn-add" data-type="video"><i class="fas fa-plus-circle"></i> Thêm video</button>
-                </div>
-                <div class="gallery-grid" id="videoGrid"></div>
-            </div>
-        </section>
-
-        <!-- KHO TÀI LIỆU -->
-        <section class="section" id="section-documents">
-            <div class="card">
-                <div class="section-title"><i class="fas fa-folder-open"></i> Kho tài liệu</div>
-                <div class="section-sub">Tài liệu có thể xem và tải xuống</div>
-                <div class="filter-bar" id="docFilterBar">
-                    <button class="filter-btn active" data-filter="all">Tất cả</button>
-                    <button class="filter-btn" data-filter="quyetdinh">Quyết định</button>
-                    <button class="filter-btn" data-filter="khenthuong">Khen thưởng</button>
-                    <button class="filter-btn" data-filter="chungnhan">Chứng nhận</button>
-                    <button class="filter-btn" data-filter="Văn bằng, chứng chỉ">Văn bằng, chứng chỉ</button>
-                </div>
-                <div style="display:flex; flex-wrap:wrap; gap:10px; margin-bottom:16px; align-items:center;">
-                    <button class="btn-add" data-type="document"><i class="fas fa-plus-circle"></i> Thêm tài liệu</button>
-                </div>
-                <div class="doc-list" id="docList"></div>
-            </div>
-        </section>
-
-        <!-- KHO CHUYÊN MÔN -->
-        <section class="section" id="section-chuyenmon">
-            <div class="card">
-                <div class="section-title"><i class="fas fa-folder"></i> Kho lưu trữ chuyên môn</div>
-                <div class="section-sub">Giáo án, đề thi, sáng kiến kinh nghiệm và tài liệu chuyên môn</div>
-                <div class="filter-bar" id="chuyenmonFilterBar">
-                    <button class="filter-btn active" data-filter="all">Tất cả</button>
-                    <button class="filter-btn" data-filter="giaoan">Giáo án</button>
-                    <button class="filter-btn" data-filter="dethi">Đề thi</button>
-                    <button class="filter-btn" data-filter="sangkien">Sáng kiến</button>
-                    <button class="filter-btn" data-filter="tailieu">Tài liệu</button>
-                    <button class="filter-btn" data-filter="phancongchuyenmon">Phân công chuyên môn</button>
-                </div>
-                <div style="display:flex; flex-wrap:wrap; gap:10px; margin-bottom:16px; align-items:center;">
-                    <button class="btn-add" data-type="chuyenmon"><i class="fas fa-plus-circle"></i> Thêm chuyên môn</button>
-                </div>
-                <div class="doc-list" id="chuyenmonList"></div>
-            </div>
-        </section>
-
-        <!-- GỘP PHẦN MỀM & LIÊN KẾT -->
-        <section class="section" id="section-ungdung">
-            <div class="card">
-                <div class="section-title"><i class="fas fa-laptop"></i> Công cụ &amp; Liên kết</div>
-                <div class="section-sub">Các phần mềm ứng dụng và liên kết hữu ích cho giáo viên</div>
-
-                <div class="two-column-layout">
-                    <!-- Cột trái: Liên kết -->
-                    <div class="left-col">
-                        <h3><i class="fas fa-link"></i> Liên kết hữu ích</h3>
-                        <div style="display:flex; flex-wrap:wrap; gap:10px; margin-bottom:16px;">
-                            <button class="btn-add" data-type="link"><i class="fas fa-plus-circle"></i> Thêm liên kết</button>
-                        </div>
-                        <div class="links-grid" id="linksGridInUngdung"></div>
+                    <div class="stats-grid">
+                        <div class="card stat-item"><i class="fas fa-images"></i><div class="stat-number" id="homePhotoCount">0</div><div class="stat-label">Ảnh</div></div>
+                        <div class="card stat-item"><i class="fas fa-video"></i><div class="stat-number" id="homeVideoCount">0</div><div class="stat-label">Video</div></div>
+                        <div class="card stat-item"><i class="fas fa-file-alt"></i><div class="stat-number" id="homeDocCount">0</div><div class="stat-label">Tài liệu</div></div>
                     </div>
+                </section>
 
-                    <!-- Cột phải: Phần mềm ứng dụng -->
-                    <div class="right-col">
-                        <h3><i class="fas fa-file-excel"></i> Phần mềm ứng dụng</h3>
-                        <div class="filter-bar" id="ungdungFilterBar">
+                <!-- THÔNG TIN GIÁO VIÊN -->
+                <section class="section" id="section-teacher">
+                    <div class="card">
+                        <div class="section-title"><i class="fas fa-user-graduate"></i> Thông tin giáo viên</div>
+                        <div class="section-sub">Hồ sơ chuyên môn và quá trình công tác</div>
+                        <div class="teacher-profile">
+                            <div class="teacher-avatar">
+                                <img src="https://i.ibb.co/GQywpxZS/IMG-0030.jpg" alt="Võ Thanh Đậm" />
+                            </div>
+                            <div class="teacher-info">
+                                <div class="info-grid">
+                                    <div class="info-item"><span class="label">Ngày sinh</span><span class="value">05/09/1983</span></div>
+                                    <div class="info-item"><span class="label">Bậc / Hệ số</span><span class="value">Bậc 7 · 4,32</span></div>
+                                    <div class="info-item"><span class="label">Thâm niên</span><span class="value">23%</span></div>
+                                    <div class="info-item"><span class="label">Nâng lương</span><span class="value">01/06/2027</span></div>
+                                    <div class="info-item"><span class="label">Kinh nghiệm</span><span class="value">24 năm <small>(từ 2002)</small></span></div>
+                                    <div class="info-item"><span class="label">Bộ môn</span><span class="value">Tin học</span></div>
+                                    <div class="info-item"><span class="label">Văn bằng</span><span class="value">Cử nhân GD Tiểu học <br /> Cử nhân Công nghệ thông tin</span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="teacher-tags">
+                            <span><i class="fas fa-calendar-check"></i> 24 năm giảng dạy</span>
+                            <span><i class="fas fa-laptop-code"></i> Chuyên môn Tin học</span>
+                            <span><i class="fas fa-university"></i> 2 bằng Cử nhân</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- KHO ẢNH -->
+                <section class="section" id="section-photos">
+                    <div class="card">
+                        <div class="section-title"><i class="fas fa-images"></i> Kho ảnh</div>
+                        <div class="section-sub">Click vào ảnh để xem toàn màn hình</div>
+                        <div class="filter-bar" id="photoFilterBar">
                             <button class="filter-btn active" data-filter="all">Tất cả</button>
+                            <button class="filter-btn" data-filter="giangday">Giảng dạy</button>
+                            <button class="filter-btn" data-filter="hoatdong">Hoạt động</button>
+                            <button class="filter-btn" data-filter="sukien">Sự kiện</button>
+                            <button class="filter-btn" data-filter="ca">Cá nhân</button>
                         </div>
                         <div style="display:flex; flex-wrap:wrap; gap:10px; margin-bottom:16px;">
-                            <button class="btn-add" data-type="ungdung"><i class="fas fa-plus-circle"></i> Thêm ứng dụng</button>
+                            <button class="btn-add" data-type="photo"><i class="fas fa-plus-circle"></i> Thêm ảnh</button>
                         </div>
-                        <div class="doc-list" id="ungdungList"></div>
+                        <div class="gallery-grid" id="photoGrid"></div>
                     </div>
-                </div>
+                </section>
+
+                <!-- KHO VIDEO -->
+                <section class="section" id="section-videos">
+                    <div class="card">
+                        <div class="section-title"><i class="fas fa-video"></i> Kho video</div>
+                        <div class="section-sub">Video từ YouTube, Vimeo</div>
+                        <div class="filter-bar" id="videoFilterBar">
+                            <button class="filter-btn active" data-filter="all">Tất cả</button>
+                            <button class="filter-btn" data-filter="giangday">Giảng dạy</button>
+                            <button class="filter-btn" data-filter="hoatdong">Hoạt động</button>
+                            <button class="filter-btn" data-filter="sukien">Sự kiện</button>
+                            <button class="filter-btn" data-filter="cá nhân">Cá nhân</button>
+                        </div>
+                        <div style="display:flex; flex-wrap:wrap; gap:10px; margin-bottom:16px;">
+                            <button class="btn-add" data-type="video"><i class="fas fa-plus-circle"></i> Thêm video</button>
+                        </div>
+                        <div class="gallery-grid" id="videoGrid"></div>
+                    </div>
+                </section>
+
+                <!-- KHO TÀI LIỆU -->
+                <section class="section" id="section-documents">
+                    <div class="card">
+                        <div class="section-title"><i class="fas fa-folder-open"></i> Kho tài liệu</div>
+                        <div class="section-sub">Tài liệu có thể xem và tải xuống</div>
+                        <div class="filter-bar" id="docFilterBar">
+                            <button class="filter-btn active" data-filter="all">Tất cả</button>
+                            <button class="filter-btn" data-filter="quyetdinh">Quyết định</button>
+                            <button class="filter-btn" data-filter="khenthuong">Khen thưởng</button>
+                            <button class="filter-btn" data-filter="chungnhan">Chứng nhận</button>
+                            <button class="filter-btn" data-filter="Văn bằng, chứng chỉ">Văn bằng, chứng chỉ</button>
+                        </div>
+                        <div style="display:flex; flex-wrap:wrap; gap:10px; margin-bottom:16px;">
+                            <button class="btn-add" data-type="document"><i class="fas fa-plus-circle"></i> Thêm tài liệu</button>
+                        </div>
+                        <div class="doc-list" id="docList"></div>
+                    </div>
+                </section>
+
+                <!-- KHO CHUYÊN MÔN -->
+                <section class="section" id="section-chuyenmon">
+                    <div class="card">
+                        <div class="section-title"><i class="fas fa-folder"></i> Kho chuyên môn</div>
+                        <div class="section-sub">Giáo án, đề thi, sáng kiến kinh nghiệm và tài liệu chuyên môn</div>
+                        <div class="filter-bar" id="chuyenmonFilterBar">
+                            <button class="filter-btn active" data-filter="all">Tất cả</button>
+                            <button class="filter-btn" data-filter="giaoan">Giáo án</button>
+                            <button class="filter-btn" data-filter="dethi">Đề thi</button>
+                            <button class="filter-btn" data-filter="sangkien">Sáng kiến</button>
+                            <button class="filter-btn" data-filter="tailieu">Tài liệu</button>
+                            <button class="filter-btn" data-filter="phancongchuyenmon">Phân công</button>
+                        </div>
+                        <div style="display:flex; flex-wrap:wrap; gap:10px; margin-bottom:16px;">
+                            <button class="btn-add" data-type="chuyenmon"><i class="fas fa-plus-circle"></i> Thêm chuyên môn</button>
+                        </div>
+                        <div class="doc-list" id="chuyenmonList"></div>
+                    </div>
+                </section>
+
+                <!-- CÔNG CỤ & LIÊN KẾT -->
+                <section class="section" id="section-ungdung">
+                    <div class="card">
+                        <div class="section-title"><i class="fas fa-laptop"></i> Công cụ &amp; Liên kết</div>
+                        <div class="section-sub">Các phần mềm ứng dụng và liên kết hữu ích cho giáo viên</div>
+                        <div class="two-column-layout">
+                            <div class="left-col">
+                                <h3><i class="fas fa-link"></i> Liên kết hữu ích</h3>
+                                <div style="display:flex; flex-wrap:wrap; gap:10px; margin-bottom:16px;">
+                                    <button class="btn-add" data-type="link"><i class="fas fa-plus-circle"></i> Thêm liên kết</button>
+                                </div>
+                                <div class="links-grid" id="linksGridInUngdung"></div>
+                            </div>
+                            <div class="right-col">
+                                <h3><i class="fas fa-file-excel"></i> Phần mềm ứng dụng</h3>
+                                <div class="filter-bar" id="ungdungFilterBar">
+                                    <button class="filter-btn active" data-filter="all">Tất cả</button>
+                                </div>
+                                <div style="display:flex; flex-wrap:wrap; gap:10px; margin-bottom:16px;">
+                                    <button class="btn-add" data-type="ungdung"><i class="fas fa-plus-circle"></i> Thêm ứng dụng</button>
+                                </div>
+                                <div class="doc-list" id="ungdungList"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- BẢNG TÍNH LƯƠNG -->
+                    <div class="card salary-calculator-card">
+                        <div class="section-title"><i class="fas fa-calculator"></i> Bảng tính lương trực tuyến</div>
+                        <div class="section-sub">Điều chỉnh hệ số, phụ cấp – tỷ lệ ưu đãi & đặc biệt có thể tùy chỉnh</div>
+                        <div class="salary-calculator-container" id="salaryApp">
+                            <div class="salary-form-grid">
+                                <div class="salary-inputs-section">
+                                    <div class="salary-section-title">⚙️ Thông số đầu vào <span>điều chỉnh</span></div>
+                                    <div class="salary-input-row"><label>Hệ số lương <span class="sub">(D)</span></label><div class="salary-input-group"><input type="number" id="hsLuong" step="0.01" value="4.32" /></div></div>
+                                    <div class="salary-input-row"><label>Phụ cấp chức vụ <span class="sub">(E)</span></label><div class="salary-input-group"><input type="number" id="hsPCCV" step="0.01" value="0" /></div></div>
+                                    <div class="salary-input-row"><label>Phụ cấp khu vực <span class="sub">(F)</span></label><div class="salary-input-group"><input type="number" id="hsPCKV" step="0.01" value="0.5" /></div></div>
+                                    <div class="salary-input-row"><label>Phụ cấp trách nhiệm <span class="sub">(H)</span></label><div class="salary-input-group"><input type="number" id="hsPCTN" step="0.01" value="0" /></div></div>
+                                    <div class="salary-input-row"><label>Thâm niên nghề <span class="sub">(N, %)</span></label><div class="salary-input-group"><input type="number" id="pctn" step="0.5" value="22" /></div></div>
+                                    <div class="salary-input-row"><label>Phụ cấp y tế <span class="sub">(J)</span></label><div class="salary-input-group"><input type="number" id="hsYTe" step="0.01" value="0" /></div></div>
+                                    <div class="salary-input-row"><label>Phụ cấp ưu đãi <span class="sub">(%)</span></label><div class="salary-input-group"><input type="number" id="hsUuDaiPct" step="0.5" value="50" /></div></div>
+                                    <div class="salary-input-row"><label>Phụ cấp đặc biệt <span class="sub">(%)</span></label><div class="salary-input-group"><input type="number" id="hsDacBietPct" step="0.5" value="30" /></div></div>
+                                    <div class="salary-input-row" style="margin-top:6px; padding-top:12px; border-top:1px dashed #dce3ec;"><label style="font-weight:600;">Lương cơ sở <span class="sub">(đồng)</span></label><div class="salary-input-group"><input type="number" id="luongCoSo" step="10000" value="2530000" /></div></div>
+                                    <div class="salary-helper">💡 Thay đổi giá trị bên trên, kết quả cập nhật ngay.</div>
+                                </div>
+                                <div class="salary-results-section">
+                                    <div class="salary-section-title">📊 Kết quả tính toán <span>chi tiết</span></div>
+                                    <div class="salary-result-item"><span class="label">Hệ số phụ cấp ưu đãi</span><span class="value" id="kqUuDai">0</span></div>
+                                    <div class="salary-result-item"><span class="label">Phụ cấp thâm niên nghề</span><span class="value" id="kqThamNien">0</span></div>
+                                    <div class="salary-result-item"><span class="label">Phụ cấp đặc biệt</span><span class="value" id="kqDacBiet">0</span></div>
+                                    <div class="salary-divider"></div>
+                                    <div class="salary-result-item"><span class="label" style="font-weight:600;">Tổng hệ số</span><span class="value highlight" id="kqTongHeSo">0</span></div>
+                                    <div class="salary-result-item"><span class="label" style="font-weight:600;">Tiền lương tháng</span><span class="value bold-lg" id="kqLuongThang">0</span></div>
+                                    <div class="salary-divider thick"></div>
+                                    <div class="salary-result-item"><span class="label">BHXH (8%)</span><span class="value negative" id="kqBHXH">0</span></div>
+                                    <div class="salary-result-item"><span class="label">BHYT (1.5%)</span><span class="value negative" id="kqBHYT">0</span></div>
+                                    <div class="salary-result-item"><span class="label">BHTN (1%)</span><span class="value negative" id="kqBHTN">0</span></div>
+                                    <div class="salary-divider"></div>
+                                    <div class="salary-result-item"><span class="label" style="font-weight:600;">Tổng trừ vào lương</span><span class="value negative bold-lg" id="kqTongTru">0</span></div>
+                                    <div class="salary-divider thick"></div>
+                                    <div class="salary-result-item" style="padding:12px 0 8px;"><span class="label" style="font-size:18px; font-weight:700; color:#0b1e33;">💵 Thực lãnh</span><span class="value positive bold-lg" id="kqThucLanh" style="font-size:26px;">0</span></div>
+                                </div>
+                            </div>
+                            <div class="salary-summary-grid">
+                                <div class="salary-summary-card"><div class="label">Tổng hệ số</div><div class="amount blue" id="sumHeSo">0</div></div>
+                                <div class="salary-summary-card"><div class="label">Lương tháng</div><div class="amount" id="sumLuong">0</div></div>
+                                <div class="salary-summary-card"><div class="label">Thực lãnh</div><div class="amount green" id="sumThucLanh">0</div></div>
+                            </div>
+                            <div class="salary-note">
+                                <strong>📌 Công thức tham khảo (có tùy chỉnh tỷ lệ):</strong>
+                                &nbsp; Ưu đãi = (D+E) × (tỷ lệ %) &nbsp;·&nbsp; Đặc biệt = (D+E) × (tỷ lệ %) &nbsp;·&nbsp; Thâm niên = (D+H)×N/100 &nbsp;·&nbsp;
+                                BHXH = (D+E+I)×LCS×8% &nbsp;·&nbsp; BHYT = (D+E+I)×LCS×1.5% &nbsp;·&nbsp; BHTN = (D+E+I)×LCS×1%
+                                <br style="margin-top:4px; display:block;" />
+                                <span style="color:#4d6a8a;">Trong đó: D = Hệ số lương, E = PC chức vụ, H = PC trách nhiệm, I = Thâm niên, N = % thâm niên, LCS = Lương cơ sở</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- KẾT QUẢ TÌM KIẾM -->
+                <section class="section" id="section-search">
+                    <div class="card">
+                        <div class="section-title"><i class="fas fa-search"></i> Kết quả tìm kiếm</div>
+                        <div class="section-sub" id="searchQueryInfo"></div>
+                        <div id="searchResultsContainer"></div>
+                    </div>
+                </section>
             </div>
+        </main>
+    </div>
 
-            <!-- FORM TÍNH LƯƠNG -->
-            <div class="card salary-calculator-card">
-                <div class="section-title"><i class="fas fa-calculator"></i> Bảng tính lương trực tuyến</div>
-                <div class="section-sub">Điều chỉnh hệ số, phụ cấp – tỷ lệ ưu đãi & đặc biệt có thể tùy chỉnh</div>
-
-                <div class="salary-calculator-container" id="salaryApp">
-                    <!-- Grid chính -->
-                    <div class="salary-form-grid">
-                        <div class="salary-inputs-section">
-                            <div class="salary-section-title">⚙️ Thông số đầu vào <span>điều chỉnh</span></div>
-                            <div class="salary-input-row">
-                                <label>Hệ số lương <span class="sub">(D)</span></label>
-                                <div class="salary-input-group">
-                                    <input type="number" id="hsLuong" step="0.01" value="4.32" />
-                                </div>
-                            </div>
-                            <div class="salary-input-row">
-                                <label>Phụ cấp chức vụ <span class="sub">(E)</span></label>
-                                <div class="salary-input-group">
-                                    <input type="number" id="hsPCCV" step="0.01" value="0" />
-                                </div>
-                            </div>
-                            <div class="salary-input-row">
-                                <label>Phụ cấp khu vực <span class="sub">(F)</span></label>
-                                <div class="salary-input-group">
-                                    <input type="number" id="hsPCKV" step="0.01" value="0.5" />
-                                </div>
-                            </div>
-                            <div class="salary-input-row">
-                                <label>Phụ cấp trách nhiệm <span class="sub">(H)</span></label>
-                                <div class="salary-input-group">
-                                    <input type="number" id="hsPCTN" step="0.01" value="0" />
-                                </div>
-                            </div>
-                            <div class="salary-input-row">
-                                <label>Thâm niên nghề <span class="sub">(N, %)</span></label>
-                                <div class="salary-input-group">
-                                    <input type="number" id="pctn" step="0.5" value="22" />
-                                </div>
-                            </div>
-                            <div class="salary-input-row">
-                                <label>Phụ cấp y tế <span class="sub">(J)</span></label>
-                                <div class="salary-input-group">
-                                    <input type="number" id="hsYTe" step="0.01" value="0" />
-                                </div>
-                            </div>
-                            <div class="salary-input-row">
-                                <label>Phụ cấp ưu đãi <span class="sub">(%)</span></label>
-                                <div class="salary-input-group">
-                                    <input type="number" id="hsUuDaiPct" step="0.5" value="50" />
-                                </div>
-                            </div>
-                            <div class="salary-input-row">
-                                <label>Phụ cấp đặc biệt <span class="sub">(%)</span></label>
-                                <div class="salary-input-group">
-                                    <input type="number" id="hsDacBietPct" step="0.5" value="30" />
-                                </div>
-                            </div>
-                            <div class="salary-input-row" style="margin-top:6px; padding-top:12px; border-top:1px dashed #dce3ec;">
-                                <label style="font-weight:600;">Lương cơ sở <span class="sub">(đồng)</span></label>
-                                <div class="salary-input-group">
-                                    <input type="number" id="luongCoSo" step="10000" value="2530000" />
-                                </div>
-                            </div>
-                            <div class="salary-helper">💡 Thay đổi giá trị bên trên, kết quả cập nhật ngay.</div>
-                        </div>
-
-                        <div class="salary-results-section">
-                            <div class="salary-section-title">📊 Kết quả tính toán <span>chi tiết</span></div>
-                            <div class="salary-result-item">
-                                <span class="label">Hệ số phụ cấp ưu đãi</span>
-                                <span class="value" id="kqUuDai">0</span>
-                            </div>
-                            <div class="salary-result-item">
-                                <span class="label">Phụ cấp thâm niên nghề</span>
-                                <span class="value" id="kqThamNien">0</span>
-                            </div>
-                            <div class="salary-result-item">
-                                <span class="label">Phụ cấp đặc biệt</span>
-                                <span class="value" id="kqDacBiet">0</span>
-                            </div>
-                            <div class="salary-divider"></div>
-                            <div class="salary-result-item">
-                                <span class="label" style="font-weight:600;">Tổng hệ số</span>
-                                <span class="value highlight" id="kqTongHeSo">0</span>
-                            </div>
-                            <div class="salary-result-item">
-                                <span class="label" style="font-weight:600;">Tiền lương tháng</span>
-                                <span class="value bold-lg" id="kqLuongThang">0</span>
-                            </div>
-                            <div class="salary-divider thick"></div>
-                            <div class="salary-result-item">
-                                <span class="label">BHXH (8%)</span>
-                                <span class="value negative" id="kqBHXH">0</span>
-                            </div>
-                            <div class="salary-result-item">
-                                <span class="label">BHYT (1.5%)</span>
-                                <span class="value negative" id="kqBHYT">0</span>
-                            </div>
-                            <div class="salary-result-item">
-                                <span class="label">BHTN (1%)</span>
-                                <span class="value negative" id="kqBHTN">0</span>
-                            </div>
-                            <div class="salary-divider"></div>
-                            <div class="salary-result-item">
-                                <span class="label" style="font-weight:600;">Tổng trừ vào lương</span>
-                                <span class="value negative bold-lg" id="kqTongTru">0</span>
-                            </div>
-                            <div class="salary-divider thick"></div>
-                            <div class="salary-result-item" style="padding:12px 0 8px;">
-                                <span class="label" style="font-size:18px; font-weight:700; color:#0b1e33;">💵 Thực lãnh</span>
-                                <span class="value positive bold-lg" id="kqThucLanh" style="font-size:26px;">0</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="salary-summary-grid">
-                        <div class="salary-summary-card">
-                            <div class="label">Tổng hệ số</div>
-                            <div class="amount blue" id="sumHeSo">0</div>
-                        </div>
-                        <div class="salary-summary-card">
-                            <div class="label">Lương tháng</div>
-                            <div class="amount" id="sumLuong">0</div>
-                        </div>
-                        <div class="salary-summary-card">
-                            <div class="label">Thực lãnh</div>
-                            <div class="amount green" id="sumThucLanh">0</div>
-                        </div>
-                    </div>
-
-                    <div class="salary-note">
-                        <strong>📌 Công thức tham khảo (có tùy chỉnh tỷ lệ):</strong>
-                        &nbsp; Ưu đãi = (D+E) × (tỷ lệ %) &nbsp;·&nbsp; Đặc biệt = (D+E) × (tỷ lệ %) &nbsp;·&nbsp; Thâm niên = (D+H)×N/100 &nbsp;·&nbsp;
-                        BHXH = (D+E+I)×LCS×8% &nbsp;·&nbsp; BHYT = (D+E+I)×LCS×1.5% &nbsp;·&nbsp; BHTN = (D+E+I)×LCS×1%
-                        <br style="margin-top:4px; display:block;" />
-                        <span style="color:#4d6a8a;">Trong đó: D = Hệ số lương, E = PC chức vụ, H = PC trách nhiệm, I = Thâm niên, N = % thâm niên, LCS = Lương cơ sở</span>
-                    </div>
+    <!-- MODAL ĐĂNG NHẬP -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <span class="modal-close" id="loginModalClose">&times;</span>
+            <h3><i class="fas fa-sign-in-alt"></i> Đăng nhập</h3>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label>Tên đăng nhập</label>
+                    <input type="text" id="loginUsername" placeholder="Nhập tên đăng nhập" required />
                 </div>
-            </div>
-        </section>
+                <div class="form-group">
+                    <label>Mật khẩu</label>
+                    <input type="password" id="loginPassword" placeholder="Nhập mật khẩu" required />
+                </div>
+                <button type="submit" class="btn-primary">Đăng nhập</button>
+            </form>
+        </div>
+    </div>
 
-    </main>
+    <!-- MODAL ĐĂNG KÝ -->
+    <div class="modal" id="registerModal">
+        <div class="modal-content">
+            <span class="modal-close" id="registerModalClose">&times;</span>
+            <h3><i class="fas fa-user-plus"></i> Đăng ký</h3>
+            <form id="registerForm">
+                <div class="form-group">
+                    <label>Họ tên</label>
+                    <input type="text" id="registerFullname" placeholder="Nhập họ tên" required />
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="registerEmail" placeholder="Nhập email" required />
+                </div>
+                <div class="form-group">
+                    <label>Tên đăng nhập</label>
+                    <input type="text" id="registerUsername" placeholder="Nhập tên đăng nhập" required />
+                </div>
+                <div class="form-group">
+                    <label>Mật khẩu</label>
+                    <input type="password" id="registerPassword" placeholder="Nhập mật khẩu" required />
+                </div>
+                <button type="submit" class="btn-primary">Đăng ký</button>
+            </form>
+        </div>
+    </div>
 
     <!-- LIGHTBOX -->
     <div class="lightbox" id="lightbox">
@@ -380,27 +355,10 @@
             <h3 id="modalTitle"><i class="fas fa-upload"></i> Thêm mới</h3>
             <form id="uploadForm">
                 <input type="hidden" id="uploadType" value="photo">
-                <div class="form-group">
-                    <label>Tiêu đề *</label>
-                    <input type="text" id="uploadTitle" required>
-                </div>
-                <div class="form-group">
-                    <label>Mô tả</label>
-                    <input type="text" id="uploadDesc">
-                </div>
-                <div class="form-group" id="categoryGroup">
-                    <label>Danh mục</label>
-                    <select id="uploadCategory">
-                        <option value="all">Tất cả</option>
-                    </select>
-                </div>
-                <div class="form-group" id="urlGroup">
-                    <label>Đường dẫn (URL) hoặc chọn file</label>
-                    <input type="url" id="uploadUrl" placeholder="https://...">
-                    <div style="margin:10px 0; text-align:center; color:#999;">— hoặc —</div>
-                    <input type="file" id="uploadFile" accept="*/*">
-                    <small id="fileAcceptHint">Hỗ trợ: ảnh (jpg, png, gif), PDF, Excel, Word...</small>
-                </div>
+                <div class="form-group"><label>Tiêu đề *</label><input type="text" id="uploadTitle" required></div>
+                <div class="form-group"><label>Mô tả</label><input type="text" id="uploadDesc"></div>
+                <div class="form-group" id="categoryGroup"><label>Danh mục</label><select id="uploadCategory"><option value="all">Tất cả</option></select></div>
+                <div class="form-group" id="urlGroup"><label>Đường dẫn (URL) hoặc chọn file</label><input type="url" id="uploadUrl" placeholder="https://..."><div style="margin:10px 0; text-align:center; color:#999;">— hoặc —</div><input type="file" id="uploadFile" accept="*/*"><small id="fileAcceptHint">Hỗ trợ: ảnh (jpg, png, gif), PDF, Excel, Word...</small></div>
                 <button type="submit" class="btn-primary"><i class="fas fa-save"></i> Lưu</button>
             </form>
         </div>

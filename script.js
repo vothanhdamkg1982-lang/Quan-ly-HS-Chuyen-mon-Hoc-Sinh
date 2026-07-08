@@ -1,6 +1,6 @@
 /* ============================================================
    QUẢN LÝ DỮ LIỆU & GIAO DIỆN (CÓ UPLOAD / XÓA / JSON)
-   TÍCH HỢP FAVICON CHO LIÊN KẾT
+   TÍCH HỢP FAVICON, TÌM KIẾM, ĐĂNG NHẬP/ĐĂNG KÝ
    ============================================================ */
 
 // ---------- DỮ LIỆU MẶC ĐỊNH ----------
@@ -63,100 +63,22 @@ const DEFAULT_DATA = {
         { id: 'cm17', title: 'Giáo án Tin học - Công nghệ K3-5', desc: 'Tuần 31-32', url: 'https://drive.google.com/file/d/1yxqoniKB45cFpA__BJcpL1EIfUu8DcM-/view?usp=sharing', category: 'giaoan', type: 'pdf' },
         { id: 'cm18', title: 'Giáo án Tin học - Công nghệ K3-5', desc: 'Tuần 33-34', url: 'https://drive.google.com/file/d/1Xvs7oaXT5eD4dhHLSp23ti8trVfohsNy/view?usp=sharing', category: 'giaoan', type: 'pdf' },
         { id: 'cm19', title: 'Giáo án Tin học - Công nghệ K3-5', desc: 'Tuần 35', url: 'https://drive.google.com/file/d/1gc1Vjxrm20vN4CmoFquJOdRfF_VzhUAu/view?usp=sharing', category: 'giaoan', type: 'pdf' },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        { id: 'cm4', title: 'Đề thi học kỳ 1 - Tin học 3', desc: 'Năm học 2024-2025', url: '#', category: 'dethi', type: 'pdf' },
-        { id: 'cm5', title: 'Đề thi học kỳ 2 - Tin học 4', desc: 'Năm học 2024-2025', url: '#', category: 'dethi', type: 'pdf' },
-        { id: 'cm6', title: 'Sáng kiến kinh nghiệm: Ứng dụng CNTT trong dạy học', desc: 'Giải A cấp huyện', url: '#', category: 'sangkien', type: 'pdf' },
-        { id: 'cm7', title: 'Sáng kiến: Học mà chơi - Trò chơi ô chữ Tin học', desc: 'Áp dụng cho lớp 3,4', url: '#', category: 'sangkien', type: 'pdf' },
-        { id: 'cm8', title: 'Phân công chuyên môn', desc: 'Lịch tập huấn SGK', url: 'https://drive.google.com/file/d/1-gMag7o8Esq4gIFwAQAt9OjkzctNANK2/view?usp=sharing', category: 'phancongchuyenmon', type: 'pdf' },
-        { id: 'cm9', title: 'Tài liệu chuyên môn', desc: 'Tài liệu tham khảo', url: '#', category: 'tailieu', type: 'pdf' },
+        { id: 'cm20', title: 'Đề thi học kỳ 1 - Tin học 3', desc: 'Năm học 2024-2025', url: '#', category: 'dethi', type: 'pdf' },
+        { id: 'cm21', title: 'Đề thi học kỳ 2 - Tin học 4', desc: 'Năm học 2024-2025', url: '#', category: 'dethi', type: 'pdf' },
+        { id: 'cm22', title: 'Sáng kiến kinh nghiệm: Ứng dụng CNTT trong dạy học', desc: 'Giải A cấp huyện', url: '#', category: 'sangkien', type: 'pdf' },
+        { id: 'cm23', title: 'Sáng kiến: Học mà chơi - Trò chơi ô chữ Tin học', desc: 'Áp dụng cho lớp 3,4', url: '#', category: 'sangkien', type: 'pdf' },
+        { id: 'cm24', title: 'Phân công chuyên môn', desc: 'Lịch tập huấn SGK', url: 'https://drive.google.com/file/d/1-gMag7o8Esq4gIFwAQAt9OjkzctNANK2/view?usp=sharing', category: 'phancongchuyenmon', type: 'pdf' },
+        { id: 'cm25', title: 'Tài liệu chuyên môn', desc: 'Tài liệu tham khảo', url: '#', category: 'tailieu', type: 'pdf' },
     ],
     ungdung: [
-        { 
-            id: 'ex1', 
-            title: 'Phần mềm Kế hoạch giáo dục - Lịch báo giảng tự động', 
-            desc: 'App web tự động tính lịch theo tuần', 
-            preview: 'https://vothanhdamkg1982-lang.github.io/Ke-Hoach-Giao-Duc-1.4-CTGDPT-2018-Tieu-hoc/', 
-            download: 'https://vothanhdamkg1982-lang.github.io/Ke-Hoach-Giao-Duc-1.4-CTGDPT-2018-Tieu-hoc/',
-            category: 'ungdung', 
-            type: 'App web' 
-        },
-        { 
-            id: 'ex2', 
-            title: 'Hệ thống lương HCSN', 
-            desc: 'Tổng hợp phiếu bầu tự động', 
-            preview: 'https://vothanhdamkg1982-lang.github.io/He-Thong-Luong-HCSN', 
-            download: 'https://vothanhdamkg1982-lang.github.io/He-Thong-Luong-HCSN',
-            category: 'ungdung', 
-            type: 'App web' 
-        },
-        { 
-            id: 'ex3', 
-            title: 'Phần mềm quản lý HS', 
-            desc: 'Tính lương, bảo hiểm, thuế', 
-            preview: 'https://vothanhdamkg1982-lang.github.io/Phan-Mem-Quan-Ly-HS/', 
-            download: 'https://vothanhdamkg1982-lang.github.io/Phan-Mem-Quan-Ly-HS/',
-            category: 'ungdung', 
-            type: 'App web' 
-        },
-        { 
-            id: 'ex4', 
-            title: 'Phần mềm Tính lương trực tuyến', 
-            desc: 'Tính lương, bảo hiểm, thuế', 
-            preview: 'https://vothanhdamkg1982-lang.github.io/BANG-TINH-LUONG-TRUC-TUYEN/', 
-            download: 'https://vothanhdamkg1982-lang.github.io/BANG-TINH-LUONG-TRUC-TUYEN/',
-            category: 'ungdung', 
-            type: 'App web' 
-        },
-        { 
-            id: 'ex5', 
-            title: 'Phần mềm Kiểm phiếu', 
-            desc: 'Kiểm phiếu nhanh,tự động, chính xác', 
-            preview: 'https://vothanhdamkg1982-lang.github.io/Phan-mem-kiem-phieu-nhanh/', 
-            download: 'https://vothanhdamkg1982-lang.github.io/Phan-mem-kiem-phieu-nhanh/',
-            category: 'ungdung', 
-            type: 'App web' 
-        },
-        { 
-            id: 'ex6', 
-            title: 'Phần mềm Tính tiền điện sinh hoạt', 
-            desc: 'Tính tiền điện sinh hoạt nhanh,tự động, chính xác', 
-            preview: 'https://vothanhdamkg1982-lang.github.io/T-nh-Nhanh-Tien-DIen-SH/', 
-            download: 'https://vothanhdamkg1982-lang.github.io/T-nh-Nhanh-Tien-DIen-SH/',
-            category: 'ungdung', 
-            type: 'App web' 
-        },
-        { 
-            id: 'ex7', 
-            title: 'Phần mềm Cập nhật ngày giáo án', 
-            desc: 'Tự động dịch chuyển toàn bộ ngày tháng trong file Word, giữ nguyên 100% định dạng', 
-            preview: 'https://vothanhdamkg1982-lang.github.io/Cap-Nhat-Ngay-Giao-An/', 
-            download: 'https://vothanhdamkg1982-lang.github.io/Cap-Nhat-Ngay-Giao-An/',
-            category: 'ungdung', 
-            type: 'App web' 
-        },
-        { 
-            id: 'ex8', 
-            title: 'Phần mềm Theo Dõi Tính Lãi Suất Ngân Hàng', 
-            desc: 'Tự động theo dõi lãi suất ngân hàng, tính toán lãi suất tiết kiệm, vay vốn',
-            preview: 'https://vothanhdamkg1982-lang.github.io/Phan-Mem-THeo-Doi-Tinh-Lai-Suat-Ngan-Hang/', 
-            download: 'https://vothanhdamkg1982-lang.github.io/Phan-Mem-THeo-Doi-Tinh-Lai-Suat-Ngan-Hang/',
-            category: 'ungdung', 
-            type: 'App web' 
-        }
+        { id: 'ex1', title: 'Phần mềm Kế hoạch giáo dục - Lịch báo giảng tự động', desc: 'App web tự động tính lịch theo tuần', preview: 'https://vothanhdamkg1982-lang.github.io/Ke-Hoach-Giao-Duc-1.4-CTGDPT-2018-Tieu-hoc/', download: 'https://vothanhdamkg1982-lang.github.io/Ke-Hoach-Giao-Duc-1.4-CTGDPT-2018-Tieu-hoc/', category: 'ungdung', type: 'App web' },
+        { id: 'ex2', title: 'Hệ thống lương HCSN', desc: 'Tổng hợp phiếu bầu tự động', preview: 'https://vothanhdamkg1982-lang.github.io/He-Thong-Luong-HCSN', download: 'https://vothanhdamkg1982-lang.github.io/He-Thong-Luong-HCSN', category: 'ungdung', type: 'App web' },
+        { id: 'ex3', title: 'Phần mềm quản lý HS', desc: 'Tính lương, bảo hiểm, thuế', preview: 'https://vothanhdamkg1982-lang.github.io/Phan-Mem-Quan-Ly-HS/', download: 'https://vothanhdamkg1982-lang.github.io/Phan-Mem-Quan-Ly-HS/', category: 'ungdung', type: 'App web' },
+        { id: 'ex4', title: 'Phần mềm Tính lương trực tuyến', desc: 'Tính lương, bảo hiểm, thuế', preview: 'https://vothanhdamkg1982-lang.github.io/BANG-TINH-LUONG-TRUC-TUYEN/', download: 'https://vothanhdamkg1982-lang.github.io/BANG-TINH-LUONG-TRUC-TUYEN/', category: 'ungdung', type: 'App web' },
+        { id: 'ex5', title: 'Phần mềm Kiểm phiếu', desc: 'Kiểm phiếu nhanh,tự động, chính xác', preview: 'https://vothanhdamkg1982-lang.github.io/Phan-mem-kiem-phieu-nhanh/', download: 'https://vothanhdamkg1982-lang.github.io/Phan-mem-kiem-phieu-nhanh/', category: 'ungdung', type: 'App web' },
+        { id: 'ex6', title: 'Phần mềm Tính tiền điện sinh hoạt', desc: 'Tính tiền điện sinh hoạt nhanh,tự động, chính xác', preview: 'https://vothanhdamkg1982-lang.github.io/T-nh-Nhanh-Tien-DIen-SH/', download: 'https://vothanhdamkg1982-lang.github.io/T-nh-Nhanh-Tien-DIen-SH/', category: 'ungdung', type: 'App web' },
+        { id: 'ex7', title: 'Phần mềm Cập nhật ngày giáo án', desc: 'Tự động dịch chuyển toàn bộ ngày tháng trong file Word, giữ nguyên 100% định dạng', preview: 'https://vothanhdamkg1982-lang.github.io/Cap-Nhat-Ngay-Giao-An/', download: 'https://vothanhdamkg1982-lang.github.io/Cap-Nhat-Ngay-Giao-An/', category: 'ungdung', type: 'App web' },
+        { id: 'ex8', title: 'Phần mềm Theo Dõi Tính Lãi Suất Ngân Hàng', desc: 'Tự động theo dõi lãi suất ngân hàng, tính toán lãi suất tiết kiệm, vay vốn', preview: 'https://vothanhdamkg1982-lang.github.io/Phan-Mem-THeo-Doi-Tinh-Lai-Suat-Ngan-Hang/', download: 'https://vothanhdamkg1982-lang.github.io/Phan-Mem-THeo-Doi-Tinh-Lai-Suat-Ngan-Hang/', category: 'ungdung', type: 'App web' }
     ],
     links: [
         { id: 'l1', title: 'Bộ Giáo dục và Đào tạo', url: 'https://moet.gov.vn', desc: 'Trang chính của Bộ GD&ĐT' },
@@ -379,10 +301,9 @@ function switchSection(sectionId) {
     document.querySelectorAll('.section').forEach(el => el.classList.remove('active'));
     const target = document.getElementById('section-' + sectionId);
     if (target) target.classList.add('active');
-    document.querySelectorAll('.nav-links button').forEach(btn => btn.classList.remove('active'));
-    const btn = document.querySelector(`.nav-links button[data-section="${sectionId}"]`);
+    document.querySelectorAll('.sidebar-nav button').forEach(btn => btn.classList.remove('active'));
+    const btn = document.querySelector(`.sidebar-nav button[data-section="${sectionId}"]`);
     if (btn) btn.classList.add('active');
-    document.getElementById('navLinks').classList.remove('open');
     renderSection(sectionId);
 }
 
@@ -404,16 +325,14 @@ function updateBadges() {
     document.getElementById('homeDocCount').textContent = DOCUMENTS.length;
 }
 
-// ---------- LẤY FAVICON CHO LIÊN KẾT ----------
+// ---------- LẤY FAVICON ----------
 function getFaviconUrl(link) {
     const url = link.url || '';
     try {
         const domain = new URL(url).hostname;
-        // Sử dụng Google Favicon service
         return `https://www.google.com/s2/favicons?domain=${domain}&sz=32`;
-        // Có thể dùng DuckDuckGo: return `https://icons.duckduckgo.com/ip3/${domain}`;
     } catch {
-        return ''; // fallback
+        return '';
     }
 }
 
@@ -579,7 +498,7 @@ function renderChuyenMon(filter = 'all') {
     });
 }
 
-// ---------- RENDER ỨNG DỤNG (PHẦN MỀM) ----------
+// ---------- RENDER ỨNG DỤNG ----------
 function renderUngDungApp(filter = 'all') {
     const list = document.getElementById('ungdungList');
     let items = UNGDUNG;
@@ -589,7 +508,6 @@ function renderUngDungApp(filter = 'all') {
         return;
     }
     list.innerHTML = items.map(u => {
-        // Áp dụng icon Font Awesome riêng cho từng ứng dụng
         let iconClass = 'fa-file-excel';
         const title = u.title || '';
         if (title.includes('Kế hoạch giáo dục') || title.includes('Lịch báo giảng')) iconClass = 'fa-calendar-alt';
@@ -630,7 +548,7 @@ function renderUngDungApp(filter = 'all') {
     });
 }
 
-// ---------- RENDER LIÊN KẾT (TRONG CỘT TRÁI CỦA UNGDUNG) VỚI FAVICON ----------
+// ---------- RENDER LIÊN KẾT ----------
 function renderLinksInUngdung() {
     const grid = document.getElementById('linksGridInUngdung');
     if (!grid) return;
@@ -640,7 +558,6 @@ function renderLinksInUngdung() {
     }
     grid.innerHTML = LINKS.map(link => {
         const favicon = getFaviconUrl(link);
-        // Nếu có favicon thì dùng ảnh, ngược lại dùng icon Font Awesome
         const iconHtml = favicon 
             ? `<img src="${favicon}" alt="favicon" class="favicon-icon" onerror="this.style.display='none'" />`
             : `<i class="fas fa-link" style="color: var(--accent);"></i>`;
@@ -672,7 +589,7 @@ function renderLinksInUngdung() {
     });
 }
 
-// ---------- RENDER GỘP PHẦN MỀM & LIÊN KẾT ----------
+// ---------- RENDER GỘP ----------
 function renderUngDungAndLinks() {
     const filter = getActiveFilter('ungdungFilterBar') || 'all';
     renderUngDungApp(filter);
@@ -733,14 +650,11 @@ document.querySelectorAll('.filter-bar').forEach(bar => {
 });
 
 // ---------- NAVIGATION EVENTS ----------
-document.querySelectorAll('.nav-links button').forEach(btn => {
+document.querySelectorAll('.sidebar-nav button').forEach(btn => {
     btn.addEventListener('click', function() {
         const section = this.dataset.section;
         if (section) switchSection(section);
     });
-});
-document.getElementById('menuToggle').addEventListener('click', function() {
-    document.getElementById('navLinks').classList.toggle('open');
 });
 
 // ---------- MODAL UPLOAD ----------
@@ -941,16 +855,167 @@ function importJSON() {
     input.click();
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-    const container = document.getElementById('jsonToolsContainer');
-    if (container) {
-        container.innerHTML = `
-            <div class="json-tools">
-                <button class="btn-json" onclick="exportJSON()"><i class="fas fa-file-export"></i> Xuất JSON</button>
-                <button class="btn-json import" onclick="importJSON()"><i class="fas fa-file-import"></i> Nhập JSON</button>
-            </div>
-        `;
+// ============================================================
+// TÌM KIẾM
+// ============================================================
+function performSearch() {
+    const input = document.getElementById('searchInput');
+    const query = input.value.trim().toLowerCase();
+    if (!query) {
+        alert('Vui lòng nhập từ khóa tìm kiếm.');
+        return;
     }
+
+    const allItems = [
+        ...PHOTOS.map(item => ({ ...item, type: 'photo' })),
+        ...VIDEOS.map(item => ({ ...item, type: 'video' })),
+        ...DOCUMENTS.map(item => ({ ...item, type: 'document' })),
+        ...CHUYENMON.map(item => ({ ...item, type: 'chuyenmon' })),
+        ...UNGDUNG.map(item => ({ ...item, type: 'ungdung' })),
+        ...LINKS.map(item => ({ ...item, type: 'link' }))
+    ];
+
+    const results = allItems.filter(item => {
+        const title = (item.title || '').toLowerCase();
+        const desc = (item.desc || '').toLowerCase();
+        return title.includes(query) || desc.includes(query);
+    });
+
+    const container = document.getElementById('searchResultsContainer');
+    const info = document.getElementById('searchQueryInfo');
+    info.textContent = `Tìm thấy ${results.length} kết quả cho từ khóa "${input.value}"`;
+
+    if (results.length === 0) {
+        container.innerHTML = `<div class="empty-state"><i class="fas fa-search"></i><p>Không tìm thấy kết quả nào.</p></div>`;
+    } else {
+        const grouped = results.reduce((acc, item) => {
+            if (!acc[item.type]) acc[item.type] = [];
+            acc[item.type].push(item);
+            return acc;
+        }, {});
+
+        let html = '';
+        for (const [type, items] of Object.entries(grouped)) {
+            const typeLabel = {
+                photo: 'Ảnh',
+                video: 'Video',
+                document: 'Tài liệu',
+                chuyenmon: 'Chuyên môn',
+                ungdung: 'Ứng dụng',
+                link: 'Liên kết'
+            }[type] || type;
+
+            html += `<h4 style="margin: 16px 0 8px; color: var(--primary);"><i class="fas fa-folder-open"></i> ${typeLabel} (${items.length})</h4>`;
+
+            if (type === 'photo' || type === 'video') {
+                html += `<div class="gallery-grid">`;
+                items.forEach(item => {
+                    if (type === 'photo') {
+                        html += `
+                            <div class="gallery-item" onclick="openLightbox('${item.url}', '${item.title || ''}')">
+                                <img src="${item.url}" alt="${item.title}" loading="lazy" />
+                                <div class="gallery-body">
+                                    <h4>${item.title || 'Không tiêu đề'}</h4>
+                                    <p>${item.desc || ''}</p>
+                                </div>
+                            </div>
+                        `;
+                    } else {
+                        const embedUrl = getEmbedUrl(item.url);
+                        html += `
+                            <div class="gallery-item">
+                                <div class="video-wrapper">
+                                    <iframe src="${embedUrl}" allowfullscreen loading="lazy"></iframe>
+                                </div>
+                                <div class="gallery-body">
+                                    <h4>${item.title || 'Không tiêu đề'}</h4>
+                                    <p>${item.desc || ''}</p>
+                                </div>
+                            </div>
+                        `;
+                    }
+                });
+                html += `</div>`;
+            } else {
+                html += `<div class="doc-list">`;
+                items.forEach(item => {
+                    let icon = 'fa-file';
+                    if (type === 'link') icon = 'fa-link';
+                    else if (item.type === 'pdf') icon = 'fa-file-pdf';
+                    else if (item.type === 'xlsx') icon = 'fa-file-excel';
+                    else if (item.type === 'docx') icon = 'fa-file-word';
+                    else if (type === 'ungdung') icon = 'fa-file-excel';
+
+                    const url = item.url || item.preview || '#';
+                    html += `
+                        <div class="doc-item">
+                            <div class="doc-info">
+                                <i class="fas ${icon}"></i>
+                                <div>
+                                    <div class="doc-title">${item.title || 'Không tiêu đề'}</div>
+                                    <div class="doc-desc">${item.desc || ''}</div>
+                                </div>
+                            </div>
+                            <div class="doc-actions">
+                                <a href="${url}" target="_blank" rel="noopener"><i class="fas fa-eye"></i> Xem</a>
+                                ${type !== 'link' ? `<a href="${url}" download><i class="fas fa-download"></i> Tải</a>` : ''}
+                            </div>
+                        </div>
+                    `;
+                });
+                html += `</div>`;
+            }
+        }
+        container.innerHTML = html;
+    }
+
+    switchSection('search');
+}
+
+// ============================================================
+// MODAL ĐĂNG NHẬP / ĐĂNG KÝ
+// ============================================================
+function openLoginModal() {
+    document.getElementById('loginModal').classList.add('active');
+}
+function closeLoginModal() {
+    document.getElementById('loginModal').classList.remove('active');
+}
+function openRegisterModal() {
+    document.getElementById('registerModal').classList.add('active');
+}
+function closeRegisterModal() {
+    document.getElementById('registerModal').classList.remove('active');
+}
+
+document.getElementById('loginBtn').addEventListener('click', openLoginModal);
+document.getElementById('registerBtn').addEventListener('click', openRegisterModal);
+document.getElementById('loginModalClose').addEventListener('click', closeLoginModal);
+document.getElementById('registerModalClose').addEventListener('click', closeRegisterModal);
+document.getElementById('loginModal').addEventListener('click', function(e) {
+    if (e.target === this) closeLoginModal();
+});
+document.getElementById('registerModal').addEventListener('click', function(e) {
+    if (e.target === this) closeRegisterModal();
+});
+
+document.getElementById('loginForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    alert('Chức năng đăng nhập đang được phát triển.\nTài khoản demo: admin / 123456');
+    closeLoginModal();
+});
+document.getElementById('registerForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    alert('Đăng ký thành công! (chức năng demo)');
+    closeRegisterModal();
+});
+
+// ============================================================
+// SỰ KIỆN TÌM KIẾM
+// ============================================================
+document.getElementById('searchBtn').addEventListener('click', performSearch);
+document.getElementById('searchInput').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') performSearch();
 });
 
 // ============================================================
@@ -1027,5 +1092,5 @@ document.addEventListener('DOMContentLoaded', function() {
     updateBadges();
     switchSection('home');
     initSalaryCalculator();
-    console.log('✅ Website đã sẵn sàng với favicon cho liên kết!');
+    console.log('✅ Website đã sẵn sàng với đầy đủ tính năng!');
 });
