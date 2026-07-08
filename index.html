@@ -140,7 +140,7 @@
                             <button class="filter-btn" data-filter="ca">Cá nhân</button>
                         </div>
                         <div style="display:flex; flex-wrap:wrap; gap:10px; margin-bottom:16px;">
-                            <button class="btn-add" data-type="photo"><i class="fas fa-plus-circle"></i> Thêm ảnh</button>
+                            <button class="btn-add hidden-if-not-loggedin" data-type="photo"><i class="fas fa-plus-circle"></i> Thêm ảnh</button>
                         </div>
                         <div class="gallery-grid" id="photoGrid"></div>
                     </div>
@@ -159,7 +159,7 @@
                             <button class="filter-btn" data-filter="cá nhân">Cá nhân</button>
                         </div>
                         <div style="display:flex; flex-wrap:wrap; gap:10px; margin-bottom:16px;">
-                            <button class="btn-add" data-type="video"><i class="fas fa-plus-circle"></i> Thêm video</button>
+                            <button class="btn-add hidden-if-not-loggedin" data-type="video"><i class="fas fa-plus-circle"></i> Thêm video</button>
                         </div>
                         <div class="gallery-grid" id="videoGrid"></div>
                     </div>
@@ -178,7 +178,7 @@
                             <button class="filter-btn" data-filter="Văn bằng, chứng chỉ">Văn bằng, chứng chỉ</button>
                         </div>
                         <div style="display:flex; flex-wrap:wrap; gap:10px; margin-bottom:16px;">
-                            <button class="btn-add" data-type="document"><i class="fas fa-plus-circle"></i> Thêm tài liệu</button>
+                            <button class="btn-add hidden-if-not-loggedin" data-type="document"><i class="fas fa-plus-circle"></i> Thêm tài liệu</button>
                         </div>
                         <div class="doc-list" id="docList"></div>
                     </div>
@@ -198,7 +198,7 @@
                             <button class="filter-btn" data-filter="phancongchuyenmon">Phân công</button>
                         </div>
                         <div style="display:flex; flex-wrap:wrap; gap:10px; margin-bottom:16px;">
-                            <button class="btn-add" data-type="chuyenmon"><i class="fas fa-plus-circle"></i> Thêm chuyên môn</button>
+                            <button class="btn-add hidden-if-not-loggedin" data-type="chuyenmon"><i class="fas fa-plus-circle"></i> Thêm chuyên môn</button>
                         </div>
                         <div class="doc-list" id="chuyenmonList"></div>
                     </div>
@@ -213,7 +213,7 @@
                             <div class="left-col">
                                 <h3><i class="fas fa-link"></i> Liên kết hữu ích</h3>
                                 <div style="display:flex; flex-wrap:wrap; gap:10px; margin-bottom:16px;">
-                                    <button class="btn-add" data-type="link"><i class="fas fa-plus-circle"></i> Thêm liên kết</button>
+                                    <button class="btn-add hidden-if-not-loggedin" data-type="link"><i class="fas fa-plus-circle"></i> Thêm liên kết</button>
                                 </div>
                                 <div class="links-grid" id="linksGridInUngdung"></div>
                             </div>
@@ -223,7 +223,7 @@
                                     <button class="filter-btn active" data-filter="all">Tất cả</button>
                                 </div>
                                 <div style="display:flex; flex-wrap:wrap; gap:10px; margin-bottom:16px;">
-                                    <button class="btn-add" data-type="ungdung"><i class="fas fa-plus-circle"></i> Thêm ứng dụng</button>
+                                    <button class="btn-add hidden-if-not-loggedin" data-type="ungdung"><i class="fas fa-plus-circle"></i> Thêm ứng dụng</button>
                                 </div>
                                 <div class="doc-list" id="ungdungList"></div>
                             </div>

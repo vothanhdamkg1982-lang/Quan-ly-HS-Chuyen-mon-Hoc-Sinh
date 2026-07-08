@@ -31,15 +31,14 @@ html {
 
 body {
     font-family: var(--font);
-    background: #f5f7fa;
+    background: linear-gradient(135deg, #f5f7fa 0%, #d4e0f0 40%, #b8d0e8 100%);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
     color: var(--text);
     line-height: 1.6;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    background: linear-gradient(135deg, #f5f7fa 0%, #e2e9f2 50%, #d4deed 100%);
-    background-size: 400% 400%;
-    animation: gradientBG 15s ease infinite;
 }
 
 @keyframes gradientBG {
@@ -574,6 +573,11 @@ a:hover {
     background: var(--accent-light);
     transform: scale(1.03);
     box-shadow: 0 6px 20px rgba(230, 126, 34, 0.35);
+}
+
+/* Ẩn các nút thêm khi chưa đăng nhập */
+.hidden-if-not-loggedin {
+    display: none;
 }
 
 /* GALLERY */

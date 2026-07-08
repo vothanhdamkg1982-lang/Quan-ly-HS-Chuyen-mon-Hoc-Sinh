@@ -99,8 +99,8 @@ const DEFAULT_DATA = {
     ],
     ungdung: [
         { id: 'ex1', title: 'Phần mềm Kế hoạch giáo dục - Lịch báo giảng tự động', desc: 'App web tự động tính lịch theo tuần', preview: 'https://vothanhdamkg1982-lang.github.io/Ke-Hoach-Giao-Duc-1.4-CTGDPT-2018-Tieu-hoc/', download: 'https://vothanhdamkg1982-lang.github.io/Ke-Hoach-Giao-Duc-1.4-CTGDPT-2018-Tieu-hoc/', category: 'ungdung', type: 'App web' },
-        { id: 'ex2', title: 'Hệ thống lương HCSN', desc: 'Tổng hợp phiếu bầu tự động', preview: 'https://vothanhdamkg1982-lang.github.io/He-Thong-Luong-HCSN', download: 'https://vothanhdamkg1982-lang.github.io/He-Thong-Luong-HCSN', category: 'ungdung', type: 'App web' },
-        { id: 'ex3', title: 'Phần mềm quản lý HS', desc: 'Tính lương, bảo hiểm, thuế', preview: 'https://vothanhdamkg1982-lang.github.io/Phan-Mem-Quan-Ly-HS/', download: 'https://vothanhdamkg1982-lang.github.io/Phan-Mem-Quan-Ly-HS/', category: 'ungdung', type: 'App web' },
+        { id: 'ex2', title: 'Hệ thống lương HCSN', desc: 'Quản lý lương cho HCSN', preview: 'https://vothanhdamkg1982-lang.github.io/He-Thong-Luong-HCSN', download: 'https://vothanhdamkg1982-lang.github.io/He-Thong-Luong-HCSN', category: 'ungdung', type: 'App web' },
+        { id: 'ex3', title: 'Phần mềm quản lý HS', desc: 'Quản lý hồ sơ, chuyên cần, điểm số, năng lực và phẩm chất học sinh', preview: 'https://vothanhdamkg1982-lang.github.io/Phan-Mem-Quan-Ly-HS/', download: 'https://vothanhdamkg1982-lang.github.io/Phan-Mem-Quan-Ly-HS/', category: 'ungdung', type: 'App web' },
         { id: 'ex4', title: 'Phần mềm Tính lương trực tuyến', desc: 'Tính lương, bảo hiểm, thuế', preview: 'https://vothanhdamkg1982-lang.github.io/BANG-TINH-LUONG-TRUC-TUYEN/', download: 'https://vothanhdamkg1982-lang.github.io/BANG-TINH-LUONG-TRUC-TUYEN/', category: 'ungdung', type: 'App web' },
         { id: 'ex5', title: 'Phần mềm Kiểm phiếu', desc: 'Kiểm phiếu nhanh,tự động, chính xác', preview: 'https://vothanhdamkg1982-lang.github.io/Phan-mem-kiem-phieu-nhanh/', download: 'https://vothanhdamkg1982-lang.github.io/Phan-mem-kiem-phieu-nhanh/', category: 'ungdung', type: 'App web' },
         { id: 'ex6', title: 'Phần mềm Tính tiền điện sinh hoạt', desc: 'Tính tiền điện sinh hoạt nhanh,tự động, chính xác', preview: 'https://vothanhdamkg1982-lang.github.io/T-nh-Nhanh-Tien-DIen-SH/', download: 'https://vothanhdamkg1982-lang.github.io/T-nh-Nhanh-Tien-DIen-SH/', category: 'ungdung', type: 'App web' },
@@ -242,7 +242,7 @@ function renderBanner() {
             desc: 'Giáo viên Tin học • Trường Tiểu học Trần Quốc Toản',
             btnText: 'Tìm hiểu thêm',
             btnLink: '#section-teacher',
-            bg: 'https://images.unsplash.com/photo-1523050854058-8df90110c7f1?w=1600&q=80',
+            bg: 'https://i.pinimg.com/736x/2e/e7/6e/2ee76e06f2852ed4f66b2b5576687066.jpg',
             avatar: 'https://i.ibb.co/rrvq3cz/IMG-0256.jpg'
         },
         {
@@ -250,7 +250,7 @@ function renderBanner() {
             desc: 'Ứng dụng CNTT để nâng cao chất lượng dạy và học',
             btnText: 'Xem kho ảnh',
             btnLink: '#section-photos',
-            bg: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?w=1600&q=80',
+            bg: 'https://i.pinimg.com/736x/38/0f/71/380f71c4e505523f641e4c6b635ee398.jpg',
             avatar: null
         },
         {
@@ -258,7 +258,7 @@ function renderBanner() {
             desc: 'Các công cụ giúp giáo viên quản lý và soạn bài hiệu quả',
             btnText: 'Khám phá',
             btnLink: '#section-ungdung',
-            bg: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1600&q=80',
+            bg: 'https://i.pinimg.com/1200x/30/d0/94/30d09446755fc2c066dc146f8b05c897.jpg',
             avatar: null
         },
         {
@@ -266,7 +266,7 @@ function renderBanner() {
             desc: 'Kết nối với các nền tảng giáo dục và tài nguyên trực tuyến',
             btnText: 'Xem ngay',
             btnLink: '#section-ungdung',
-            bg: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1600&q=80',
+            bg: 'https://i.pinimg.com/1200x/3b/14/0a/3b140a880f7fa17e74b468accb38d018.jpg',
             avatar: null
         }
     ];
@@ -980,6 +980,13 @@ document.getElementById('registerModal').addEventListener('click', function(e) {
     if (e.target === this) closeRegisterModal();
 });
 
+// Hàm hiển thị các nút thêm khi đăng nhập
+function updateUIForLogin() {
+    document.querySelectorAll('.btn-add.hidden-if-not-loggedin').forEach(el => {
+        el.classList.remove('hidden-if-not-loggedin');
+    });
+}
+
 // Xử lý submit form ĐĂNG NHẬP
 document.getElementById('loginForm').addEventListener('submit', function(e) {
     e.preventDefault();
@@ -995,6 +1002,8 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
         document.getElementById('loginBtn').style.borderColor = '#27ae60';
         document.getElementById('loginBtn').style.color = '#27ae60';
         document.getElementById('registerBtn').style.display = 'none';
+        // Hiển thị các nút thêm
+        updateUIForLogin();
         // Hiển thị lại nút thêm/xóa
         renderSection('photos');
         renderSection('videos');
