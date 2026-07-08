@@ -90,8 +90,8 @@ const DEFAULT_DATA = {
         { id: 'cm17', title: 'Giáo án Tin học - Công nghệ K3-5', desc: 'Tuần 31-32', url: 'https://drive.google.com/file/d/1yxqoniKB45cFpA__BJcpL1EIfUu8DcM-/view?usp=sharing', category: 'giaoan', type: 'pdf' },
         { id: 'cm18', title: 'Giáo án Tin học - Công nghệ K3-5', desc: 'Tuần 33-34', url: 'https://drive.google.com/file/d/1Xvs7oaXT5eD4dhHLSp23ti8trVfohsNy/view?usp=sharing', category: 'giaoan', type: 'pdf' },
         { id: 'cm19', title: 'Giáo án Tin học - Công nghệ K3-5', desc: 'Tuần 35', url: 'https://drive.google.com/file/d/1gc1Vjxrm20vN4CmoFquJOdRfF_VzhUAu/view?usp=sharing', category: 'giaoan', type: 'pdf' },
-        { id: 'cm20', title: 'Đề thi học kỳ 1 - Tin học 3', desc: 'Năm học 2024-2025', url: '#', category: 'dethi', type: 'pdf' },
-        { id: 'cm21', title: 'Đề thi học kỳ 2 - Tin học 4', desc: 'Năm học 2024-2025', url: '#', category: 'dethi', type: 'pdf' },
+        { id: 'cm20', title: 'Đề thi học kỳ 1 - Tin học - Công nghệ', desc: 'Năm học 2025-2026', url: 'https://drive.google.com/drive/folders/1yG2fRBdybO1QNff5W2GTxPRJuNW5DURe?usp=sharing', category: 'dethi', type: 'pdf' },
+        { id: 'cm21', title: 'Đề thi học kỳ 2 - Tin học - Công nghệ', desc: 'Năm học 2025-2026', url: 'https://drive.google.com/drive/folders/1MlpTeSPnN3GXd6HuIxC4gQydgct8wgVo?usp=sharing', category: 'dethi', type: 'pdf' },
         { id: 'cm22', title: 'Sáng kiến kinh nghiệm: Ứng dụng CNTT trong dạy học', desc: 'Giải A cấp huyện', url: '#', category: 'sangkien', type: 'pdf' },
         { id: 'cm23', title: 'Sáng kiến: Học mà chơi - Trò chơi ô chữ Tin học', desc: 'Áp dụng cho lớp 3,4', url: '#', category: 'sangkien', type: 'pdf' },
         { id: 'cm24', title: 'Phân công chuyên môn', desc: 'Lịch tập huấn SGK', url: 'https://drive.google.com/file/d/1-gMag7o8Esq4gIFwAQAt9OjkzctNANK2/view?usp=sharing', category: 'phancongchuyenmon', type: 'pdf' },
@@ -118,6 +118,7 @@ const DEFAULT_DATA = {
         { id: 'l8', title: 'Đại học Trà Vinh', url: 'https://lms2tvu.onschool.edu.vn/', desc: 'Khóa học trực tuyến' },
         { id: 'l9', title: 'Bình dân học vụ số', url: 'https://binhdanhocvuso.gov.vn/dashboard', desc: 'Nền tảng Bình dân học vụ số' },
         { id: 'l10', title: 'Câu hỏi sau tập huấn, bồi dưỡng', url: 'https://th.nxbgd.vn/cauhoidanhgia', desc: 'Đánh giá sau tập huấn, bồi dưỡng' },
+        { id: 'l11', title: 'Pháp luật', url: 'https://thuvienphapluat.vn/phap-luat', desc: 'Thông tin Văn bản pháp luật mới ban hành' },
     ]
 };
 
