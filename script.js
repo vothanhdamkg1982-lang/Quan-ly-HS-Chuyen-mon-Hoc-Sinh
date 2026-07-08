@@ -9,6 +9,8 @@ const DEFAULT_DATA = {
         { id: 'p2', url: 'https://i.ibb.co/1cqx5g9/T-p-hu-n-m-n-C-ng-ngh.jpg', title: 'Tập huấn môn Công nghệ', desc: 'Tập huấn tại Hội trường', category: 'hoatdong' },
         { id: 'p3', url: 'https://i.ibb.co/rrvq3cz/IMG-0256.jpg', title: 'Họp mặt 20/11', desc: 'Ngày Nhà giáo Việt Nam', category: 'sukien' },
         { id: 'p4', url: 'https://i.ibb.co/M5yQtMMG/T-p-hu-n-SGK-TNXH.jpg', title: 'Tâp huấn SGK', desc: 'Tập hấn bộ sách thống nhất toàn quốc', category: 'hoatdong' },
+        { id: 'p5', url: 'https://i.ibb.co/JRngLzcJ/T-p-hu-n-SGK-2.jpg', title: 'Tâp huấn SGK', desc: 'Tập hấn bộ sách thống nhất toàn quốc', category: 'hoatdong' },
+        { id: 'p6', url: 'https://i.ibb.co/p6xX1Ljk/TH-SGK.jpg', title: 'Tâp huấn SGK', desc: 'Tập hấn bộ sách thống nhất toàn quốc', category: 'hoatdong' },
     ],
     videos: [
         { id: 'v1', url: 'https://www.youtube.com/watch?v=Z_ZohjfYVyc&t=2976s', title: 'Tập huấn SGK Tin học 3', desc: 'Tập huấn trực tuyến', category: 'hoatdong' },
