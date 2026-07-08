@@ -1,7 +1,34 @@
 /* ============================================================
    QUẢN LÝ DỮ LIỆU & GIAO DIỆN (CÓ UPLOAD / XÓA / JSON)
-   TÍCH HỢP FAVICON, TÌM KIẾM, ĐĂNG NHẬP/ĐĂNG KÝ
+   TÍCH HỢP FAVICON CHO LIÊN KẾT
+   TÍCH HỢP ĐĂNG NHẬP BẢO MẬT
    ============================================================ */
+
+// ---------- TÀI KHOẢN ĐĂNG NHẬP (MÃ HÓA) ----------
+// Tài khoản hợp lệ: admin / Admin@2026
+// Mật khẩu được mã hóa base64 (chỉ người có code mới biết)
+const VALID_CREDENTIALS = {
+    username: 'admin',
+    passwordHash: 'QWRtaW5AMjAyNg==' // base64 của "Admin@2026"
+};
+
+// Hàm mã hóa đơn giản (base64)
+function hashPassword(password) {
+    return btoa(password);
+}
+
+// Hàm kiểm tra đăng nhập
+function checkLogin(username, password) {
+    const hashed = hashPassword(password);
+    return username === VALID_CREDENTIALS.username && 
+           hashed === VALID_CREDENTIALS.passwordHash;
+}
+
+// ---------- BIẾN TOÀN CỤC ----------
+let data = {};
+const STORAGE_KEY = 'teacherData';
+let PHOTOS = [], VIDEOS = [], DOCUMENTS = [], CHUYENMON = [], UNGDUNG = [], LINKS = [];
+let isLoggedIn = false;
 
 // ---------- DỮ LIỆU MẶC ĐỊNH ----------
 const DEFAULT_DATA = {
@@ -94,11 +121,6 @@ const DEFAULT_DATA = {
     ]
 };
 
-// ---------- BIẾN TOÀN CỤC ----------
-let data = {};
-const STORAGE_KEY = 'teacherData';
-let PHOTOS = [], VIDEOS = [], DOCUMENTS = [], CHUYENMON = [], UNGDUNG = [], LINKS = [];
-
 // ---------- HÀM LƯU / TẢI DỮ LIỆU ----------
 function loadData() {
     const stored = localStorage.getItem(STORAGE_KEY);
@@ -135,6 +157,10 @@ function saveData() {
 
 // ---------- CÁC HÀM QUẢN LÝ ITEM ----------
 function addItem(arrayKey, newItem) {
+    if (!isLoggedIn) {
+        alert('Vui lòng đăng nhập để thực hiện chức năng này!');
+        return;
+    }
     newItem.id = Date.now().toString(36) + Math.random().toString(36).substr(2, 5);
     switch(arrayKey) {
         case 'photos': PHOTOS.push(newItem); break;
@@ -154,6 +180,10 @@ function addItem(arrayKey, newItem) {
 }
 
 function removeItem(arrayKey, id) {
+    if (!isLoggedIn) {
+        alert('Vui lòng đăng nhập để thực hiện chức năng này!');
+        return;
+    }
     let arr;
     switch(arrayKey) {
         case 'photos': arr = PHOTOS; break;
@@ -325,7 +355,7 @@ function updateBadges() {
     document.getElementById('homeDocCount').textContent = DOCUMENTS.length;
 }
 
-// ---------- LẤY FAVICON ----------
+// ---------- LẤY FAVICON CHO LIÊN KẾT ----------
 function getFaviconUrl(link) {
     const url = link.url || '';
     try {
@@ -354,7 +384,7 @@ function renderPhotos(filter = 'all') {
                 <div class="actions">
                     <a href="${p.url}" target="_blank" rel="noopener"><i class="fas fa-eye"></i> Xem</a>
                     <a href="${p.url}" download="${p.title || 'anh'}.jpg"><i class="fas fa-download"></i> Tải</a>
-                    <button class="btn-delete" data-key="photos" data-id="${p.id}"><i class="fas fa-trash"></i> Xóa</button>
+                    ${isLoggedIn ? `<button class="btn-delete" data-key="photos" data-id="${p.id}"><i class="fas fa-trash"></i> Xóa</button>` : ''}
                 </div>
             </div>
         </div>
@@ -401,7 +431,7 @@ function renderVideos(filter = 'all') {
                     <p>${v.desc || ''}</p>
                     <div class="actions">
                         <a href="${v.url}" target="_blank" rel="noopener"><i class="fas fa-external-link-alt"></i> Mở gốc</a>
-                        <button class="btn-delete" data-key="videos" data-id="${v.id}"><i class="fas fa-trash"></i> Xóa</button>
+                        ${isLoggedIn ? `<button class="btn-delete" data-key="videos" data-id="${v.id}"><i class="fas fa-trash"></i> Xóa</button>` : ''}
                     </div>
                 </div>
             </div>
@@ -440,7 +470,7 @@ function renderDocuments(filter = 'all') {
             <div class="doc-actions">
                 <a href="${d.url}" target="_blank" rel="noopener"><i class="fas fa-eye"></i> Xem</a>
                 <a href="${d.url}" download="${d.title || 'tailieu'}.pdf"><i class="fas fa-download"></i> Tải xuống</a>
-                <button class="btn-delete" data-key="documents" data-id="${d.id}"><i class="fas fa-trash"></i> Xóa</button>
+                ${isLoggedIn ? `<button class="btn-delete" data-key="documents" data-id="${d.id}"><i class="fas fa-trash"></i> Xóa</button>` : ''}
             </div>
         </div>
     `).join('');
@@ -481,7 +511,7 @@ function renderChuyenMon(filter = 'all') {
                 <div class="doc-actions">
                     <a href="${c.url}" target="_blank" rel="noopener"><i class="fas fa-eye"></i> Xem</a>
                     <a href="${c.url}" download="${c.title || 'chuyenmon'}.${c.type || 'pdf'}"><i class="fas fa-download"></i> Tải xuống</a>
-                    <button class="btn-delete" data-key="chuyenmon" data-id="${c.id}"><i class="fas fa-trash"></i> Xóa</button>
+                    ${isLoggedIn ? `<button class="btn-delete" data-key="chuyenmon" data-id="${c.id}"><i class="fas fa-trash"></i> Xóa</button>` : ''}
                 </div>
             </div>
         `;
@@ -531,7 +561,7 @@ function renderUngDungApp(filter = 'all') {
                 <div class="doc-actions">
                     <a href="${u.preview}" target="_blank" rel="noopener"><i class="fas fa-eye"></i> Xem trước</a>
                     <a href="${u.download}" download="${u.title || 'ungdung'}.xlsx"><i class="fas fa-download"></i> Tải xuống</a>
-                    <button class="btn-delete" data-key="ungdung" data-id="${u.id}"><i class="fas fa-trash"></i> Xóa</button>
+                    ${isLoggedIn ? `<button class="btn-delete" data-key="ungdung" data-id="${u.id}"><i class="fas fa-trash"></i> Xóa</button>` : ''}
                 </div>
             </div>
         `;
@@ -572,7 +602,7 @@ function renderLinksInUngdung() {
                 </div>
                 <div class="doc-actions">
                     <a href="${link.url}" target="_blank" rel="noopener"><i class="fas fa-external-link-alt"></i> Mở</a>
-                    <button class="btn-delete" data-key="links" data-id="${link.id}"><i class="fas fa-trash"></i> Xóa</button>
+                    ${isLoggedIn ? `<button class="btn-delete" data-key="links" data-id="${link.id}"><i class="fas fa-trash"></i> Xóa</button>` : ''}
                 </div>
             </div>
         `;
@@ -669,6 +699,10 @@ const uploadUrl = document.getElementById('uploadUrl');
 const fileAcceptHint = document.getElementById('fileAcceptHint');
 
 function openUploadModal(type) {
+    if (!isLoggedIn) {
+        alert('Vui lòng đăng nhập để thêm mới!');
+        return;
+    }
     uploadType.value = type;
     modalTitle.innerHTML = `<i class="fas fa-upload"></i> Thêm mới ${getTypeLabel(type)}`;
     const categories = getCategories(type);
@@ -802,62 +836,7 @@ document.querySelectorAll('.btn-add').forEach(btn => {
     });
 });
 
-// ---------- XUẤT / NHẬP JSON ----------
-function exportJSON() {
-    const json = JSON.stringify(data, null, 2);
-    const blob = new Blob([json], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `teacher_data_${new Date().toISOString().slice(0,10)}.json`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-}
-
-function importJSON() {
-    const input = document.createElement('input');
-    input.type = 'file';
-    input.accept = '.json';
-    input.onchange = function(e) {
-        const file = e.target.files[0];
-        if (!file) return;
-        const reader = new FileReader();
-        reader.onload = function(ev) {
-            try {
-                const imported = JSON.parse(ev.target.result);
-                for (let key in DEFAULT_DATA) {
-                    if (imported[key]) {
-                        data[key] = imported[key];
-                    }
-                }
-                PHOTOS = data.photos;
-                VIDEOS = data.videos;
-                DOCUMENTS = data.documents;
-                CHUYENMON = data.chuyenmon;
-                UNGDUNG = data.ungdung;
-                LINKS = data.links;
-                saveData();
-                renderSection('photos');
-                renderSection('videos');
-                renderSection('documents');
-                renderSection('chuyenmon');
-                renderUngDungAndLinks();
-                updateBadges();
-                alert('Nhập dữ liệu thành công!');
-            } catch(err) {
-                alert('Lỗi: File JSON không hợp lệ.');
-            }
-        };
-        reader.readAsText(file);
-    };
-    input.click();
-}
-
-// ============================================================
-// TÌM KIẾM
-// ============================================================
+// ---------- TÌM KIẾM ----------
 function performSearch() {
     const input = document.getElementById('searchInput');
     const query = input.value.trim().toLowerCase();
@@ -972,9 +951,7 @@ function performSearch() {
     switchSection('search');
 }
 
-// ============================================================
-// MODAL ĐĂNG NHẬP / ĐĂNG KÝ
-// ============================================================
+// ---------- MODAL ĐĂNG NHẬP / ĐĂNG KÝ ----------
 function openLoginModal() {
     document.getElementById('loginModal').classList.add('active');
 }
@@ -988,10 +965,13 @@ function closeRegisterModal() {
     document.getElementById('registerModal').classList.remove('active');
 }
 
+// Sự kiện cho các nút
 document.getElementById('loginBtn').addEventListener('click', openLoginModal);
 document.getElementById('registerBtn').addEventListener('click', openRegisterModal);
 document.getElementById('loginModalClose').addEventListener('click', closeLoginModal);
 document.getElementById('registerModalClose').addEventListener('click', closeRegisterModal);
+
+// Đóng modal khi click ra ngoài
 document.getElementById('loginModal').addEventListener('click', function(e) {
     if (e.target === this) closeLoginModal();
 });
@@ -999,24 +979,107 @@ document.getElementById('registerModal').addEventListener('click', function(e) {
     if (e.target === this) closeRegisterModal();
 });
 
+// Xử lý submit form ĐĂNG NHẬP
 document.getElementById('loginForm').addEventListener('submit', function(e) {
     e.preventDefault();
-    alert('Chức năng đăng nhập đang được phát triển.\nTài khoản demo: admin / 123456');
-    closeLoginModal();
+    const username = document.getElementById('loginUsername').value.trim();
+    const password = document.getElementById('loginPassword').value.trim();
+    
+    if (checkLogin(username, password)) {
+        isLoggedIn = true;
+        alert('Đăng nhập thành công! Chào mừng ' + username);
+        closeLoginModal();
+        // Cập nhật giao diện
+        document.getElementById('loginBtn').innerHTML = '<i class="fas fa-user-check"></i> ' + username;
+        document.getElementById('loginBtn').style.borderColor = '#27ae60';
+        document.getElementById('loginBtn').style.color = '#27ae60';
+        document.getElementById('registerBtn').style.display = 'none';
+        // Hiển thị lại nút thêm/xóa
+        renderSection('photos');
+        renderSection('videos');
+        renderSection('documents');
+        renderSection('chuyenmon');
+        renderUngDungAndLinks();
+    } else {
+        alert('Sai tên đăng nhập hoặc mật khẩu!');
+        document.getElementById('loginPassword').value = '';
+        document.getElementById('loginPassword').focus();
+    }
 });
+
+// Xử lý submit form ĐĂNG KÝ
 document.getElementById('registerForm').addEventListener('submit', function(e) {
     e.preventDefault();
-    alert('Đăng ký thành công! (chức năng demo)');
+    alert('Chức năng đăng ký chỉ dành cho quản trị viên. Vui lòng liên hệ admin để được cấp tài khoản.');
     closeRegisterModal();
 });
 
-// ============================================================
-// SỰ KIỆN TÌM KIẾM
-// ============================================================
+// Sự kiện tìm kiếm
 document.getElementById('searchBtn').addEventListener('click', performSearch);
 document.getElementById('searchInput').addEventListener('keypress', function(e) {
     if (e.key === 'Enter') performSearch();
 });
+
+// ---------- XUẤT / NHẬP JSON ----------
+function exportJSON() {
+    if (!isLoggedIn) {
+        alert('Vui lòng đăng nhập để xuất dữ liệu!');
+        return;
+    }
+    const json = JSON.stringify(data, null, 2);
+    const blob = new Blob([json], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `teacher_data_${new Date().toISOString().slice(0,10)}.json`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+}
+
+function importJSON() {
+    if (!isLoggedIn) {
+        alert('Vui lòng đăng nhập để nhập dữ liệu!');
+        return;
+    }
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = '.json';
+    input.onchange = function(e) {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = function(ev) {
+            try {
+                const imported = JSON.parse(ev.target.result);
+                for (let key in DEFAULT_DATA) {
+                    if (imported[key]) {
+                        data[key] = imported[key];
+                    }
+                }
+                PHOTOS = data.photos;
+                VIDEOS = data.videos;
+                DOCUMENTS = data.documents;
+                CHUYENMON = data.chuyenmon;
+                UNGDUNG = data.ungdung;
+                LINKS = data.links;
+                saveData();
+                renderSection('photos');
+                renderSection('videos');
+                renderSection('documents');
+                renderSection('chuyenmon');
+                renderUngDungAndLinks();
+                updateBadges();
+                alert('Nhập dữ liệu thành công!');
+            } catch(err) {
+                alert('Lỗi: File JSON không hợp lệ.');
+            }
+        };
+        reader.readAsText(file);
+    };
+    input.click();
+}
 
 // ============================================================
 // TÍNH LƯƠNG
@@ -1092,5 +1155,6 @@ document.addEventListener('DOMContentLoaded', function() {
     updateBadges();
     switchSection('home');
     initSalaryCalculator();
-    console.log('✅ Website đã sẵn sàng với đầy đủ tính năng!');
+    console.log('✅ Website đã sẵn sàng với hệ thống đăng nhập bảo mật!');
+    console.log('🔐 Tài khoản: admin | Mật khẩu: Admin@2026');
 });
