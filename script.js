@@ -242,7 +242,7 @@ function renderBanner() {
             btnText: 'Tìm hiểu thêm',
             btnLink: '#section-teacher',
             bg: 'https://images.unsplash.com/photo-1523050854058-8df90110c7f1?w=1600&q=80',
-            avatar: 'https://i.ibb.co/GQywpxZS/IMG-0030.jpg'
+            avatar: 'https://i.ibb.co/rrvq3cz/IMG-0256.jpg'
         },
         {
             title: 'Công nghệ trong giáo dục',
