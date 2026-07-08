@@ -11,8 +11,8 @@ const DEFAULT_DATA = {
         { id: 'p4', url: 'https://i.ibb.co/M5yQtMMG/T-p-hu-n-SGK-TNXH.jpg', title: 'Tâp huấn SGK', desc: 'Tập hấn bộ sách thống nhất toàn quốc', category: 'hoatdong' },
     ],
     videos: [
-        { id: 'v1', url: 'https://www.youtube.com/live/MmGmy9FZFII', title: 'Tập huấn SGK Tin học 3', desc: 'Tập huấn trực tuyến', category: 'hoatdong' },
-        { id: 'v2', url: 'https://www.youtube.com/live/ZyA_CFS7Rb8', title: 'Tập huấn SGK môn Công nghệ', desc: 'Tập huấn trực tuyến', category: 'hoatdong' },
+        { id: 'v1', url: 'https://www.youtube.com/watch?v=Z_ZohjfYVyc&t=2976s', title: 'Tập huấn SGK Tin học 3', desc: 'Tập huấn trực tuyến', category: 'hoatdong' },
+        { id: 'v2', url: 'https://www.youtube.com/watch?v=ZyA_CFS7Rb8&t=2085s', title: 'Tập huấn SGK môn Công nghệ', desc: 'Tập huấn trực tuyến', category: 'hoatdong' },
     ],
     documents: [
         { id: 'd1', url: 'https://drive.google.com/file/d/1Wp_pWeOQuE5WUtKADi0VLK05qKqUhFfm/view?usp=sharing', title: 'Danh hiệu', desc: 'Chiến sĩ thi đua cơ sở 2013', category: 'khenthuong' },
