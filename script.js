@@ -242,7 +242,7 @@ function renderBanner() {
             desc: 'Cập nhật hồ sơ cá nhân - Thông tin học sinh - Chia sẻ tài nguyên giáo dục',
             btnText: 'Tìm hiểu thêm',
             btnLink: '#section-teacher',
-            bg: 'https://i.pinimg.com/736x/2e/e7/6e/2ee76e06f2852ed4f66b2b5576687066.jpg',
+            bg: 'https://i.pinimg.com/736x/5c/9b/92/5c9b92b5ca26978d3862d582954a1acd.jpg',
             avatar: 'https://i.ibb.co/rrvq3cz/IMG-0256.jpg'
         },
         {
@@ -250,7 +250,7 @@ function renderBanner() {
             desc: 'Ứng dụng CNTT để nâng cao chất lượng dạy và học',
             btnText: 'Xem kho ảnh',
             btnLink: '#section-photos',
-            bg: 'https://i.pinimg.com/736x/38/0f/71/380f71c4e505523f641e4c6b635ee398.jpg',
+            bg: 'https://i.pinimg.com/1200x/88/b4/d8/88b4d8e6e0527096a18ecf9ca38471ab.jpg',
             avatar: null
         },
         {
@@ -258,7 +258,7 @@ function renderBanner() {
             desc: 'Các công cụ giúp giáo viên quản lý và soạn bài hiệu quả',
             btnText: 'Khám phá',
             btnLink: '#section-ungdung',
-            bg: 'https://i.pinimg.com/1200x/30/d0/94/30d09446755fc2c066dc146f8b05c897.jpg',
+            bg: 'https://i.pinimg.com/1200x/91/6b/4b/916b4bd44f429ba9d69e3976d778ae2d.jpg',
             avatar: null
         },
         {
