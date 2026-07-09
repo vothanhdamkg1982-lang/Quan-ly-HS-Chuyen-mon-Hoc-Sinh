@@ -490,7 +490,7 @@ a:hover {
 }
 
 .card {
-    background: rgba(123, 186, 223, 0.986);
+    background: rgba(211, 229, 235, 0.849);
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
     border-radius: var(--radius);
