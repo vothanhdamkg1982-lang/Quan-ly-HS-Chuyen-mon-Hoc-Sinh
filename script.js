@@ -124,38 +124,53 @@ const DEFAULT_DATA = {
     ]
 };
 
-// ---------- HÀM LƯU / TẢI DỮ LIỆU ----------
-function loadData() {
-    const stored = localStorage.getItem(STORAGE_KEY);
-    if (stored) {
-        try {
-            data = JSON.parse(stored);
+// 2. Thay thế toàn bộ hàm loadData() cũ
+async function loadData() {
+    try {
+        const docRef = doc(db, "portal", "teacherData");
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+            data = docSnap.data();
+            // Khôi phục dữ liệu mặc định nếu mảng bị trống
             for (let key in DEFAULT_DATA) {
                 if (!data[key]) data[key] = DEFAULT_DATA[key];
             }
-        } catch(e) {
+        } else {
             data = JSON.parse(JSON.stringify(DEFAULT_DATA));
         }
-    } else {
+    } catch (error) {
+        console.error("Lỗi khi tải dữ liệu từ Firebase:", error);
         data = JSON.parse(JSON.stringify(DEFAULT_DATA));
     }
+
+    // Gán dữ liệu vào các biến toàn cục như mã cũ của bạn
     PHOTOS = data.photos;
     VIDEOS = data.videos;
     DOCUMENTS = data.documents;
     CHUYENMON = data.chuyenmon;
     UNGDUNG = data.ungdung;
     LINKS = data.links;
+    
+    // Gọi các hàm render giao diện sau khi dữ liệu đã tải xong (nếu cần)
 }
 
-function saveData() {
+// 3. Thay thế toàn bộ hàm saveData() cũ
+async function saveData() {
     data.photos = PHOTOS;
     data.videos = VIDEOS;
     data.documents = DOCUMENTS;
     data.chuyenmon = CHUYENMON;
     data.ungdung = UNGDUNG;
     data.links = LINKS;
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-    updateBadges();
+    
+    try {
+        const docRef = doc(db, "portal", "teacherData");
+        await setDoc(docRef, data);
+        updateBadges(); 
+    } catch (error) {
+        console.error("Lỗi khi lưu dữ liệu lên Firebase:", error);
+    }
 }
 
 // ---------- CÁC HÀM QUẢN LÝ ITEM ----------
