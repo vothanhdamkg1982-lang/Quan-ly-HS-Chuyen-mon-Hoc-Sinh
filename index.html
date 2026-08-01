@@ -6,6 +6,10 @@
     <title>Giáo viên Võ Thanh Đậm</title>
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <!-- Firebase SDK compat (v10) -->
+    <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-auth-compat.js"></script>
 </head>
 <body>
     <!-- HEADER -->
@@ -368,8 +372,8 @@
         <p>&copy; 2026 Võ Thanh Đậm - Website cá nhân</p>
     </footer>
 
-    <script src="script.js"></script>
+    <!-- File cấu hình Firebase (phải đặt trước script.js) -->
     <script src="firebase.js"></script>
-
+    <script src="script.js"></script>
 </body>
 </html>
