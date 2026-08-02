@@ -96,6 +96,7 @@ const DEFAULT_DATA = {
         { id: 'cm23', title: 'Sáng kiến: Học mà chơi - Trò chơi ô chữ Tin học', desc: 'Áp dụng cho lớp 3,4', url: '#', category: 'sangkien', type: 'pdf' },
         { id: 'cm24', title: 'Phân công chuyên môn', desc: 'Lịch tập huấn SGK', url: 'https://drive.google.com/file/d/1-gMag7o8Esq4gIFwAQAt9OjkzctNANK2/view?usp=sharing', category: 'phancongchuyenmon', type: 'pdf' },
         { id: 'cm25', title: 'Tài liệu chuyên môn', desc: 'Tài liệu tham khảo', url: '#', category: 'tailieu', type: 'pdf' },
+        { id: 'cm25', title: 'Phân công chuyên môn', desc: 'Họp chi bộ tháng 8', url: 'https://docs.google.com/document/d/1FOPQSCK4zWxXNnciDUqpo59-77_AlmmFehODfDcyWcU/edit?usp=sharing', category: 'phancongchuyenmon', type: 'pdf' },
     ],
     ungdung: [
         { id: 'ex1', title: 'Phần mềm Kế hoạch giáo dục - Lịch báo giảng tự động', desc: 'App web tự động tính lịch theo tuần', preview: 'https://vothanhdamkg1982-lang.github.io/Ke-Hoach-GD-1.4/', download: 'https://vothanhdamkg1982-lang.github.io/Ke-Hoach-GD-1.4/', category: 'ungdung', type: 'App web' },
