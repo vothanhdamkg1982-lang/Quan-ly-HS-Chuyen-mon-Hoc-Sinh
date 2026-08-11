@@ -24,6 +24,23 @@
             <div class="header-actions">
                 <button class="btn-login" id="loginBtn"><i class="fas fa-user"></i> Đăng nhập</button>
                 <button class="btn-register" id="registerBtn">Đăng ký</button>
+                <!-- ➕ CHÈN THÊM NÚT ĐĂNG XUẤT VÀO ĐÂY -->
+    <button type="button" id="btnLogout" class="btn-logout" style="
+        margin-left: 10px;
+        padding: 5px 12px;
+        background-color: #dc3545;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        font-size: 13px;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+    ">
+        <i class="fas fa-sign-out-alt"></i> Đăng xuất
+    </button>
+</div>
             </div>
         </div>
     </header>
@@ -78,7 +95,7 @@
                                     <span class="stat"><i class="fas fa-calendar-alt"></i> <strong>24</strong> năm kinh nghiệm</span>
                                     <span class="stat"><i class="fas fa-graduation-cap"></i> <strong>2</strong> bằng Cử nhân</span>
                                     <span class="stat"><i class="fas fa-book-open"></i> <strong>Tin học</strong> bộ môn</span>
-                                </div>
+                                    </div>
                             </div>
                         </div>
                     </div>
@@ -312,7 +329,15 @@
                     <input type="password" id="loginPassword" placeholder="Nhập mật khẩu" required />
                 </div>
                 <button type="submit" class="btn-primary">Đăng nhập</button>
-            </form>
+                <!-- Phân cách & Nút Google -->
+            <div class="or-divider" style="text-align: center; margin: 15px 0; color: #888; font-size: 14px;">
+                <span>hoặc</span>
+            </div>
+            <button type="button" id="btnGoogleLogin" class="btn-google" style="width: 100%; padding: 10px 15px; background-color: #4285f4; color: white; border: none; border-radius: 6px; font-size: 14px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;">
+                <i class="fab fa-google"></i> Đăng nhập với Google
+            </button>
+<!-- Đóng Form Đăng Nhập -->
+</form>
         </div>
     </div>
 

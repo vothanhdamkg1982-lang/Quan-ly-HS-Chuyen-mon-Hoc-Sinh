@@ -19,7 +19,46 @@ function hashPassword(password) { return btoa(password); }
 function checkLogin(username, password) {
     return username === VALID_CREDENTIALS.username && hashPassword(password) === VALID_CREDENTIALS.passwordHash;
 }
+// ---------- ĐĂNG NHẬP VỚI GOOGLE ----------
+async function signInWithGoogle() {
+    try {
+        const { data, error } = await supabaseClient.auth.signInWithOAuth({
+            provider: 'google',
+            options: {
+                redirectTo: window.location.origin
+            }
+        });
+        if (error) throw error;
+    } catch (error) {
+        alert('Lỗi đăng nhập Google: ' + error.message);
+    }
+}
 
+// Lắng nghe trạng thái đăng nhập từ Supabase Google Auth
+supabaseClient.auth.onAuthStateChange((event, session) => {
+    if (session && session.user) {
+        // Lưu trạng thái đã đăng nhập
+        localStorage.setItem('isLoggedIn', 'true');
+        localStorage.setItem('userEmail', session.user.email);
+        
+        // Cập nhật giao diện khi đã đăng nhập
+        const loginBtn = document.getElementById('loginBtn');
+        if (loginBtn) {
+            const userName = session.user.user_metadata.full_name || session.user.email.split('@')[0];
+            loginBtn.innerHTML = `<i class="fas fa-user-check"></i> ${userName}`;
+            loginBtn.style.borderColor = '#27ae60';
+            loginBtn.style.color = '#27ae60';
+        }
+        
+        // Ẩn nút đăng ký nếu có
+        const registerBtn = document.getElementById('registerBtn');
+        if (registerBtn) registerBtn.style.display = 'none';
+
+        // Đóng Modal đăng nhập
+        const loginModal = document.getElementById('loginModal');
+        if (loginModal) loginModal.style.display = 'none';
+    }
+});
 // ---------- DỮ LIỆU MẶC ĐỊNH ----------
 const DEFAULT_DATA = {
     photos: [
@@ -977,18 +1016,69 @@ function performSearch() {
 document.getElementById('searchBtn').addEventListener('click', performSearch);
 document.getElementById('searchInput').addEventListener('keypress', function(e) { if (e.key === 'Enter') performSearch(); });
 
-// ---------- LOGIN / REGISTER ----------
-function openLoginModal() { document.getElementById('loginModal').classList.add('active'); }
-function closeLoginModal() { document.getElementById('loginModal').classList.remove('active'); }
-function openRegisterModal() { document.getElementById('registerModal').classList.add('active'); }
-function closeRegisterModal() { document.getElementById('registerModal').classList.remove('active'); }
+// --------- LOGIN / REGISTER ---------
+function openLoginModal() { 
+    const modal = document.getElementById('loginModal');
+    if (modal) modal.classList.add('active'); 
+}
 
-document.getElementById('loginBtn').addEventListener('click', openLoginModal);
-document.getElementById('registerBtn').addEventListener('click', openRegisterModal);
-document.getElementById('loginModalClose').addEventListener('click', closeLoginModal);
-document.getElementById('registerModalClose').addEventListener('click', closeRegisterModal);
-document.getElementById('loginModal').addEventListener('click', function(e) { if (e.target === this) closeLoginModal(); });
-document.getElementById('registerModal').addEventListener('click', function(e) { if (e.target === this) closeRegisterModal(); });
+function closeLoginModal() { 
+    const modal = document.getElementById('loginModal');
+    if (modal) modal.classList.remove('active'); 
+}
+
+function openRegisterModal() { 
+    const modal = document.getElementById('registerModal');
+    if (modal) modal.classList.add('active'); 
+}
+
+function closeRegisterModal() { 
+    const modal = document.getElementById('registerModal');
+    if (modal) modal.classList.remove('active'); 
+}
+// --------- LOGIN / REGISTER ---------
+// ... các hàm openLoginModal, openRegisterModal ...
+
+document.getElementById('loginBtn')?.addEventListener('click', openLoginModal);
+document.getElementById('registerBtn')?.addEventListener('click', openRegisterModal);
+document.getElementById('loginModalClose')?.addEventListener('click', closeLoginModal);
+document.getElementById('registerModalClose')?.addEventListener('click', closeRegisterModal);
+
+
+// ➕ DÁN ĐOẠN MÃ ĐĂNG XUẤT NÀY VÀO NGAY BÊN DƯỚI:
+
+async function handleLogout() {
+    try {
+        if (typeof supabaseClient !== 'undefined' && supabaseClient.auth) {
+            await supabaseClient.auth.signOut();
+        }
+        localStorage.removeItem('currentUser');
+        localStorage.removeItem('supabase.auth.token');
+        sessionStorage.clear();
+
+        alert('Đã đăng xuất thành công!');
+        window.location.reload();
+    } catch (error) {
+        console.error('Lỗi khi đăng xuất:', error);
+        window.location.reload();
+    }
+}
+
+// Bắt sự kiện click cho nút Đăng xuất
+document.getElementById('btnLogout')?.addEventListener('click', handleLogout);
+// Bắt sự kiện an toàn (không lo bị rớt lỗi Uncaught TypeError)
+document.getElementById('loginBtn')?.addEventListener('click', openLoginModal);
+document.getElementById('registerBtn')?.addEventListener('click', openRegisterModal);
+document.getElementById('loginModalClose')?.addEventListener('click', closeLoginModal);
+document.getElementById('registerModalClose')?.addEventListener('click', closeRegisterModal);
+
+document.getElementById('loginModal')?.addEventListener('click', function(e) { 
+    if (e.target === this) closeLoginModal(); 
+});
+
+document.getElementById('registerModal')?.addEventListener('click', function(e) { 
+    if (e.target === this) closeRegisterModal(); 
+});
 
 document.getElementById('loginForm').addEventListener('submit', function(e) {
     e.preventDefault();
@@ -1136,4 +1226,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // Các sự kiện khác đã được gán trong HTML
     console.log('✅ Website đã sẵn sàng với Supabase!');
     console.log('🔐 Tài khoản: admin | Mật khẩu: Admin@2026');
+    const btnGoogle = document.getElementById('btnGoogleLogin');
+if (btnGoogle) {
+    btnGoogle.addEventListener('click', signInWithGoogle);
+}
 });
