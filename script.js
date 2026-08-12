@@ -1066,6 +1066,8 @@ async function handleLogout() {
 
 // Bắt sự kiện click cho nút Đăng xuất
 document.getElementById('btnLogout')?.addEventListener('click', handleLogout);
+// Bắt sự kiện click cho nút Đăng nhập Google
+document.getElementById('btnGoogleLogin')?.addEventListener('click', signInWithGoogle);
 // Bắt sự kiện an toàn (không lo bị rớt lỗi Uncaught TypeError)
 document.getElementById('loginBtn')?.addEventListener('click', openLoginModal);
 document.getElementById('registerBtn')?.addEventListener('click', openRegisterModal);
