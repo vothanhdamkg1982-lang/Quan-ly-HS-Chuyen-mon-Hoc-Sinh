@@ -1107,10 +1107,25 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
     }
 });
 
-document.getElementById('registerForm').addEventListener('submit', function(e) {
+document.getElementById('registerForm')?.addEventListener('submit', async function(e) {
     e.preventDefault();
-    alert('Chức năng đăng ký chỉ dành cho quản trị viên. Vui lòng liên hệ admin để được cấp tài khoản.');
-    closeRegisterModal();
+    
+    const email = document.getElementById('registerEmail')?.value; // Điều chỉnh ID ô nhập email cho đúng với HTML
+    const password = document.getElementById('registerPassword')?.value; // Điều chỉnh ID ô nhập password
+
+    try {
+        const { data, error } = await supabaseClient.auth.signUp({
+            email: email,
+            password: password,
+        });
+
+        if (error) throw error;
+
+        alert('Đăng ký thành công! Vui lòng kiểm tra email để xác thực tài khoản (nếu có).');
+        closeRegisterModal();
+    } catch (error) {
+        alert('Lỗi đăng ký: ' + error.message);
+    }
 });
 
 // ---------- EXPORT / IMPORT JSON ----------
