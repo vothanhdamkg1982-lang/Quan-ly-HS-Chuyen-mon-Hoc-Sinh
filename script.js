@@ -37,11 +37,14 @@ async function signInWithGoogle() {
 // Lắng nghe trạng thái đăng nhập từ Supabase Google Auth
 supabaseClient.auth.onAuthStateChange((event, session) => {
     if (session && session.user) {
-        // Lưu trạng thái đã đăng nhập
+        // 1. Cập nhật biến trạng thái đăng nhập toàn cục
+        isLoggedIn = true;
+
+        // Lưu trạng thái vào bộ nhớ trình duyệt
         localStorage.setItem('isLoggedIn', 'true');
         localStorage.setItem('userEmail', session.user.email);
         
-        // Cập nhật giao diện khi đã đăng nhập
+        // 2. Cập nhật tên người dùng trên Header
         const loginBtn = document.getElementById('loginBtn');
         if (loginBtn) {
             const userName = session.user.user_metadata.full_name || session.user.email.split('@')[0];
@@ -50,13 +53,24 @@ supabaseClient.auth.onAuthStateChange((event, session) => {
             loginBtn.style.color = '#27ae60';
         }
         
-        // Ẩn nút đăng ký nếu có
+        // Ẩn nút đăng ký & Đóng Modal
         const registerBtn = document.getElementById('registerBtn');
         if (registerBtn) registerBtn.style.display = 'none';
 
-        // Đóng Modal đăng nhập
         const loginModal = document.getElementById('loginModal');
         if (loginModal) loginModal.style.display = 'none';
+
+        // 3. Hiển thị tất cả nút "Thêm..." (Gỡ bỏ class ẩn)
+        document.querySelectorAll('.btn-add.hidden-if-not-loggedin').forEach(el => {
+            el.classList.remove('hidden-if-not-loggedin');
+        });
+
+        // 4. Render lại dữ liệu các phần để hiển thị nút Sửa / Xóa
+        renderSection('photos');
+        renderSection('videos');
+        renderSection('documents');
+        renderSection('chuyenmon');
+        renderUngDungAndLinks();
     }
 });
 // ---------- DỮ LIỆU MẶC ĐỊNH ----------
