@@ -887,8 +887,14 @@ uploadForm.addEventListener('submit', async function(e) {
         }
 
         let key = type + 's';
-        if (type === 'ungdung') key = 'ungdung';
 
+if (type === 'ungdung') {
+    key = 'ungdung';
+}
+
+if (type === 'chuyenmon') {
+    key = 'chuyenmon';
+}
         // QUAN TRỌNG: Phân biệt Thêm mới và Cập nhật
         if (editingId) {
             // Nếu có editingId -> Gọi hàm cập nhật
