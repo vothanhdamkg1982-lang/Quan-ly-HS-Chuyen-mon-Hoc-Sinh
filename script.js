@@ -9,6 +9,16 @@ const SUPABASE_ANON_KEY = 'sb_publishable_gpW8TcOIz4ocrrMIWUx3Qg_sZaeZqQ0'; // T
 const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 const BUCKET_NAME = 'teacher-assets'; // Tên bucket đã tạo
 
+// ---------- MAPPING DỮ LIỆU ----------
+const DATA_KEYS = {
+    photo: 'photos',
+    video: 'videos',
+    document: 'documents',
+    chuyenmon: 'chuyenmon',
+    ungdung: 'ungdung',
+    link: 'links'
+};
+
 // ---------- TÀI KHOẢN ĐĂNG NHẬP ----------
 const VALID_CREDENTIALS = {
     username: 'admin',
@@ -19,6 +29,7 @@ function hashPassword(password) { return btoa(password); }
 function checkLogin(username, password) {
     return username === VALID_CREDENTIALS.username && hashPassword(password) === VALID_CREDENTIALS.passwordHash;
 }
+
 // ---------- ĐĂNG NHẬP VỚI GOOGLE ----------
 async function signInWithGoogle() {
     try {
@@ -37,14 +48,10 @@ async function signInWithGoogle() {
 // Lắng nghe trạng thái đăng nhập từ Supabase Google Auth
 supabaseClient.auth.onAuthStateChange((event, session) => {
     if (session && session.user) {
-        // 1. Cập nhật biến trạng thái đăng nhập toàn cục
         isLoggedIn = true;
-
-        // Lưu trạng thái vào bộ nhớ trình duyệt
         localStorage.setItem('isLoggedIn', 'true');
         localStorage.setItem('userEmail', session.user.email);
         
-        // 2. Cập nhật tên người dùng trên Header
         const loginBtn = document.getElementById('loginBtn');
         if (loginBtn) {
             const userName = session.user.user_metadata.full_name || session.user.email.split('@')[0];
@@ -53,19 +60,16 @@ supabaseClient.auth.onAuthStateChange((event, session) => {
             loginBtn.style.color = '#27ae60';
         }
         
-        // Ẩn nút đăng ký & Đóng Modal
         const registerBtn = document.getElementById('registerBtn');
         if (registerBtn) registerBtn.style.display = 'none';
 
         const loginModal = document.getElementById('loginModal');
         if (loginModal) loginModal.style.display = 'none';
 
-        // 3. Hiển thị tất cả nút "Thêm..." (Gỡ bỏ class ẩn)
         document.querySelectorAll('.btn-add.hidden-if-not-loggedin').forEach(el => {
             el.classList.remove('hidden-if-not-loggedin');
         });
 
-        // 4. Render lại dữ liệu các phần để hiển thị nút Sửa / Xóa
         renderSection('photos');
         renderSection('videos');
         renderSection('documents');
@@ -73,6 +77,7 @@ supabaseClient.auth.onAuthStateChange((event, session) => {
         renderUngDungAndLinks();
     }
 });
+
 // ---------- DỮ LIỆU MẶC ĐỊNH ----------
 const DEFAULT_DATA = {
     photos: [
@@ -116,56 +121,18 @@ const DEFAULT_DATA = {
     chuyenmon: [
         { id: 'cm1', title: 'Giáo án Tin học - Công nghệ K3-5', desc: 'Tuần 1-35(Năm học 2026 - 2027)', url: 'https://drive.google.com/file/d/1s3Fg-lo7fYhQgazJw2L_s4YOWYuLzmzG/view?usp=sharing', category: 'giaoan', type: 'pdf' },
         { id: 'cm2', title: 'Giáo án Tin học - Công nghệ K3-5', desc: 'Tuần 1-2', url: 'https://drive.google.com/file/d/1s9noCA7NJsQecKH0M0VCzo2KcIg9GMdk/view?usp=sharing', category: 'giaoan', type: 'pdf' },
-        { id: 'cm3', title: 'Giáo án Tin học - Công nghệ K3-5', desc: 'Tuần 3-4', url: 'https://drive.google.com/file/d/1H2GpJKNxnrIWsGDOPtlB69g1UTt1NmTJ/view?usp=sharing', category: 'giaoan', type: 'pdf' },
-        { id: 'cm4', title: 'Giáo án Tin học - Công nghệ K3-5', desc: 'Tuần 5-6', url: 'https://drive.google.com/file/d/1XtxwAxmpZ-WrT5i3OcpOb51Kxq8MCnit/view?usp=sharing', category: 'giaoan', type: 'pdf' },
-        { id: 'cm5', title: 'Giáo án Tin học - Công nghệ K3-5', desc: 'Tuần 7-8', url: 'https://drive.google.com/file/d/1jmvC7A_mAxfaKHUoNY7zKXZJQe8hmQN5/view?usp=sharing', category: 'giaoan', type: 'pdf' },
-        { id: 'cm6', title: 'Giáo án Tin học - Công nghệ K3-5', desc: 'Tuần 9-10', url: 'https://drive.google.com/file/d/1YV88Lxdh00uEq57GlR1bP9zfRckV3VMK/view?usp=sharing', category: 'giaoan', type: 'pdf' },
-        { id: 'cm7', title: 'Giáo án Tin học - Công nghệ K3-5', desc: 'Tuần 11-12', url: 'https://drive.google.com/file/d/1TE8QGMupYaJnh9f7VuDbPlBkChlHi9PU/view?usp=sharing', category: 'giaoan', type: 'pdf' },
-        { id: 'cm8', title: 'Giáo án Tin học - Công nghệ K3-5', desc: 'Tuần 13-14', url: 'https://drive.google.com/file/d/1LtK9v4J17B5Bd8X-hPU_qitMgiWRBmqM/view?usp=sharing', category: 'giaoan', type: 'pdf' },
-        { id: 'cm9', title: 'Giáo án Tin học - Công nghệ K3-5', desc: 'Tuần 15-16', url: 'https://drive.google.com/file/d/12UZI0dzasT3MLfMdB28CcIjroE28GfUl/view?usp=sharing', category: 'giaoan', type: 'pdf' },
-        { id: 'cm10', title: 'Giáo án Tin học - Công nghệ K3-5', desc: 'Tuần 17-18', url: 'https://drive.google.com/file/d/1WpkSv_tVsu4Y1NuBfsGjLSiH_4LJXJve/view?usp=sharing', category: 'giaoan', type: 'pdf' },
-        { id: 'cm11', title: 'Giáo án Tin học - Công nghệ K3-5', desc: 'Tuần 19-20', url: 'https://drive.google.com/file/d/1rVIda7a6qqsQ2IHeNrwT3qKpjn7730nK/view?usp=sharing', category: 'giaoan', type: 'pdf' },
-        { id: 'cm12', title: 'Giáo án Tin học - Công nghệ K3-5', desc: 'Tuần 21-22', url: 'https://drive.google.com/file/d/1caHmB6OPgc5w5HsNhGYipkw472XCCT3E/view?usp=sharing', category: 'giaoan', type: 'pdf' },
-        { id: 'cm13', title: 'Giáo án Tin học - Công nghệ K3-5', desc: 'Tuần 23-24', url: 'https://drive.google.com/file/d/1U2a02Vabxv2mcsknmtzALTz1VVbZeNaV/view?usp=sharing', category: 'giaoan', type: 'pdf' },
-        { id: 'cm14', title: 'Giáo án Tin học - Công nghệ K3-5', desc: 'Tuần 25-26', url: 'https://drive.google.com/file/d/1QmSw1Io6Mvd3NH-tjg5lvSrVSlX4grpd/view?usp=sharing', category: 'giaoan', type: 'pdf' },
-        { id: 'cm15', title: 'Giáo án Tin học - Công nghệ K3-5', desc: 'Tuần 27-28', url: 'https://drive.google.com/file/d/1noHBpIU0uU640os8niSJNXte4RYEa9LP/view?usp=sharing', category: 'giaoan', type: 'pdf' },
-        { id: 'cm16', title: 'Giáo án Tin học - Công nghệ K3-5', desc: 'Tuần 29-30', url: 'https://drive.google.com/file/d/1JAZseO5X09WzUmTrKTAaqmb1_qvy16hW/view?usp=sharing', category: 'giaoan', type: 'pdf' },
-        { id: 'cm17', title: 'Giáo án Tin học - Công nghệ K3-5', desc: 'Tuần 31-32', url: 'https://drive.google.com/file/d/1yxqoniKB45cFpA__BJcpL1EIfUu8DcM-/view?usp=sharing', category: 'giaoan', type: 'pdf' },
-        { id: 'cm18', title: 'Giáo án Tin học - Công nghệ K3-5', desc: 'Tuần 33-34', url: 'https://drive.google.com/file/d/1Xvs7oaXT5eD4dhHLSp23ti8trVfohsNy/view?usp=sharing', category: 'giaoan', type: 'pdf' },
-        { id: 'cm19', title: 'Giáo án Tin học - Công nghệ K3-5', desc: 'Tuần 35', url: 'https://drive.google.com/file/d/1gc1Vjxrm20vN4CmoFquJOdRfF_VzhUAu/view?usp=sharing', category: 'giaoan', type: 'pdf' },
         { id: 'cm20', title: 'Đề thi học kỳ 1 - Tin học - Công nghệ', desc: 'Năm học 2025-2026', url: 'https://drive.google.com/drive/folders/1yG2fRBdybO1QNff5W2GTxPRJuNW5DURe?usp=sharing', category: 'dethi', type: 'pdf' },
-        { id: 'cm21', title: 'Đề thi học kỳ 2 - Tin học - Công nghệ', desc: 'Năm học 2025-2026', url: 'https://drive.google.com/drive/folders/1MlpTeSPnN3GXd6HuIxC4gQydgct8wgVo?usp=sharing', category: 'dethi', type: 'pdf' },
         { id: 'cm22', title: 'Sáng kiến kinh nghiệm: Ứng dụng CNTT trong dạy học', desc: 'Giải A cấp huyện', url: '#', category: 'sangkien', type: 'pdf' },
-        { id: 'cm23', title: 'Sáng kiến: Học mà chơi - Trò chơi ô chữ Tin học', desc: 'Áp dụng cho lớp 3,4', url: '#', category: 'sangkien', type: 'pdf' },
         { id: 'cm24', title: 'Phân công chuyên môn', desc: 'Lịch tập huấn SGK', url: 'https://drive.google.com/file/d/1-gMag7o8Esq4gIFwAQAt9OjkzctNANK2/view?usp=sharing', category: 'phancongchuyenmon', type: 'pdf' },
         { id: 'cm25', title: 'Tài liệu chuyên môn', desc: 'Tài liệu tham khảo', url: '#', category: 'tailieu', type: 'pdf' },
-        { id: 'cm25', title: 'Phân công chuyên môn', desc: 'Họp chi bộ tháng 8', url: 'https://docs.google.com/document/d/1FOPQSCK4zWxXNnciDUqpo59-77_AlmmFehODfDcyWcU/edit?usp=sharing', category: 'phancongchuyenmon', type: 'pdf' },
     ],
     ungdung: [
         { id: 'ex1', title: 'Phần mềm Kế hoạch giáo dục - Lịch báo giảng tự động', desc: 'App web tự động tính lịch theo tuần', preview: 'https://vothanhdamkg1982-lang.github.io/Ke-Hoach-GD-1.4/', download: 'https://vothanhdamkg1982-lang.github.io/Ke-Hoach-GD-1.4/', category: 'ungdung', type: 'App web' },
         { id: 'ex2', title: 'Hệ thống lương HCSN', desc: 'Quản lý lương cho HCSN', preview: 'https://vothanhdamkg1982-lang.github.io/He-Thong-Luong-HCSN', download: 'https://vothanhdamkg1982-lang.github.io/He-Thong-Luong-HCSN', category: 'ungdung', type: 'App web' },
-        { id: 'ex3', title: 'Phần mềm quản lý HS', desc: 'Quản lý hồ sơ, chuyên cần, điểm số, năng lực và phẩm chất học sinh', preview: 'https://vothanhdamkg1982-lang.github.io/Phan-Mem-Quan-Ly-HS/', download: 'https://vothanhdamkg1982-lang.github.io/Phan-Mem-Quan-Ly-HS/', category: 'ungdung', type: 'App web' },
-        { id: 'ex4', title: 'Phần mềm Tính lương trực tuyến', desc: 'Tính lương, bảo hiểm, thuế', preview: 'https://vothanhdamkg1982-lang.github.io/BANG-TINH-LUONG-TRUC-TUYEN/', download: 'https://vothanhdamkg1982-lang.github.io/BANG-TINH-LUONG-TRUC-TUYEN/', category: 'ungdung', type: 'App web' },
-        { id: 'ex5', title: 'Phần mềm Kiểm phiếu', desc: 'Kiểm phiếu nhanh,tự động, chính xác', preview: 'https://vothanhdamkg1982-lang.github.io/Phan-mem-kiem-phieu-nhanh/', download: 'https://vothanhdamkg1982-lang.github.io/Phan-mem-kiem-phieu-nhanh/', category: 'ungdung', type: 'App web' },
-        { id: 'ex6', title: 'Phần mềm Tính tiền điện sinh hoạt', desc: 'Tính tiền điện sinh hoạt nhanh,tự động, chính xác', preview: 'https://vothanhdamkg1982-lang.github.io/T-nh-Nhanh-Tien-DIen-SH/', download: 'https://vothanhdamkg1982-lang.github.io/T-nh-Nhanh-Tien-DIen-SH/', category: 'ungdung', type: 'App web' },
-        { id: 'ex7', title: 'Phần mềm Cập nhật ngày giáo án', desc: 'Tự động dịch chuyển toàn bộ ngày tháng trong file Word, giữ nguyên 100% định dạng', preview: 'https://vothanhdamkg1982-lang.github.io/Cap-Nhat-Ngay-Giao-An/', download: 'https://vothanhdamkg1982-lang.github.io/Cap-Nhat-Ngay-Giao-An/', category: 'ungdung', type: 'App web' },
-        { id: 'ex8', title: 'Phần mềm Theo Dõi Tính Lãi Suất Ngân Hàng', desc: 'Tự động theo dõi lãi suất ngân hàng, tính toán lãi suất tiết kiệm, vay vốn', preview: 'https://vothanhdamkg1982-lang.github.io/Phan-Mem-THeo-Doi-Tinh-Lai-Suat-Ngan-Hang/', download: 'https://vothanhdamkg1982-lang.github.io/Phan-Mem-THeo-Doi-Tinh-Lai-Suat-Ngan-Hang/', category: 'ungdung', type: 'App web' },
-        { id: 'ex9', title: 'Phần mềm Theo Dõi Tài chính', desc: 'Tự động theo dõi Thu chi cá nhân', preview: 'https://vothanhdamkg1982-lang.github.io/MoneyMaster/', download: 'https://vothanhdamkg1982-lang.github.io/MoneyMaster/', category: 'ungdung', type: 'App web' },
-        { id: 'ex10', title: 'Hồ sơ năng lực CĐS giáo viên', desc: 'Hồ sơ vị trí việc làm 232', preview: 'https://vothanhdamkg1982-lang.github.io/EduProfile-Pro/', download: 'https://vothanhdamkg1982-lang.github.io/EduProfile-Pro/', category: 'ungdung', type: 'App web' },
-        { id: 'ex10', title: 'Phiếu khảo sát học sinh', desc: 'Phiếu khảo sát trực tuyến', preview: 'https://script.google.com/macros/s/AKfycbx7sDz95OvCuItNTyljPPP4EqPD07TKalHPXIjGa9376Ccqhy8uICWbxgD9rARnjzIZBQ/exec', download: 'https://script.google.com/macros/s/AKfycbx7sDz95OvCuItNTyljPPP4EqPD07TKalHPXIjGa9376Ccqhy8uICWbxgD9rARnjzIZBQ/exec', category: 'ungdung', type: 'App web' }
     ],
     links: [
         { id: 'l1', title: 'Bộ Giáo dục và Đào tạo', url: 'https://moet.gov.vn', desc: 'Trang chính của Bộ GD&ĐT' },
         { id: 'l2', title: 'VietnamNet - Giáo dục', url: 'https://vietnamnet.vn/giao-duc', desc: 'Tin tức giáo dục mới nhất' },
-        { id: 'l3', title: 'Học mãi', url: 'https://hocmai.vn', desc: 'Nền tảng học trực tuyến hàng đầu' },
-        { id: 'l4', title: 'Nhà xuất bản Giáo dục Việt Nam', url: 'https://taphuan.nxbgd.vn', desc: 'Bộ sách giáo khoa thống nhất' },
-        { id: 'l5', title: 'Tin học trẻ', url: 'https://tinhoctre.vn', desc: 'Sân chơi Tin học cho học sinh' },
-        { id: 'l6', title: 'Bồi dưỡng Giáo viên Phổ thông', url: 'https://taphuan.csdl.edu.vn', desc: 'Quản lý cơ sở giáo dục' },
-        { id: 'l7', title: 'VNEDU Trần Quốc Toản', url: 'https://ucnnzccazsgdkiengiang.vnedu.vn', desc: 'Quản lý học sinh' },
-        { id: 'l8', title: 'Đại học Trà Vinh', url: 'https://lms2tvu.onschool.edu.vn/', desc: 'Khóa học trực tuyến' },
-        { id: 'l9', title: 'Bình dân học vụ số', url: 'https://binhdanhocvuso.gov.vn/dashboard', desc: 'Nền tảng Bình dân học vụ số' },
-        { id: 'l10', title: 'Câu hỏi sau tập huấn, bồi dưỡng', url: 'https://th.nxbgd.vn/cauhoidanhgia', desc: 'Đánh giá sau tập huấn, bồi dưỡng' },
-        { id: 'l11', title: 'Pháp luật', url: 'https://thuvienphapluat.vn/phap-luat', desc: 'Thông tin Văn bản pháp luật mới ban hành' },
     ]
 };
 
@@ -174,7 +141,7 @@ let PHOTOS = [], VIDEOS = [], DOCUMENTS = [], CHUYENMON = [], UNGDUNG = [], LINK
 let isLoggedIn = false;
 let currentSlide = 0;
 let slideInterval;
-let editingId = null; // <--- THÊM DÒNG NÀY
+let editingId = null; 
 
 // ---------- LOAD DATA ----------
 async function loadData() {
@@ -188,7 +155,6 @@ async function loadData() {
 
         if (error) {
             console.error('❌ Lỗi tải dữ liệu:', error);
-            // Nếu lỗi 404 (không có dữ liệu), tạo mới
             if (error.code === 'PGRST116') {
                 console.warn('⚠️ Chưa có dữ liệu, tạo mới...');
                 PHOTOS = DEFAULT_DATA.photos;
@@ -209,11 +175,6 @@ async function loadData() {
             CHUYENMON = d.chuyenmon || DEFAULT_DATA.chuyenmon;
             UNGDUNG = d.ungdung || DEFAULT_DATA.ungdung;
             LINKS = d.links || DEFAULT_DATA.links;
-            console.log('✅ Đã tải dữ liệu thành công:', {
-                photos: PHOTOS.length,
-                videos: VIDEOS.length,
-                documents: DOCUMENTS.length
-            });
         } else {
             console.warn('⚠️ Dữ liệu rỗng, sử dụng mặc định');
             PHOTOS = DEFAULT_DATA.photos;
@@ -234,7 +195,6 @@ async function loadData() {
         LINKS = DEFAULT_DATA.links;
     }
 
-    // Render giao diện
     renderPhotos('all');
     renderVideos('all');
     renderDocuments('all');
@@ -264,23 +224,21 @@ async function saveData() {
             .upsert({ id: 'teacherData', data: dataToSave, updated_at: new Date().toISOString() })
             .eq('id', 'teacherData');
 
-        if (error) {
-            console.error('❌ Lỗi khi lưu dữ liệu:', error);
-            throw error;
-        }
+        if (error) throw error;
         console.log('✅ Dữ liệu đã được lưu thành công');
     } catch (error) {
         console.error('❌ Lỗi lưu dữ liệu:', error);
         alert('❌ Lỗi lưu dữ liệu lên Supabase. Kiểm tra Console để biết chi tiết.');
     }
 }
+
 // ---------- UPLOAD FILE ----------
 async function uploadFileToSupabase(file, folder = 'photos') {
     const ext = file.name.split('.').pop();
     const fileName = `${Date.now()}_${Math.random().toString(36).substring(2, 8)}.${ext}`;
     const filePath = `${folder}/${fileName}`;
 
-    const { data, error } = await supabaseClient.storage
+    const { error } = await supabaseClient.storage
         .from(BUCKET_NAME)
         .upload(filePath, file, { upsert: false });
 
@@ -314,85 +272,80 @@ async function deleteFileFromSupabase(fileUrl) {
 function addItem(arrayKey, newItem) {
     if (!isLoggedIn) { alert('Vui lòng đăng nhập!'); return; }
     newItem.id = Date.now().toString(36) + Math.random().toString(36).substr(2, 5);
-    switch(arrayKey) {
-        case 'photos': PHOTOS.push(newItem); break;
-        case 'videos': VIDEOS.push(newItem); break;
-        case 'documents': DOCUMENTS.push(newItem); break;
-        case 'chuyenmon': CHUYENMON.push(newItem); break;
-        case 'ungdung': UNGDUNG.push(newItem); break;
-        case 'links': LINKS.push(newItem); break;
-        default: return;
-    }
+    
+    if (arrayKey === 'photos') PHOTOS.push(newItem);
+    else if (arrayKey === 'videos') VIDEOS.push(newItem);
+    else if (arrayKey === 'documents') DOCUMENTS.push(newItem);
+    else if (arrayKey === 'chuyenmon') CHUYENMON.push(newItem);
+    else if (arrayKey === 'ungdung') UNGDUNG.push(newItem);
+    else if (arrayKey === 'links') LINKS.push(newItem);
+    
     saveData();
     if (arrayKey === 'ungdung' || arrayKey === 'links') renderUngDungAndLinks();
     else renderSection(arrayKey);
 }
 
-function removeItem(arrayKey, id) {
+function updateItem(arrayKey, id, newData) {
     if (!isLoggedIn) { alert('Vui lòng đăng nhập!'); return; }
-    let arr, item;
-    switch(arrayKey) {
-        case 'photos': arr = PHOTOS; break;
-        case 'videos': arr = VIDEOS; break;
-        case 'documents': arr = DOCUMENTS; break;
-        case 'chuyenmon': arr = CHUYENMON; break;
-        case 'ungdung': arr = UNGDUNG; break;
-        case 'links': arr = LINKS; break;
-        default: return;
-    }
+    let arr;
+    if (arrayKey === 'photos') arr = PHOTOS;
+    else if (arrayKey === 'videos') arr = VIDEOS;
+    else if (arrayKey === 'documents') arr = DOCUMENTS;
+    else if (arrayKey === 'chuyenmon') arr = CHUYENMON;
+    else if (arrayKey === 'ungdung') arr = UNGDUNG;
+    else if (arrayKey === 'links') arr = LINKS;
+    
+    if (!arr) return;
+    
     const index = arr.findIndex(it => it.id === id);
     if (index !== -1) {
-        item = arr[index];
-        arr.splice(index, 1);
-        const fileUrl = item.url || item.preview || null;
-        if (fileUrl) deleteFileFromSupabase(fileUrl);
+        arr[index] = { ...arr[index], ...newData };
         saveData();
         if (arrayKey === 'ungdung' || arrayKey === 'links') renderUngDungAndLinks();
         else renderSection(arrayKey);
     }
 }
-// ---------- CRUD (UPDATE) ----------
-function updateItem(arrayKey, id, newData) {
+
+function removeItem(arrayKey, id) {
     if (!isLoggedIn) { alert('Vui lòng đăng nhập!'); return; }
-    let arr;
-    switch(arrayKey) {
-        case 'photos': arr = PHOTOS; break;
-        case 'videos': arr = VIDEOS; break;
-        case 'documents': arr = DOCUMENTS; break;
-        case 'chuyenmon': arr = CHUYENMON; break;
-        case 'ungdung': arr = UNGDUNG; break;
-        case 'links': arr = LINKS; break;
-        default: return;
-    }
+    let arr, item;
     
-    // Tìm item cũ và cập nhật dữ liệu (giữ lại id cũ)
+    if (arrayKey === 'photos') arr = PHOTOS;
+    else if (arrayKey === 'videos') arr = VIDEOS;
+    else if (arrayKey === 'documents') arr = DOCUMENTS;
+    else if (arrayKey === 'chuyenmon') arr = CHUYENMON;
+    else if (arrayKey === 'ungdung') arr = UNGDUNG;
+    else if (arrayKey === 'links') arr = LINKS;
+    else return;
+
     const index = arr.findIndex(it => it.id === id);
     if (index !== -1) {
-        arr[index] = { ...arr[index], ...newData };
-        saveData(); // Lưu lên Supabase
-        // Render lại giao diện
+        item = arr[index];
+        arr.splice(index, 1);
+        const fileUrl = item.url || item.preview || null;
+        if (fileUrl && fileUrl.includes(BUCKET_NAME)) deleteFileFromSupabase(fileUrl);
+        saveData();
         if (arrayKey === 'ungdung' || arrayKey === 'links') renderUngDungAndLinks();
         else renderSection(arrayKey);
     }
 }
+
 // ---------- RENDER CÁC SECTION ----------
 function renderSection(key) {
     let barId;
-    switch(key) {
-        case 'photos': barId = 'photoFilterBar'; break;
-        case 'videos': barId = 'videoFilterBar'; break;
-        case 'documents': barId = 'docFilterBar'; break;
-        case 'chuyenmon': barId = 'chuyenmonFilterBar'; break;
-        case 'ungdung': renderUngDungAndLinks(); return;
-        default: barId = null;
-    }
+    if (key === 'photos') barId = 'photoFilterBar';
+    else if (key === 'videos') barId = 'videoFilterBar';
+    else if (key === 'documents') barId = 'docFilterBar';
+    else if (key === 'chuyenmon') barId = 'chuyenmonFilterBar';
+    else if (key === 'ungdung') { renderUngDungAndLinks(); return; }
+    
     const filter = barId ? getActiveFilter(barId) : 'all';
-    switch(key) {
-        case 'photos': renderPhotos(filter); break;
-        case 'videos': renderVideos(filter); break;
-        case 'documents': renderDocuments(filter); break;
-        case 'chuyenmon': renderChuyenMon(filter); break;
-    }
+    if (key === 'photos') renderPhotos(filter);
+    else if (key === 'videos') renderVideos(filter);
+    else if (key === 'documents') renderDocuments(filter);
+    else if (key === 'chuyenmon') renderChuyenMon(filter);
+    
+    updateBadges();
 }
 
 function getActiveFilter(barId) {
@@ -403,14 +356,14 @@ function getActiveFilter(barId) {
 }
 
 function updateBadges() {
-    document.getElementById('photoCount').textContent = PHOTOS.length;
-    document.getElementById('videoCount').textContent = VIDEOS.length;
-    document.getElementById('docCount').textContent = DOCUMENTS.length;
-    document.getElementById('chuyenmonCount').textContent = CHUYENMON.length;
-    document.getElementById('ungdungCount').textContent = UNGDUNG.length;
-    document.getElementById('homePhotoCount').textContent = PHOTOS.length;
-    document.getElementById('homeVideoCount').textContent = VIDEOS.length;
-    document.getElementById('homeDocCount').textContent = DOCUMENTS.length;
+    if(document.getElementById('photoCount')) document.getElementById('photoCount').textContent = PHOTOS.length;
+    if(document.getElementById('videoCount')) document.getElementById('videoCount').textContent = VIDEOS.length;
+    if(document.getElementById('docCount')) document.getElementById('docCount').textContent = DOCUMENTS.length;
+    if(document.getElementById('chuyenmonCount')) document.getElementById('chuyenmonCount').textContent = CHUYENMON.length;
+    if(document.getElementById('ungdungCount')) document.getElementById('ungdungCount').textContent = UNGDUNG.length;
+    if(document.getElementById('homePhotoCount')) document.getElementById('homePhotoCount').textContent = PHOTOS.length;
+    if(document.getElementById('homeVideoCount')) document.getElementById('homeVideoCount').textContent = VIDEOS.length;
+    if(document.getElementById('homeDocCount')) document.getElementById('homeDocCount').textContent = DOCUMENTS.length;
 }
 
 // ---------- RENDER PHOTOS ----------
@@ -419,44 +372,37 @@ function renderPhotos(filter = 'all') {
     let items = PHOTOS;
     if (filter !== 'all') items = items.filter(p => p.category === filter);
     if (!items.length) { grid.innerHTML = `<div class="empty-state"><i class="fas fa-images"></i><p>Không có ảnh nào trong danh mục này.</p></div>`; return; }
-    // Trong function renderPhotos(filter = 'all') { ... }
-grid.innerHTML = items.map(p => `
-    <div class="gallery-item" data-id="${p.id}">
-        <img src="${p.url}" alt="${p.title || 'Ảnh'}" loading="lazy" />
-        <div class="gallery-body">
-            <h4>${p.title || 'Không có tiêu đề'}</h4>
-            <p>${p.desc || ''}</p>
-            <div class="actions">
-                <a href="${p.url}" target="_blank" rel="noopener"><i class="fas fa-eye"></i> Xem</a>
-                <a href="${p.url}" download="${p.title || 'anh'}.jpg"><i class="fas fa-download"></i> Tải</a>
-                <!-- SỬA Ở ĐÂY: Thêm nút Sửa -->
-                ${isLoggedIn ? `<button class="btn-edit" data-key="photos" data-id="${p.id}"><i class="fas fa-edit"></i> Sửa</button>` : ''}
-                ${isLoggedIn ? `<button class="btn-delete" data-key="photos" data-id="${p.id}"><i class="fas fa-trash"></i> Xóa</button>` : ''}
+    
+    grid.innerHTML = items.map(p => `
+        <div class="gallery-item" data-id="${p.id}">
+            <img src="${p.url}" alt="${p.title || 'Ảnh'}" loading="lazy" onclick="openLightbox('${p.url}', '${p.title}')" style="cursor:pointer;" />
+            <div class="gallery-body">
+                <h4>${p.title || 'Không có tiêu đề'}</h4>
+                <p>${p.desc || ''}</p>
+                <div class="actions">
+                    <a href="${p.url}" target="_blank" rel="noopener"><i class="fas fa-eye"></i> Xem</a>
+                    <a href="${p.url}" download><i class="fas fa-download"></i> Tải</a>
+                    ${isLoggedIn ? `<button class="btn-edit" data-key="photo" data-id="${p.id}"><i class="fas fa-edit"></i> Sửa</button>` : ''}
+                    ${isLoggedIn ? `<button class="btn-delete" data-key="photo" data-id="${p.id}"><i class="fas fa-trash"></i> Xóa</button>` : ''}
+                </div>
             </div>
         </div>
-    </div>
-`).join('');
-   // Xử lý sự kiện click cho nút Sửa (Thêm đoạn này vào)
-document.querySelectorAll('#photoGrid .btn-edit').forEach(btn => {
-    btn.addEventListener('click', function(e) {
-        e.stopPropagation();
-        const key = this.dataset.key; // 'photos'
-        const id = this.dataset.id;
-        const item = PHOTOS.find(p => p.id === id);
-        if (item) {
-            // Dùng lại hàm mở modal, truyền vào item cũ để lấy dữ liệu
-            openUploadModal('photo', item); 
-        }
+    `).join('');
+
+    document.querySelectorAll('#photoGrid .btn-edit').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const id = this.dataset.id;
+            const item = PHOTOS.find(p => p.id === id);
+            if (item) openUploadModal('photo', item); 
+        });
     });
-});
+
     document.querySelectorAll('#photoGrid .btn-delete').forEach(btn => {
         btn.addEventListener('click', function(e) {
             e.stopPropagation();
-            const key = this.dataset.key;
             const id = this.dataset.id;
-            if (confirm('Bạn có chắc muốn xóa ảnh này?')) {
-                removeItem(key, id);
-            }
+            if (confirm('Bạn có chắc muốn xóa ảnh này?')) removeItem('photos', id);
         });
     });
 }
@@ -467,6 +413,7 @@ function renderVideos(filter = 'all') {
     let items = VIDEOS;
     if (filter !== 'all') items = items.filter(v => v.category === filter);
     if (!items.length) { grid.innerHTML = `<div class="empty-state"><i class="fas fa-video"></i><p>Không có video nào trong danh mục này.</p></div>`; return; }
+    
     grid.innerHTML = items.map(v => {
         const embedUrl = getEmbedUrl(v.url);
         return `
@@ -479,36 +426,31 @@ function renderVideos(filter = 'all') {
                     <p>${v.desc || ''}</p>
                     <div class="actions">
                         <a href="${v.url}" target="_blank" rel="noopener"><i class="fas fa-external-link-alt"></i> Mở gốc</a>
-                        ${isLoggedIn ? `<button class="btn-edit" data-key="videos" data-id="${v.id}"><i class="fas fa-edit"></i> Sửa</button>` : ''}
-                        ${isLoggedIn ? `<button class="btn-delete" data-key="videos" data-id="${v.id}"><i class="fas fa-trash"></i> Xóa</button>` : ''}
+                        ${isLoggedIn ? `<button class="btn-edit" data-key="video" data-id="${v.id}"><i class="fas fa-edit"></i> Sửa</button>` : ''}
+                        ${isLoggedIn ? `<button class="btn-delete" data-key="video" data-id="${v.id}"><i class="fas fa-trash"></i> Xóa</button>` : ''}
                     </div>
                 </div>
             </div>
         `;
     }).join('');
-    document.querySelectorAll('#videoGrid .btn-delete').forEach(btn => {
-        btn.addEventListener('click', function(e) {
-            e.stopPropagation();
-            const key = this.dataset.key;
-            const id = this.dataset.id;
-            if (confirm('Bạn có chắc muốn xóa video này?')) {
-                removeItem(key, id);
-            }
-        });
-    });
-}
-// Bổ sung sự kiện Sửa Video
+
     document.querySelectorAll('#videoGrid .btn-edit').forEach(btn => {
         btn.addEventListener('click', function(e) {
             e.stopPropagation();
             const id = this.dataset.id;
             const item = VIDEOS.find(v => v.id === id);
-            if (item) {
-                openUploadModal('video', item);
-            }
+            if (item) openUploadModal('video', item);
         });
     });
 
+    document.querySelectorAll('#videoGrid .btn-delete').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const id = this.dataset.id;
+            if (confirm('Bạn có chắc muốn xóa video này?')) removeItem('videos', id);
+        });
+    });
+}
 
 // ---------- RENDER DOCUMENTS ----------
 function renderDocuments(filter = 'all') {
@@ -516,6 +458,7 @@ function renderDocuments(filter = 'all') {
     let items = DOCUMENTS;
     if (filter !== 'all') items = items.filter(d => d.category === filter);
     if (!items.length) { list.innerHTML = `<div class="empty-state"><i class="fas fa-folder-open"></i><p>Không có tài liệu nào trong danh mục này.</p></div>`; return; }
+    
     list.innerHTML = items.map(d => `
         <div class="doc-item" data-id="${d.id}">
             <div class="doc-info">
@@ -527,30 +470,27 @@ function renderDocuments(filter = 'all') {
             </div>
             <div class="doc-actions">
                 <a href="${d.url}" target="_blank" rel="noopener"><i class="fas fa-eye"></i> Xem</a>
-                <a href="${d.url}" download="${d.title || 'tailieu'}.pdf"><i class="fas fa-download"></i> Tải xuống</a>
-                ${isLoggedIn ? `<button class="btn-delete" data-key="documents" data-id="${d.id}"><i class="fas fa-trash"></i> Xóa</button>` : ''}
-                ${isLoggedIn ? `<button class="btn-edit" data-key="documents" data-id="${d.id}"><i class="fas fa-edit"></i> Sửa</button>` : ''}
+                <a href="${d.url}" download><i class="fas fa-download"></i> Tải xuống</a>
+                ${isLoggedIn ? `<button class="btn-edit" data-key="document" data-id="${d.id}"><i class="fas fa-edit"></i> Sửa</button>` : ''}
+                ${isLoggedIn ? `<button class="btn-delete" data-key="document" data-id="${d.id}"><i class="fas fa-trash"></i> Xóa</button>` : ''}
             </div>
         </div>
     `).join('');
-    document.querySelectorAll('#docList .btn-delete').forEach(btn => {
+
     document.querySelectorAll('#docList .btn-edit').forEach(btn => {
         btn.addEventListener('click', function(e) {
             e.stopPropagation();
             const id = this.dataset.id;
             const item = DOCUMENTS.find(d => d.id === id);
-            if (item) {
-                openUploadModal('document', item);
-            }
+            if (item) openUploadModal('document', item);
         });
     });    
+
+    document.querySelectorAll('#docList .btn-delete').forEach(btn => {
         btn.addEventListener('click', function(e) {
             e.stopPropagation();
-            const key = this.dataset.key;
             const id = this.dataset.id;
-            if (confirm('Bạn có chắc muốn xóa tài liệu này?')) {
-                removeItem(key, id);
-            }
+            if (confirm('Bạn có chắc muốn xóa tài liệu này?')) removeItem('documents', id);
         });
     });
 }
@@ -561,10 +501,13 @@ function renderChuyenMon(filter = 'all') {
     let items = CHUYENMON;
     if (filter !== 'all') items = items.filter(c => c.category === filter);
     if (!items.length) { list.innerHTML = `<div class="empty-state"><i class="fas fa-folder"></i><p>Không có tài liệu chuyên môn nào trong danh mục này.</p></div>`; return; }
+    
     list.innerHTML = items.map(c => {
         let icon = 'fa-file-pdf';
-        if (c.type === 'xlsx') icon = 'fa-file-excel';
-        else if (c.type === 'docx') icon = 'fa-file-word';
+        if (c.type === 'xlsx' || c.type === 'xls') icon = 'fa-file-excel';
+        else if (c.type === 'docx' || c.type === 'doc') icon = 'fa-file-word';
+        else if (c.type === 'pptx' || c.type === 'ppt') icon = 'fa-file-powerpoint';
+        
         return `
             <div class="doc-item" data-id="${c.id}">
                 <div class="doc-info">
@@ -576,31 +519,28 @@ function renderChuyenMon(filter = 'all') {
                 </div>
                 <div class="doc-actions">
                     <a href="${c.url}" target="_blank" rel="noopener"><i class="fas fa-eye"></i> Xem</a>
-                    <a href="${c.url}" download="${c.title || 'chuyenmon'}.${c.type || 'pdf'}"><i class="fas fa-download"></i> Tải xuống</a>
+                    <a href="${c.url}" download><i class="fas fa-download"></i> Tải xuống</a>
                     ${isLoggedIn ? `<button class="btn-edit" data-key="chuyenmon" data-id="${c.id}"><i class="fas fa-edit"></i> Sửa</button>` : ''}
                     ${isLoggedIn ? `<button class="btn-delete" data-key="chuyenmon" data-id="${c.id}"><i class="fas fa-trash"></i> Xóa</button>` : ''}
                 </div>
             </div>
         `;
     }).join('');
-    document.querySelectorAll('#chuyenmonList .btn-delete').forEach(btn => {
-     document.querySelectorAll('#chuyenmonList .btn-edit').forEach(btn => {
+
+    document.querySelectorAll('#chuyenmonList .btn-edit').forEach(btn => {
         btn.addEventListener('click', function(e) {
             e.stopPropagation();
             const id = this.dataset.id;
             const item = CHUYENMON.find(c => c.id === id);
-            if (item) {
-                openUploadModal('chuyenmon', item);
-            }
+            if (item) openUploadModal('chuyenmon', item);
         });
     });   
+
+    document.querySelectorAll('#chuyenmonList .btn-delete').forEach(btn => {
         btn.addEventListener('click', function(e) {
             e.stopPropagation();
-            const key = this.dataset.key;
             const id = this.dataset.id;
-            if (confirm('Bạn có chắc muốn xóa mục này?')) {
-                removeItem(key, id);
-            }
+            if (confirm('Bạn có chắc muốn xóa mục này?')) removeItem('chuyenmon', id);
         });
     });
 }
@@ -611,6 +551,7 @@ function renderUngDungApp(filter = 'all') {
     let items = UNGDUNG;
     if (filter !== 'all') items = items.filter(u => u.category === filter);
     if (!items.length) { list.innerHTML = `<div class="empty-state"><i class="fas fa-file-excel"></i><p>Không có ứng dụng nào.</p></div>`; return; }
+    
     list.innerHTML = items.map(u => {
         let iconClass = 'fa-file-excel';
         const title = u.title || '';
@@ -634,24 +575,14 @@ function renderUngDungApp(filter = 'all') {
                 </div>
                 <div class="doc-actions">
                     <a href="${u.preview}" target="_blank" rel="noopener"><i class="fas fa-eye"></i> Xem trước</a>
-                    <a href="${u.download}" download="${u.title || 'ungdung'}.xlsx"><i class="fas fa-download"></i> Tải xuống</a>
+                    <a href="${u.download}" download><i class="fas fa-download"></i> Tải xuống</a>
                     ${isLoggedIn ? `<button class="btn-edit" data-key="ungdung" data-id="${u.id}"><i class="fas fa-edit"></i> Sửa</button>` : ''}
                     ${isLoggedIn ? `<button class="btn-delete" data-key="ungdung" data-id="${u.id}"><i class="fas fa-trash"></i> Xóa</button>` : ''}
                 </div>
             </div>
         `;
     }).join('');
-    document.querySelectorAll('#ungdungList .btn-delete').forEach(btn => {
-        btn.addEventListener('click', function(e) {
-            e.stopPropagation();
-            const key = this.dataset.key;
-            const id = this.dataset.id;
-            if (confirm('Bạn có chắc muốn xóa ứng dụng này?')) {
-                removeItem(key, id);
-            }
-        });
-    });
-    // Sự kiện sửa Ứng dụng
+
     document.querySelectorAll('#ungdungList .btn-edit').forEach(btn => {
         btn.addEventListener('click', function(e) {
             e.stopPropagation();
@@ -660,12 +591,21 @@ function renderUngDungApp(filter = 'all') {
             if (item) openUploadModal('ungdung', item);
         });
     });
+
+    document.querySelectorAll('#ungdungList .btn-delete').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const id = this.dataset.id;
+            if (confirm('Bạn có chắc muốn xóa ứng dụng này?')) removeItem('ungdung', id);
+        });
+    });
 }
 
 function renderLinksInUngdung() {
     const grid = document.getElementById('linksGridInUngdung');
     if (!grid) return;
     if (!LINKS || !LINKS.length) { grid.innerHTML = `<div class="empty-state"><i class="fas fa-link"></i><p>Chưa có liên kết nào.</p></div>`; return; }
+    
     grid.innerHTML = LINKS.map(link => {
         const favicon = getFaviconUrl(link);
         const iconHtml = favicon ? `<img src="${favicon}" alt="favicon" class="favicon-icon" onerror="this.style.display='none'" />` : `<i class="fas fa-link" style="color: var(--accent);"></i>`;
@@ -680,31 +620,27 @@ function renderLinksInUngdung() {
                 </div>
                 <div class="doc-actions">
                     <a href="${link.url}" target="_blank" rel="noopener"><i class="fas fa-external-link-alt"></i> Mở</a>
-                    ${isLoggedIn ? `<button class="btn-edit" data-key="links" data-id="${link.id}"><i class="fas fa-edit"></i></button>` : ''}
-                    ${isLoggedIn ? `<button class="btn-delete" data-key="links" data-id="${link.id}"><i class="fas fa-trash"></i> Xóa</button>` : ''}
+                    ${isLoggedIn ? `<button class="btn-edit" data-key="link" data-id="${link.id}"><i class="fas fa-edit"></i> Sửa</button>` : ''}
+                    ${isLoggedIn ? `<button class="btn-delete" data-key="link" data-id="${link.id}"><i class="fas fa-trash"></i> Xóa</button>` : ''}
                 </div>
             </div>
         `;
     }).join('');
-    document.querySelectorAll('#linksGridInUngdung .btn-delete').forEach(btn => {
-            btn.addEventListener('click', function(e) {
-            e.stopPropagation();
-            const key = this.dataset.key;
-            const id = this.dataset.id;
-            if (confirm('Bạn có chắc muốn xóa liên kết này?')) {
-                removeItem(key, id);
-            }
-        });
-    });
-    // Sự kiện sửa Liên kết
-    document.querySelectorAll('button[data-key="links"].btn-edit').forEach(btn => {
+
+    document.querySelectorAll('#linksGridInUngdung .btn-edit').forEach(btn => {
         btn.addEventListener('click', function(e) {
             e.stopPropagation();
             const id = this.dataset.id;
             const item = LINKS.find(l => l.id === id);
-            if (item) {
-                openUploadModal('link', item);
-            }
+            if (item) openUploadModal('link', item);
+        });
+    });
+
+    document.querySelectorAll('#linksGridInUngdung .btn-delete').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const id = this.dataset.id;
+            if (confirm('Bạn có chắc muốn xóa liên kết này?')) removeItem('links', id);
         });
     });
 }
@@ -734,6 +670,47 @@ function getFaviconUrl(link) {
     } catch { return ''; }
 }
 
+// ---------- DANH MỤC PHÂN LOẠI ----------
+function getCategories(type) {
+    switch (type) {
+        case 'chuyenmon':
+            return [
+                { val: 'giaoan', text: 'Giáo án' },
+                { val: 'dethi', text: 'Đề thi' },
+                { val: 'sangkien', text: 'Sáng kiến' },
+                { val: 'tailieu', text: 'Tài liệu' },
+                { val: 'phancongchuyenmon', text: 'Phân công' }
+            ];
+        case 'document':
+            return [
+                { val: 'quyetdinh', text: 'Quyết định' },
+                { val: 'khenthuong', text: 'Khen thưởng' },
+                { val: 'chungnhan', text: 'Chứng nhận' },
+                { val: 'Văn bằng, chứng chỉ', text: 'Văn bằng, chứng chỉ' }
+            ];
+        case 'photo':
+            return [
+                { val: 'giangday', text: 'Giảng dạy' },
+                { val: 'hoatdong', text: 'Hoạt động' },
+                { val: 'sukien', text: 'Sự kiện' },
+                { val: 'ca', text: 'Cá nhân' }
+            ];
+        case 'video':
+            return [
+                { val: 'giangday', text: 'Giảng dạy' },
+                { val: 'hoatdong', text: 'Hoạt động' },
+                { val: 'sukien', text: 'Sự kiện' },
+                { val: 'cá nhân', text: 'Cá nhân' }
+            ];
+        case 'ungdung':
+            return [
+                { val: 'ungdung', text: 'Ứng dụng' }
+            ];
+        default:
+            return [];
+    }
+}
+
 // ---------- LIGHTBOX ----------
 const lightbox = document.getElementById('lightbox');
 const lightboxImg = document.getElementById('lightboxImg');
@@ -758,6 +735,7 @@ document.addEventListener('keydown', function(e) { if (e.key === 'Escape') close
 function renderBanner() {
     const wrapper = document.getElementById('bannerSlidesWrapper');
     const dotsContainer = document.getElementById('bannerDots');
+    if(!wrapper || !dotsContainer) return;
     const SLIDES = [
         { title: 'Cổng thông tin giáo viên', desc: 'Cập nhật hồ sơ cá nhân - Thông tin học sinh - Chia sẻ tài nguyên giáo dục', btnText: 'Tìm hiểu thêm', btnLink: '#section-teacher', bg: 'https://i.pinimg.com/736x/5c/9b/92/5c9b92b5ca26978d3862d582954a1acd.jpg' },
         { title: 'Công nghệ trong giáo dục', desc: 'Ứng dụng CNTT để nâng cao chất lượng dạy và học', btnText: 'Xem kho ảnh', btnLink: '#section-photos', bg: 'https://i.pinimg.com/1200x/88/b4/d8/88b4d8e6e0527096a18ecf9ca38471ab.jpg' },
@@ -786,6 +764,7 @@ function goToSlide(index) {
     const slides = document.querySelectorAll('.banner-slide');
     const dots = document.querySelectorAll('.banner-dot');
     const total = slides.length;
+    if(total === 0) return;
     if (index < 0) index = total - 1;
     if (index >= total) index = 0;
     slides.forEach(s => s.classList.remove('active'));
@@ -801,6 +780,9 @@ function startAutoSlide() {
     slideInterval = setInterval(() => goToSlide(currentSlide + 1), 5000);
 }
 function resetAutoSlide() { clearInterval(slideInterval); startAutoSlide(); }
+
+// Initialize Banner
+renderBanner();
 
 // ---------- SWITCH SECTION ----------
 function switchSection(sectionId) {
@@ -848,36 +830,44 @@ const uploadUrl = document.getElementById('uploadUrl');
 const fileAcceptHint = document.getElementById('fileAcceptHint');
 
 function openUploadModal(type, existingItem = null) {
-    const modal = document.getElementById('uploadModal');
-    const form = document.getElementById('uploadForm');
-    const modalTitle = document.getElementById('modalTitle');
-    const submitBtn = form.querySelector('button[type="submit"]');
-
     document.getElementById('uploadType').value = type;
+    uploadForm.reset();
+    
+    // Tái tạo danh mục
+    const categories = getCategories(type);
+    const catGroup = document.getElementById('uploadCategory');
+    if (catGroup) {
+        if (categories.length > 0) {
+            catGroup.innerHTML = '<option value="all">Tất cả</option>';
+            categories.forEach(cat => {
+                const option = document.createElement('option');
+                option.value = cat.val;
+                option.textContent = cat.text;
+                catGroup.appendChild(option);
+            });
+            catGroup.closest('.form-group').style.display = 'block';
+        } else {
+            catGroup.innerHTML = '<option value="all">Tất cả</option>';
+            catGroup.closest('.form-group').style.display = 'none';
+        }
+    }
 
-    // Reset form trước khi làm gì khác
-    form.reset();
+    const submitBtn = uploadForm.querySelector('button[type="submit"]');
 
     if (existingItem) {
-        // TRẠNG THÁI SỬA
         editingId = existingItem.id;
-        modalTitle.innerHTML = `<i class="fas fa-edit"></i> Cập nhật ${type}`;
+        modalTitle.innerHTML = `<i class="fas fa-edit"></i> Cập nhật`;
         submitBtn.innerHTML = `<i class="fas fa-save"></i> Cập nhật`;
 
-        // Điền lại dữ liệu cũ
         document.getElementById('uploadTitle').value = existingItem.title || '';
         document.getElementById('uploadDesc').value = existingItem.desc || '';
         
-        const catGroup = document.getElementById('uploadCategory');
         if (catGroup && existingItem.category) {
             catGroup.value = existingItem.category;
         }
 
-        // Ưu tiên URL cũ (hoặc preview cho ứng dụng)
         document.getElementById('uploadUrl').value = existingItem.url || existingItem.preview || '';
-
     } else {
-        // TRẠNG THÁI THÊM MỚI
         editingId = null;
         modalTitle.innerHTML = `<i class="fas fa-upload"></i> Thêm mới`;
         submitBtn.innerHTML = `<i class="fas fa-save"></i> Lưu`;
@@ -886,127 +876,96 @@ function openUploadModal(type, existingItem = null) {
     modal.style.display = 'flex';
 }
 
-function closeModal() { modal.classList.remove('active'); }
+function closeModal() { 
+    modal.style.display = 'none';
+    uploadForm.reset();
+    editingId = null;
+}
 modalClose.addEventListener('click', closeModal);
 modal.addEventListener('click', function(e) { if (e.target === this) closeModal(); });
 
 uploadForm.addEventListener('submit', async function(e) {
-        e.preventDefault();
+    e.preventDefault();
+    
+    const type = uploadType.value;
+    const title = document.getElementById('uploadTitle').value.trim();
+    const desc = document.getElementById('uploadDesc').value.trim();
+    const category = uploadCategory.value === 'all' ? '' : uploadCategory.value;
+    const url = uploadUrl.value.trim();
+    const file = uploadFile.files[0];
+
+    if (!title) { alert('Vui lòng nhập tiêu đề.'); return; }
+
+    const submitBtn = this.querySelector('button[type="submit"]');
+    const originalBtnText = submitBtn.innerHTML;
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Đang xử lý...';
+    submitBtn.disabled = true;
+
+    try {
+        let finalUrl = url;
+        let fileTypeExt = null;
         
-        // --- 1. Lấy dữ liệu từ form ---
-        const type = uploadType.value;
-        const title = document.getElementById('uploadTitle').value.trim();
-        const desc = document.getElementById('uploadDesc').value.trim();
-        const category = uploadCategory.value === 'all' ? '' : uploadCategory.value;
-        const url = uploadUrl.value.trim();
-        const file = uploadFile.files[0];
-
-        if (!title) { alert('Vui lòng nhập tiêu đề.'); return; }
-
-        // Đổi nút bấm thành trạng thái đang xử lý
-        const submitBtn = this.querySelector('button[type="submit"]');
-        const originalBtnText = submitBtn.innerHTML;
-        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Đang xử lý...';
-        submitBtn.disabled = true;
-
-        try {
-            let finalUrl = url;
+        if (file) {
+            let folder = 'photos';
+            if (type === 'video') folder = 'videos';
+            else if (type === 'document' || type === 'chuyenmon') folder = 'documents';
+            else if (type === 'ungdung') folder = 'excel';
+            else if (type === 'link') folder = 'links';
             
-            // --- 2. Xử lý Upload file (Giữ nguyên logic folder của thầy) ---
-            if (file) {
-                let folder = 'photos';
-                if (type === 'video') folder = 'videos';
-                else if (type === 'document' || type === 'chuyenmon') folder = 'documents';
-                else if (type === 'ungdung') folder = 'excel';
-                else if (type === 'link') folder = 'links';
-                
-                finalUrl = await uploadFileToSupabase(file, folder);
-            }
-
-            // --- 3. Đóng gói dữ liệu (Giữ nguyên cách phân loại file của thầy) ---
-            let newData = { title, desc, category };
-            
-            if (finalUrl) {
-                if (type === 'ungdung') {
-                    newData.preview = finalUrl;
-                    newData.download = finalUrl;
-                } else if (type === 'chuyenmon') {
-                    newData.url = finalUrl;
-                    let t = 'pdf';
-                    // Tôn trọng cách thầy nhận diện file docx/xlsx
-                    if (finalUrl.startsWith('data:application/vnd.openxmlformats-officedocument.wordprocessingml.document')) t = 'docx';
-                    else if (finalUrl.startsWith('data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')) t = 'xlsx';
-                    newData.type = t;
-                } else if (type === 'document') {
-                    newData.url = finalUrl;
-                    newData.type = 'pdf';
-                } else {
-                    newData.url = finalUrl; // photo, video, link
-                }
-            }
-
-            // --- 4. KHÓA TÊN BẢNG BẰNG SWITCH (TIÊU DIỆT LỖI CHUYENMONS) ---
-            let arrayKey;
-            switch(type) {
-                case 'photo': arrayKey = 'photos'; break;
-                case 'video': arrayKey = 'videos'; break;
-                case 'document': arrayKey = 'documents'; break;
-                case 'chuyenmon': arrayKey = 'chuyenmon'; break; // Tuyệt đối KHÔNG có "s"
-                case 'ungdung': arrayKey = 'ungdung'; break;     // Tuyệt đối KHÔNG có "s"
-                case 'link': arrayKey = 'links'; break;
-                default: arrayKey = type + 's'; 
-            }
-
-            // --- 5. QUYẾT ĐỊNH LƯU MỚI HAY CẬP NHẬT ---
-            if (typeof editingId !== 'undefined' && editingId !== null) {
-                // TRẠNG THÁI SỬA
-                updateItem(arrayKey, editingId, newData);
-                alert('Cập nhật thành công!');
-            } else {
-                // TRẠNG THÁI THÊM MỚI
-                if (!finalUrl) {
-                    alert('Vui lòng nhập URL hoặc chọn file.');
-                    submitBtn.innerHTML = originalBtnText;
-                    submitBtn.disabled = false;
-                    return;
-                }
-                addItem(arrayKey, newData);
-                alert('Thêm mới thành công!');
-            }
-
-           // --- 6. Đóng Form và Xóa dữ liệu cũ (Đã sửa lỗi) ---
-            document.getElementById('uploadModal').style.display = 'none';
-            document.getElementById('uploadForm').reset();
-            window.editingId = null;
-
-        } catch (error) {
-            console.error('Lỗi:', error);
-            alert('Có lỗi xảy ra: ' + error.message);
-        } finally {
-            submitBtn.innerHTML = originalBtnText;
-            submitBtn.disabled = false;
+            finalUrl = await uploadFileToSupabase(file, folder);
+            fileTypeExt = file.name.split('.').pop().toLowerCase();
         }
-    });
-    // --- SỬA LỖI NÚT X VÀ BẤM RA NGOÀI ĐỂ ĐÓNG BẢNG ---
-    const btnCloseX = document.getElementById('modalClose');
-    if (btnCloseX) {
-        btnCloseX.addEventListener('click', function() {
-            document.getElementById('uploadModal').style.display = 'none';
-            document.getElementById('uploadForm').reset();
-            window.editingId = null;
-        });
-    }
 
-    const modalBg = document.getElementById('uploadModal');
-    if (modalBg) {
-        modalBg.addEventListener('click', function(e) {
-            if (e.target === this) {
-                this.style.display = 'none';
-                document.getElementById('uploadForm').reset();
-                window.editingId = null;
+        let newData = { title, desc, category };
+        
+        if (finalUrl) {
+            if (type === 'ungdung') {
+                newData.preview = finalUrl;
+                newData.download = finalUrl;
+            } else if (type === 'chuyenmon') {
+                newData.url = finalUrl;
+                if (fileTypeExt) {
+                    newData.type = fileTypeExt;
+                } else if (editingId) {
+                    const existing = CHUYENMON.find(c => c.id === editingId);
+                    if(existing) newData.type = existing.type;
+                } else {
+                    newData.type = 'pdf'; 
+                }
+            } else if (type === 'document') {
+                newData.url = finalUrl;
+                newData.type = 'pdf';
+            } else {
+                newData.url = finalUrl;
             }
-        });
+        }
+
+        const arrayKey = DATA_KEYS[type];
+
+        if (editingId !== null) {
+            updateItem(arrayKey, editingId, newData);
+            alert('Cập nhật thành công!');
+        } else {
+            if (!finalUrl) {
+                alert('Vui lòng nhập URL hoặc chọn file.');
+                submitBtn.innerHTML = originalBtnText;
+                submitBtn.disabled = false;
+                return;
+            }
+            addItem(arrayKey, newData);
+            alert('Thêm mới thành công!');
+        }
+
+        closeModal();
+
+    } catch (error) {
+        console.error('Lỗi:', error);
+        alert('Có lỗi xảy ra: ' + error.message);
+    } finally {
+        submitBtn.innerHTML = originalBtnText;
+        submitBtn.disabled = false;
     }
+});
 
 document.querySelectorAll('.btn-add').forEach(btn => {
     btn.addEventListener('click', function() { openUploadModal(this.dataset.type); });
@@ -1030,7 +989,8 @@ function performSearch() {
     const results = allItems.filter(item => {
         const title = (item.title || '').toLowerCase();
         const desc = (item.desc || '').toLowerCase();
-        return title.includes(query) || desc.includes(query);
+        const cat = (item.category || '').toLowerCase();
+        return title.includes(query) || desc.includes(query) || cat.includes(query);
     });
 
     const container = document.getElementById('searchResultsContainer');
@@ -1085,8 +1045,9 @@ function performSearch() {
                     let icon = 'fa-file';
                     if (type === 'link') icon = 'fa-link';
                     else if (item.type === 'pdf') icon = 'fa-file-pdf';
-                    else if (item.type === 'xlsx') icon = 'fa-file-excel';
-                    else if (item.type === 'docx') icon = 'fa-file-word';
+                    else if (item.type === 'xlsx' || item.type === 'xls') icon = 'fa-file-excel';
+                    else if (item.type === 'docx' || item.type === 'doc') icon = 'fa-file-word';
+                    else if (item.type === 'pptx' || item.type === 'ppt') icon = 'fa-file-powerpoint';
                     else if (type === 'ungdung') icon = 'fa-file-excel';
                     const url = item.url || item.preview || '#';
                     html += `
@@ -1119,41 +1080,31 @@ document.getElementById('searchInput').addEventListener('keypress', function(e) 
 // --------- LOGIN / REGISTER ---------
 function openLoginModal() { 
     const modal = document.getElementById('loginModal');
-    if (modal) modal.classList.add('active'); 
+    if (modal) modal.style.display = 'flex'; 
 }
 
 function closeLoginModal() { 
     const modal = document.getElementById('loginModal');
-    if (modal) modal.classList.remove('active'); 
+    if (modal) modal.style.display = 'none'; 
 }
 
 function openRegisterModal() { 
     const modal = document.getElementById('registerModal');
-    if (modal) modal.classList.add('active'); 
+    if (modal) modal.style.display = 'flex'; 
 }
 
 function closeRegisterModal() { 
     const modal = document.getElementById('registerModal');
-    if (modal) modal.classList.remove('active'); 
+    if (modal) modal.style.display = 'none'; 
 }
-// --------- LOGIN / REGISTER ---------
-// ... các hàm openLoginModal, openRegisterModal ...
-
-document.getElementById('loginBtn')?.addEventListener('click', openLoginModal);
-document.getElementById('registerBtn')?.addEventListener('click', openRegisterModal);
-document.getElementById('loginModalClose')?.addEventListener('click', closeLoginModal);
-document.getElementById('registerModalClose')?.addEventListener('click', closeRegisterModal);
-
-
-// ➕ DÁN ĐOẠN MÃ ĐĂNG XUẤT NÀY VÀO NGAY BÊN DƯỚI:
 
 async function handleLogout() {
     try {
         if (typeof supabaseClient !== 'undefined' && supabaseClient.auth) {
             await supabaseClient.auth.signOut();
         }
-        localStorage.removeItem('currentUser');
-        localStorage.removeItem('supabase.auth.token');
+        localStorage.removeItem('isLoggedIn');
+        localStorage.removeItem('userEmail');
         sessionStorage.clear();
 
         alert('Đã đăng xuất thành công!');
@@ -1164,11 +1115,8 @@ async function handleLogout() {
     }
 }
 
-// Bắt sự kiện click cho nút Đăng xuất
 document.getElementById('btnLogout')?.addEventListener('click', handleLogout);
-// Bắt sự kiện click cho nút Đăng nhập Google
 document.getElementById('btnGoogleLogin')?.addEventListener('click', signInWithGoogle);
-// Bắt sự kiện an toàn (không lo bị rớt lỗi Uncaught TypeError)
 document.getElementById('loginBtn')?.addEventListener('click', openLoginModal);
 document.getElementById('registerBtn')?.addEventListener('click', openRegisterModal);
 document.getElementById('loginModalClose')?.addEventListener('click', closeLoginModal);
@@ -1182,7 +1130,7 @@ document.getElementById('registerModal')?.addEventListener('click', function(e) 
     if (e.target === this) closeRegisterModal(); 
 });
 
-document.getElementById('loginForm').addEventListener('submit', function(e) {
+document.getElementById('loginForm')?.addEventListener('submit', function(e) {
     e.preventDefault();
     const username = document.getElementById('loginUsername').value.trim();
     const password = document.getElementById('loginPassword').value.trim();
@@ -1209,24 +1157,81 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
 
 document.getElementById('registerForm')?.addEventListener('submit', async function(e) {
     e.preventDefault();
-    
-    const email = document.getElementById('registerEmail')?.value; // Điều chỉnh ID ô nhập email cho đúng với HTML
-    const password = document.getElementById('registerPassword')?.value; // Điều chỉnh ID ô nhập password
+    const email = document.getElementById('registerEmail')?.value;
+    const password = document.getElementById('registerPassword')?.value;
 
     try {
         const { data, error } = await supabaseClient.auth.signUp({
             email: email,
             password: password,
         });
-
         if (error) throw error;
-
         alert('Đăng ký thành công! Vui lòng kiểm tra email để xác thực tài khoản (nếu có).');
         closeRegisterModal();
     } catch (error) {
         alert('Lỗi đăng ký: ' + error.message);
     }
 });
+
+// ---------- SALARY CALCULATOR ----------
+function initSalaryCalculator() {
+    const inputs = ['hsLuong', 'hsPCCV', 'hsPCKV', 'hsPCTN', 'pctn', 'hsYTe', 'hsUuDaiPct', 'hsDacBietPct', 'luongCoSo'];
+    inputs.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.addEventListener('input', calculateSalary);
+    });
+    calculateSalary();
+}
+
+function calculateSalary() {
+    try {
+        const D = parseFloat(document.getElementById('hsLuong')?.value || 0);
+        const E = parseFloat(document.getElementById('hsPCCV')?.value || 0);
+        const F = parseFloat(document.getElementById('hsPCKV')?.value || 0);
+        const H = parseFloat(document.getElementById('hsPCTN')?.value || 0);
+        const N = parseFloat(document.getElementById('pctn')?.value || 0);
+        const J = parseFloat(document.getElementById('hsYTe')?.value || 0);
+        const uuDaiPct = parseFloat(document.getElementById('hsUuDaiPct')?.value || 0);
+        const dacBietPct = parseFloat(document.getElementById('hsDacBietPct')?.value || 0);
+        const LCS = parseFloat(document.getElementById('luongCoSo')?.value || 0);
+
+        const thamNien = (D + H) * (N / 100);
+        const uuDai = (D + E) * (uuDaiPct / 100);
+        const dacBiet = (D + E) * (dacBietPct / 100);
+        
+        const tongHeSo = D + E + F + H + thamNien + J + uuDai + dacBiet;
+        const luongThang = tongHeSo * LCS;
+
+        const bhxh = (D + E + thamNien) * LCS * 0.08;
+        const bhyt = (D + E + thamNien) * LCS * 0.015;
+        const bhtn = (D + E + thamNien) * LCS * 0.01;
+        
+        const tongTru = bhxh + bhyt + bhtn;
+        const thucLanh = luongThang - tongTru;
+
+        const formatMoney = val => Math.round(val).toLocaleString('vi-VN');
+        const formatHeSo = val => val.toFixed(2);
+
+        if(document.getElementById('kqUuDai')) document.getElementById('kqUuDai').textContent = formatHeSo(uuDai);
+        if(document.getElementById('kqThamNien')) document.getElementById('kqThamNien').textContent = formatHeSo(thamNien);
+        if(document.getElementById('kqDacBiet')) document.getElementById('kqDacBiet').textContent = formatHeSo(dacBiet);
+        if(document.getElementById('kqTongHeSo')) document.getElementById('kqTongHeSo').textContent = formatHeSo(tongHeSo);
+        if(document.getElementById('sumHeSo')) document.getElementById('sumHeSo').textContent = formatHeSo(tongHeSo);
+
+        if(document.getElementById('kqLuongThang')) document.getElementById('kqLuongThang').textContent = formatMoney(luongThang);
+        if(document.getElementById('sumLuong')) document.getElementById('sumLuong').textContent = formatMoney(luongThang);
+
+        if(document.getElementById('kqBHXH')) document.getElementById('kqBHXH').textContent = formatMoney(bhxh);
+        if(document.getElementById('kqBHYT')) document.getElementById('kqBHYT').textContent = formatMoney(bhyt);
+        if(document.getElementById('kqBHTN')) document.getElementById('kqBHTN').textContent = formatMoney(bhtn);
+        if(document.getElementById('kqTongTru')) document.getElementById('kqTongTru').textContent = formatMoney(tongTru);
+        
+        if(document.getElementById('kqThucLanh')) document.getElementById('kqThucLanh').textContent = formatMoney(thucLanh);
+        if(document.getElementById('sumThucLanh')) document.getElementById('sumThucLanh').textContent = formatMoney(thucLanh);
+    } catch (err) {
+        console.warn("Lỗi tính lương: ", err);
+    }
+}
 
 // ---------- EXPORT / IMPORT JSON ----------
 function exportJSON() {
@@ -1244,107 +1249,9 @@ function exportJSON() {
 }
 
 function importJSON() {
-    if (!isLoggedIn) { alert('Vui lòng đăng nhập để nhập dữ liệu!'); return; }
-    const input = document.createElement('input');
-    input.type = 'file';
-    input.accept = '.json';
-    input.onchange = function(e) {
-        const file = e.target.files[0];
-        if (!file) return;
-        const reader = new FileReader();
-        reader.onload = function(ev) {
-            try {
-                const imported = JSON.parse(ev.target.result);
-                if (imported.photos) PHOTOS = imported.photos;
-                if (imported.videos) VIDEOS = imported.videos;
-                if (imported.documents) DOCUMENTS = imported.documents;
-                if (imported.chuyenmon) CHUYENMON = imported.chuyenmon;
-                if (imported.ungdung) UNGDUNG = imported.ungdung;
-                if (imported.links) LINKS = imported.links;
-                saveData();
-                renderSection('photos');
-                renderSection('videos');
-                renderSection('documents');
-                renderSection('chuyenmon');
-                renderUngDungAndLinks();
-                updateBadges();
-                alert('Nhập dữ liệu thành công!');
-            } catch(err) {
-                alert('Lỗi: File JSON không hợp lệ.');
-            }
-        };
-        reader.readAsText(file);
-    };
-    input.click();
+    if (!isLoggedIn) { alert('Vui lòng đăng nhập!'); return; }
+    alert('Chức năng đang được cập nhật...');
 }
 
-// ---------- TÍNH LƯƠNG ----------
-function calculateSalary() {
-    const hsLuong = document.getElementById('hsLuong');
-    if (!hsLuong) return;
-    const D = parseFloat(hsLuong.value) || 0;
-    const E = parseFloat(document.getElementById('hsPCCV').value) || 0;
-    const F = parseFloat(document.getElementById('hsPCKV').value) || 0;
-    const H = parseFloat(document.getElementById('hsPCTN').value) || 0;
-    const N = parseFloat(document.getElementById('pctn').value) || 0;
-    const J = parseFloat(document.getElementById('hsYTe').value) || 0;
-    const uuDaiPct = parseFloat(document.getElementById('hsUuDaiPct').value) || 0;
-    const dacBietPct = parseFloat(document.getElementById('hsDacBietPct').value) || 0;
-    const LCS = parseFloat(document.getElementById('luongCoSo').value) || 0;
-
-    const round4 = (v) => Math.round(v * 10000) / 10000;
-    const round0 = (v) => Math.round(v);
-    const uuDai = round4((D + E) * (uuDaiPct / 100));
-    const thamNien = round4((D + H) * N / 100);
-    const dacBiet = round4((D + E) * (dacBietPct / 100));
-    const tongHeSo = round4(D + E + F + uuDai + H + thamNien + J + dacBiet);
-    const luongThang = round0(tongHeSo * LCS);
-    const baseBH = D + E + thamNien;
-    const bhxh = round0(baseBH * LCS * 0.08);
-    const bhyt = round0(baseBH * LCS * 0.015);
-    const bhtn = round0(baseBH * LCS * 0.01);
-    const tongTru = bhxh + bhyt + bhtn;
-    const thucLanh = luongThang - tongTru;
-
-    const formatNum = (v) => Number(v).toFixed(4);
-    const formatCurrency = (v) => Math.round(v).toLocaleString('vi-VN');
-
-    document.getElementById('kqUuDai').textContent = formatNum(uuDai);
-    document.getElementById('kqThamNien').textContent = formatNum(thamNien);
-    document.getElementById('kqDacBiet').textContent = formatNum(dacBiet);
-    document.getElementById('kqTongHeSo').textContent = formatNum(tongHeSo);
-    document.getElementById('kqLuongThang').textContent = formatCurrency(luongThang) + ' ₫';
-    document.getElementById('kqBHXH').textContent = formatCurrency(bhxh) + ' ₫';
-    document.getElementById('kqBHYT').textContent = formatCurrency(bhyt) + ' ₫';
-    document.getElementById('kqBHTN').textContent = formatCurrency(bhtn) + ' ₫';
-    document.getElementById('kqTongTru').textContent = formatCurrency(tongTru) + ' ₫';
-    document.getElementById('kqThucLanh').textContent = formatCurrency(thucLanh) + ' ₫';
-    document.getElementById('sumHeSo').textContent = formatNum(tongHeSo);
-    document.getElementById('sumLuong').textContent = formatCurrency(luongThang) + ' ₫';
-    document.getElementById('sumThucLanh').textContent = formatCurrency(thucLanh) + ' ₫';
-}
-
-function initSalaryCalculator() {
-    const inputs = ['hsLuong', 'hsPCCV', 'hsPCKV', 'hsPCTN', 'pctn', 'hsYTe', 'hsUuDaiPct', 'hsDacBietPct', 'luongCoSo'];
-    inputs.forEach(id => {
-        const el = document.getElementById(id);
-        if (el) {
-            el.addEventListener('input', calculateSalary);
-            el.addEventListener('change', calculateSalary);
-        }
-    });
-    calculateSalary();
-}
-
-// ---------- KHỞI TẠO ----------
-document.addEventListener('DOMContentLoaded', function() {
-    loadData();
-    renderBanner();
-    // Các sự kiện khác đã được gán trong HTML
-    console.log('✅ Website đã sẵn sàng với Supabase!');
-    console.log('🔐 Tài khoản: admin | Mật khẩu: Admin@2026');
-    const btnGoogle = document.getElementById('btnGoogleLogin');
-if (btnGoogle) {
-    btnGoogle.addEventListener('click', signInWithGoogle);
-}
-});
+// KHỞI CHẠY APP
+window.addEventListener('DOMContentLoaded', loadData);
