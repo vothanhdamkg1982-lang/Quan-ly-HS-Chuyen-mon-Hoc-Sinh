@@ -497,6 +497,18 @@ function renderVideos(filter = 'all') {
         });
     });
 }
+// Bổ sung sự kiện Sửa Video
+    document.querySelectorAll('#videoGrid .btn-edit').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const id = this.dataset.id;
+            const item = VIDEOS.find(v => v.id === id);
+            if (item) {
+                openUploadModal('video', item);
+            }
+        });
+    });
+
 
 // ---------- RENDER DOCUMENTS ----------
 function renderDocuments(filter = 'all') {
@@ -517,10 +529,21 @@ function renderDocuments(filter = 'all') {
                 <a href="${d.url}" target="_blank" rel="noopener"><i class="fas fa-eye"></i> Xem</a>
                 <a href="${d.url}" download="${d.title || 'tailieu'}.pdf"><i class="fas fa-download"></i> Tải xuống</a>
                 ${isLoggedIn ? `<button class="btn-delete" data-key="documents" data-id="${d.id}"><i class="fas fa-trash"></i> Xóa</button>` : ''}
+                ${isLoggedIn ? `<button class="btn-edit" data-key="documents" data-id="${d.id}"><i class="fas fa-edit"></i> Sửa</button>` : ''}
             </div>
         </div>
     `).join('');
     document.querySelectorAll('#docList .btn-delete').forEach(btn => {
+    document.querySelectorAll('#docList .btn-edit').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const id = this.dataset.id;
+            const item = DOCUMENTS.find(d => d.id === id);
+            if (item) {
+                openUploadModal('document', item);
+            }
+        });
+    });    
         btn.addEventListener('click', function(e) {
             e.stopPropagation();
             const key = this.dataset.key;
@@ -554,12 +577,23 @@ function renderChuyenMon(filter = 'all') {
                 <div class="doc-actions">
                     <a href="${c.url}" target="_blank" rel="noopener"><i class="fas fa-eye"></i> Xem</a>
                     <a href="${c.url}" download="${c.title || 'chuyenmon'}.${c.type || 'pdf'}"><i class="fas fa-download"></i> Tải xuống</a>
+                    ${isLoggedIn ? `<button class="btn-edit" data-key="chuyenmon" data-id="${c.id}"><i class="fas fa-edit"></i> Sửa</button>` : ''}
                     ${isLoggedIn ? `<button class="btn-delete" data-key="chuyenmon" data-id="${c.id}"><i class="fas fa-trash"></i> Xóa</button>` : ''}
                 </div>
             </div>
         `;
     }).join('');
     document.querySelectorAll('#chuyenmonList .btn-delete').forEach(btn => {
+     document.querySelectorAll('#chuyenmonList .btn-edit').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const id = this.dataset.id;
+            const item = CHUYENMON.find(c => c.id === id);
+            if (item) {
+                openUploadModal('chuyenmon', item);
+            }
+        });
+    });   
         btn.addEventListener('click', function(e) {
             e.stopPropagation();
             const key = this.dataset.key;
@@ -601,6 +635,7 @@ function renderUngDungApp(filter = 'all') {
                 <div class="doc-actions">
                     <a href="${u.preview}" target="_blank" rel="noopener"><i class="fas fa-eye"></i> Xem trước</a>
                     <a href="${u.download}" download="${u.title || 'ungdung'}.xlsx"><i class="fas fa-download"></i> Tải xuống</a>
+                    ${isLoggedIn ? `<button class="btn-edit" data-key="ungdung" data-id="${u.id}"><i class="fas fa-edit"></i> Sửa</button>` : ''}
                     ${isLoggedIn ? `<button class="btn-delete" data-key="ungdung" data-id="${u.id}"><i class="fas fa-trash"></i> Xóa</button>` : ''}
                 </div>
             </div>
@@ -614,6 +649,15 @@ function renderUngDungApp(filter = 'all') {
             if (confirm('Bạn có chắc muốn xóa ứng dụng này?')) {
                 removeItem(key, id);
             }
+        });
+    });
+    // Sự kiện sửa Ứng dụng
+    document.querySelectorAll('#ungdungList .btn-edit').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const id = this.dataset.id;
+            const item = UNGDUNG.find(u => u.id === id);
+            if (item) openUploadModal('ungdung', item);
         });
     });
 }
@@ -636,18 +680,30 @@ function renderLinksInUngdung() {
                 </div>
                 <div class="doc-actions">
                     <a href="${link.url}" target="_blank" rel="noopener"><i class="fas fa-external-link-alt"></i> Mở</a>
+                    ${isLoggedIn ? `<button class="btn-edit" data-key="links" data-id="${link.id}"><i class="fas fa-edit"></i></button>` : ''}
                     ${isLoggedIn ? `<button class="btn-delete" data-key="links" data-id="${link.id}"><i class="fas fa-trash"></i> Xóa</button>` : ''}
                 </div>
             </div>
         `;
     }).join('');
     document.querySelectorAll('#linksGridInUngdung .btn-delete').forEach(btn => {
-        btn.addEventListener('click', function(e) {
+            btn.addEventListener('click', function(e) {
             e.stopPropagation();
             const key = this.dataset.key;
             const id = this.dataset.id;
             if (confirm('Bạn có chắc muốn xóa liên kết này?')) {
                 removeItem(key, id);
+            }
+        });
+    });
+    // Sự kiện sửa Liên kết
+    document.querySelectorAll('button[data-key="links"].btn-edit').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const id = this.dataset.id;
+            const item = LINKS.find(l => l.id === id);
+            if (item) {
+                openUploadModal('link', item);
             }
         });
     });
@@ -792,49 +848,42 @@ const uploadUrl = document.getElementById('uploadUrl');
 const fileAcceptHint = document.getElementById('fileAcceptHint');
 
 function openUploadModal(type, existingItem = null) {
-    if (!isLoggedIn) { alert('Vui lòng đăng nhập để thêm mới!'); return; }
-    
-    const isEdit = existingItem !== null;
-    
-    uploadType.value = type;
-    editingId = isEdit ? existingItem.id : null;
-    modalTitle.innerHTML = isEdit ? `<i class="fas fa-edit"></i> Cập nhật ${getTypeLabel(type)}` : `<i class="fas fa-upload"></i> Thêm mới ${getTypeLabel(type)}`;
+    const modal = document.getElementById('uploadModal');
+    const form = document.getElementById('uploadForm');
+    const modalTitle = document.getElementById('modalTitle');
+    const submitBtn = form.querySelector('button[type="submit"]');
 
-    // Cập nhật danh sách Category
-    const categories = getCategories(type);
-    uploadCategory.innerHTML = '<option value="all">Tất cả</option>';
-    categories.forEach(cat => { uploadCategory.innerHTML += `<option value="${cat}">${cat}</option>`; });
+    document.getElementById('uploadType').value = type;
 
-    // Set lại accept/placeholder
-    if (type === 'photo') { uploadFile.accept = 'image/*'; fileAcceptHint.textContent = 'Hỗ trợ: ảnh (jpg, png, gif, svg...)'; uploadUrl.placeholder = 'https://example.com/hinh-anh.jpg'; }
-    else if (type === 'video') { uploadFile.accept = 'video/*'; fileAcceptHint.textContent = 'Hỗ trợ: video (mp4, webm...) hoặc nhập URL YouTube/Vimeo'; uploadUrl.placeholder = 'https://www.youtube.com/watch?v=...'; }
-    else if (type === 'document' || type === 'chuyenmon') { uploadFile.accept = '.pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx'; fileAcceptHint.textContent = 'Hỗ trợ: PDF, Word, Excel, PowerPoint'; uploadUrl.placeholder = 'https://drive.google.com/file/d/...'; }
-    else if (type === 'ungdung') { uploadFile.accept = '.xls,.xlsx'; fileAcceptHint.textContent = 'Hỗ trợ: file Excel (.xls, .xlsx)'; uploadUrl.placeholder = 'https://docs.google.com/spreadsheets/...'; }
-    else if (type === 'link') { uploadFile.accept = ''; fileAcceptHint.textContent = 'Nhập URL và tiêu đề'; uploadUrl.placeholder = 'https://example.com'; }
-    else { uploadFile.accept = '*/*'; fileAcceptHint.textContent = 'Chọn file hoặc nhập URL'; uploadUrl.placeholder = 'https://...'; }
+    // Reset form trước khi làm gì khác
+    form.reset();
 
-    uploadForm.reset();
-    uploadUrl.value = '';
-    uploadFile.value = '';
+    if (existingItem) {
+        // TRẠNG THÁI SỬA
+        editingId = existingItem.id;
+        modalTitle.innerHTML = `<i class="fas fa-edit"></i> Cập nhật ${type}`;
+        submitBtn.innerHTML = `<i class="fas fa-save"></i> Cập nhật`;
 
-    // Nếu là Sửa, điền dữ liệu cũ vào form
-    if (isEdit) {
+        // Điền lại dữ liệu cũ
         document.getElementById('uploadTitle').value = existingItem.title || '';
         document.getElementById('uploadDesc').value = existingItem.desc || '';
-        if (existingItem.category) uploadCategory.value = existingItem.category;
-        if (existingItem.url || existingItem.preview) {
-            uploadUrl.value = existingItem.url || existingItem.preview || '';
+        
+        const catGroup = document.getElementById('uploadCategory');
+        if (catGroup && existingItem.category) {
+            catGroup.value = existingItem.category;
         }
-        // Ẩn chọn file khi sửa (để tránh upload lại ảnh nếu không cần thiết)
-        uploadFile.style.display = 'none';
-        document.querySelector('#urlGroup .or-divider') ? document.querySelector('#urlGroup .or-divider').style.display = 'none' : null;
-        document.querySelector('#urlGroup small').style.display = 'none';
+
+        // Ưu tiên URL cũ (hoặc preview cho ứng dụng)
+        document.getElementById('uploadUrl').value = existingItem.url || existingItem.preview || '';
+
     } else {
-        uploadFile.style.display = 'block';
-        document.querySelector('#urlGroup small').style.display = 'block';
+        // TRẠNG THÁI THÊM MỚI
+        editingId = null;
+        modalTitle.innerHTML = `<i class="fas fa-upload"></i> Thêm mới`;
+        submitBtn.innerHTML = `<i class="fas fa-save"></i> Lưu`;
     }
 
-    modal.classList.add('active');
+    modal.style.display = 'flex';
 }
 
 function closeModal() { modal.classList.remove('active'); }
@@ -842,91 +891,122 @@ modalClose.addEventListener('click', closeModal);
 modal.addEventListener('click', function(e) { if (e.target === this) closeModal(); });
 
 uploadForm.addEventListener('submit', async function(e) {
-    e.preventDefault();
-    const type = uploadType.value;
-    const title = document.getElementById('uploadTitle').value.trim();
-    const desc = document.getElementById('uploadDesc').value.trim();
-    const category = uploadCategory.value === 'all' ? '' : uploadCategory.value;
-    const url = uploadUrl.value.trim();
-    const file = uploadFile.files[0];
-
-    if (!title) { alert('Vui lòng nhập tiêu đề.'); return; }
-
-    try {
-        let finalUrl = url;
-        if (file) {
-            let folder = 'photos';
-            if (type === 'video') folder = 'videos';
-            else if (type === 'document' || type === 'chuyenmon') folder = 'documents';
-            else if (type === 'ungdung') folder = 'excel';
-            else if (type === 'link') folder = 'links';
-            finalUrl = await uploadFileToSupabase(file, folder);
-        } else if (!url) {
-            alert('Vui lòng nhập URL hoặc chọn file.');
-            return;
-        }
-
-        // ... Giữ nguyên phần upload file/get URL như cũ ...
-        // Đặt đoạn này thay cho đoạn let newItem cũ:
-        let newItem;
-        if (type === 'photo') {
-            newItem = { url: finalUrl, title, desc, category };
-        } else if (type === 'video') {
-            newItem = { url: finalUrl, title, desc, category };
-        } else if (type === 'document') {
-            newItem = { url: finalUrl, title, desc, category, type: 'pdf' };
-        } else if (type === 'chuyenmon') {
-            let t = 'pdf';
-            if (finalUrl.startsWith('data:application/vnd.openxmlformats-officedocument.wordprocessingml.document')) t = 'docx';
-            else if (finalUrl.startsWith('data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')) t = 'xlsx';
-            newItem = { url: finalUrl, title, desc, category, type: t };
-        } else if (type === 'ungdung') {
-            newItem = { preview: finalUrl, download: finalUrl, title, desc, category, type: 'xlsx' };
-        } else if (type === 'link') {
-            newItem = { title, desc, url: finalUrl };
-        }
-
-        let key = type + 's';
-
-if (type === 'ungdung') {
-    key = 'ungdung';
-}
-
-if (type === 'chuyenmon') {
-    key = 'chuyenmon';
-}
-        // QUAN TRỌNG: Phân biệt Thêm mới và Cập nhật
-        if (editingId) {
-            // Nếu có editingId -> Gọi hàm cập nhật
-            updateItem(key, editingId, newItem);
-        } else {
-            // Nếu không có -> Gọi hàm thêm mới
-            addItem(key, newItem);
-        }
+        e.preventDefault();
         
-        closeModal();
-        if (key === 'ungdung' || key === 'links') renderUngDungAndLinks();
-        else renderSection(key);
-    } catch (error) {
-        alert('Lỗi upload: ' + error.message);
-    }
-});
+        // --- 1. Lấy dữ liệu từ form ---
+        const type = uploadType.value;
+        const title = document.getElementById('uploadTitle').value.trim();
+        const desc = document.getElementById('uploadDesc').value.trim();
+        const category = uploadCategory.value === 'all' ? '' : uploadCategory.value;
+        const url = uploadUrl.value.trim();
+        const file = uploadFile.files[0];
 
-function getTypeLabel(type) {
-    const map = { 'photo': 'Ảnh', 'video': 'Video', 'document': 'Tài liệu', 'chuyenmon': 'Chuyên môn', 'ungdung': 'Ứng dụng', 'link': 'Liên kết' };
-    return map[type] || type;
-}
-function getCategories(type) {
-    const map = {
-        'photo': ['giangday', 'hoatdong', 'sukien', 'ca'],
-        'video': ['giangday', 'hoatdong', 'sukien', 'cá nhân'],
-        'document': ['quyetdinh', 'khenthuong', 'chungnhan', 'Văn bằng, chứng chỉ'],
-        'chuyenmon': ['giaoan', 'dethi', 'sangkien', 'tailieu', 'phancongchuyenmon'],
-        'ungdung': ['ungdung'],
-        'link': []
-    };
-    return map[type] || [];
-}
+        if (!title) { alert('Vui lòng nhập tiêu đề.'); return; }
+
+        // Đổi nút bấm thành trạng thái đang xử lý
+        const submitBtn = this.querySelector('button[type="submit"]');
+        const originalBtnText = submitBtn.innerHTML;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Đang xử lý...';
+        submitBtn.disabled = true;
+
+        try {
+            let finalUrl = url;
+            
+            // --- 2. Xử lý Upload file (Giữ nguyên logic folder của thầy) ---
+            if (file) {
+                let folder = 'photos';
+                if (type === 'video') folder = 'videos';
+                else if (type === 'document' || type === 'chuyenmon') folder = 'documents';
+                else if (type === 'ungdung') folder = 'excel';
+                else if (type === 'link') folder = 'links';
+                
+                finalUrl = await uploadFileToSupabase(file, folder);
+            }
+
+            // --- 3. Đóng gói dữ liệu (Giữ nguyên cách phân loại file của thầy) ---
+            let newData = { title, desc, category };
+            
+            if (finalUrl) {
+                if (type === 'ungdung') {
+                    newData.preview = finalUrl;
+                    newData.download = finalUrl;
+                } else if (type === 'chuyenmon') {
+                    newData.url = finalUrl;
+                    let t = 'pdf';
+                    // Tôn trọng cách thầy nhận diện file docx/xlsx
+                    if (finalUrl.startsWith('data:application/vnd.openxmlformats-officedocument.wordprocessingml.document')) t = 'docx';
+                    else if (finalUrl.startsWith('data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')) t = 'xlsx';
+                    newData.type = t;
+                } else if (type === 'document') {
+                    newData.url = finalUrl;
+                    newData.type = 'pdf';
+                } else {
+                    newData.url = finalUrl; // photo, video, link
+                }
+            }
+
+            // --- 4. KHÓA TÊN BẢNG BẰNG SWITCH (TIÊU DIỆT LỖI CHUYENMONS) ---
+            let arrayKey;
+            switch(type) {
+                case 'photo': arrayKey = 'photos'; break;
+                case 'video': arrayKey = 'videos'; break;
+                case 'document': arrayKey = 'documents'; break;
+                case 'chuyenmon': arrayKey = 'chuyenmon'; break; // Tuyệt đối KHÔNG có "s"
+                case 'ungdung': arrayKey = 'ungdung'; break;     // Tuyệt đối KHÔNG có "s"
+                case 'link': arrayKey = 'links'; break;
+                default: arrayKey = type + 's'; 
+            }
+
+            // --- 5. QUYẾT ĐỊNH LƯU MỚI HAY CẬP NHẬT ---
+            if (typeof editingId !== 'undefined' && editingId !== null) {
+                // TRẠNG THÁI SỬA
+                updateItem(arrayKey, editingId, newData);
+                alert('Cập nhật thành công!');
+            } else {
+                // TRẠNG THÁI THÊM MỚI
+                if (!finalUrl) {
+                    alert('Vui lòng nhập URL hoặc chọn file.');
+                    submitBtn.innerHTML = originalBtnText;
+                    submitBtn.disabled = false;
+                    return;
+                }
+                addItem(arrayKey, newData);
+                alert('Thêm mới thành công!');
+            }
+
+           // --- 6. Đóng Form và Xóa dữ liệu cũ (Đã sửa lỗi) ---
+            document.getElementById('uploadModal').style.display = 'none';
+            document.getElementById('uploadForm').reset();
+            window.editingId = null;
+
+        } catch (error) {
+            console.error('Lỗi:', error);
+            alert('Có lỗi xảy ra: ' + error.message);
+        } finally {
+            submitBtn.innerHTML = originalBtnText;
+            submitBtn.disabled = false;
+        }
+    });
+    // --- SỬA LỖI NÚT X VÀ BẤM RA NGOÀI ĐỂ ĐÓNG BẢNG ---
+    const btnCloseX = document.getElementById('modalClose');
+    if (btnCloseX) {
+        btnCloseX.addEventListener('click', function() {
+            document.getElementById('uploadModal').style.display = 'none';
+            document.getElementById('uploadForm').reset();
+            window.editingId = null;
+        });
+    }
+
+    const modalBg = document.getElementById('uploadModal');
+    if (modalBg) {
+        modalBg.addEventListener('click', function(e) {
+            if (e.target === this) {
+                this.style.display = 'none';
+                document.getElementById('uploadForm').reset();
+                window.editingId = null;
+            }
+        });
+    }
 
 document.querySelectorAll('.btn-add').forEach(btn => {
     btn.addEventListener('click', function() { openUploadModal(this.dataset.type); });
